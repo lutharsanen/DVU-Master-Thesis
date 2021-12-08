@@ -1,7 +1,7 @@
 import os
 import shutil
 
-dir = "/media/lkunam/My Passport/HLVU/training/movie_knowledge_graphs/honey/images_copy"
+dir = "/media/lkunam/My Passport/HLVU/training/movie_knowledge_graphs/honey/images_copy2"
 movie_entity_details = "/media/lkunam/My Passport/HLVU/training/movie_knowledge_graphs/honey/honey.entity.types.txt"
 
 f = open(movie_entity_details, "r").read()
@@ -18,9 +18,12 @@ for file in os.listdir(dir):
     # get all but the last 8 characters to remove
     # the index number and extension
     dir_name = file[:-6]
+
+    ent_type = entity_type[dir_name]
+
     print(f'dir_name: {dir_name}')
 
-    dir_path = f"{dir}/{dir_name}"
+    dir_path = f"{dir}/{ent_type}/{dir_name}"
     print(f'dir_path: {dir_path}')
     
     # check if directory exists or not yet
@@ -34,3 +37,4 @@ for file in os.listdir(dir):
         
         # move files into created directory
         shutil.move(file_path, dir_path)
+
