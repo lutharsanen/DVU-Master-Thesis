@@ -53,6 +53,6 @@ def face_match(img_path, data_path): # img_path= location of photo, data_path= l
 
 #help(MTCNN)
 
-result = face_match('/media/lkunam/My Passport/HLVU/training/movie.keyframes/shot_keyf/honey-1', 'data.pt')
+result = face_match('/media/lkunam/DVU-Challenge/HLVU/training/movie.keyframes/shot_keyf/honey-1', 'data.pt')
 
 #print('Face matched with: ',result[0], 'With distance: ',result[1])

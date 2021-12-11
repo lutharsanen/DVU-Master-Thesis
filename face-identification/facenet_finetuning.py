@@ -6,8 +6,8 @@ from torch.utils.data import DataLoader
 from PIL import Image
 
 
-dir = "/media/lkunam/My Passport/HLVU/training/movie_knowledge_graphs/honey/images_copy/face"
-movie_entity_details = "/media/lkunam/My Passport/HLVU/training/movie_knowledge_graphs/honey/honey.entity.types.txt"
+dir = "/media/lkunam/DVU-Challenge/HLVU/movie_knowledge_graph/honey/image_copy/Person"
+movie_entity_details = "/media/lkunam/DVU-Challenge/HLVU/movie_knowledge_graph/honey/honey.entity.types.txt"
 
 f = open(movie_entity_details, "r").read()
 lst = f.split("\n")

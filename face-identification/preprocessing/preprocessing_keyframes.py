@@ -1,7 +1,7 @@
 import os
 import shutil
 
-dir = "/media/lkunam/My Passport/HLVU/training/movie.keyframes/shot_keyf/"
+dir = "/media/lkunam/DVU-Challenge/HLVU/keyframes/shot_keyf/"
 
 for files in os.listdir(dir):
     for file in os.listdir(f"{dir}/{files}"):
