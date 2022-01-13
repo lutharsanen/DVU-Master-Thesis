@@ -1,11 +1,24 @@
 src/face
 src/__pycache__
 src/images
+src/test-videos
 
 src/models/deepface/deepface
 src/models/deepface/.ipynb_checkpoints
 src/models/Keras-VGG16-places365
-srcmodels/places365
+src/models/deep-person-reid/torchreid-env
+src/models/DeepSpeech/speech-env
+src/models/facenet/facenet-env
+src/models/places/places365/places_env
+src/models/speechbrain/speech-env
+src/models/speechbrain/pretrained_models
+src/models/speechbrain/pretrained_ASR
+src/models/DeepSpeech/deepspeech-0.9.3-models.pbmm
+src/models/DeepSpeech/deepspeech-0.9.3-models.scorer
+src/models/VSGNet
+src/models/deep-person-reid
+src/models/places365
+
 
 papers
 
