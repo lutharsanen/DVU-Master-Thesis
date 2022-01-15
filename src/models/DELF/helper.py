@@ -5,8 +5,7 @@ import numpy as np
 import tensorflow_hub as hub
 
 
-def download_and_resize(name, url, new_width=256, new_height=256):
-  path = tf.keras.utils.get_file(url.split('/')[-1], url)
+def download_and_resize(name, path, new_width=256, new_height=256):
   image = Image.open(path)
   image = ImageOps.fit(image, (new_width, new_height), Image.ANTIALIAS)
   return image

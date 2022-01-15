@@ -9,18 +9,12 @@ from skimage.transform import AffineTransform
 from six import BytesIO
 
 import tensorflow as tf
-
-import tensorflow_hub as hub
-from six.moves.urllib.request import urlopen
 from helper import download_and_resize, run_delf
 
 
 
-test_image1 = ""
-test_image2 = ""
-
-image1 = download_and_resize('image_1.jpg', test_image1)
-image2 = download_and_resize('image_2.jpg', test_image2)
+image1 = download_and_resize('image_1.jpg', 'test1.jpg')
+image2 = download_and_resize('image_2.jpg', 'test2.jpg')
 
 
 #@title TensorFlow is not needed for this post-processing and visualization
@@ -75,6 +69,7 @@ def match_images(image1, image2, result1, result2):
       matches_color='b')
   ax.axis('off')
   ax.set_title('DELF correspondences')
+  plt.savefig("mygraph.png")
 
 result1 = run_delf(image1)
 result2 = run_delf(image2)
