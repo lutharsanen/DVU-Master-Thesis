@@ -4,6 +4,7 @@ src/images
 src/test-videos
 
 src/models/deepface/deepface
+src/models/deepface/cropped.jpg
 src/models/deepface/.ipynb_checkpoints
 src/models/Keras-VGG16-places365
 src/models/deep-person-reid/torchreid-env
