@@ -1,10 +1,10 @@
+from collections import Counter
 import shutil
 import os
 from retinaface import RetinaFace
 from deepface import DeepFace
 from PIL import Image
 from tqdm import tqdm
-from collections import Counter
 import numpy as np
 
 def enlargen_image(border):
@@ -20,14 +20,15 @@ def euclidean_distance_check(border, border_list):
     for compare_border in borders:
         dist = np.linalg.norm(np.array(border) - np.array(compare_border))
         if dist < 25:
-            border_list_index = result_border.index(compare_border)
-            result_border.apend(border_list[border_list_index])
+            border_list_index = borders.index(compare_border)
+            result_border.append(border_list[border_list_index])
     if len(result_border) == 0:
         return 0
+    print(result_border)
     resulting_name = [i[2] for i in result_border]
     c = Counter(resulting_name)
-    name, count = c.most_common()[0]
-    return name
+    value, count = c.most_common()[0]
+    return value
 
 img_path = "/media/lkunam/DVU-Challenge/HLVU/keyframes/shot_keyf"
 
@@ -53,25 +54,34 @@ for i in tqdm(range(len(shotlist))):
             if len(resp) > 0 and type(resp) == dict:
                 for face in resp:
                     border = resp[face]["facial_area"]
-                    border_list.append((border,image))
                     enlarged_border = enlargen_image(border)
                     im = Image.open(f"{img_path}/{movies}/{shots}/{shot}/{image}")
                     im1 = im.crop(enlarged_border)
                     im1.save("cropped.jpg")
                     try:
                         df = DeepFace.find(img_path = "cropped.jpg", db_path = f"/media/lkunam/DVU-Challenge/HLVU/movie_knowledge_graph/{movies}/image/Person/", detector_backend = backends[4])
-                        result = df["identity"][0]
-                        name = result[-17:].partition('/')[0]
-                        #name = "{img_path}/{movies}/{shots}/{shot}/{image}"
-                        shutil.copyfile("cropped.jpg", f"/media/lkunam/DVU-Challenge/HLVU/movie_knowledge_graph/{movies}/image/Person/{name}/{name}_new_{image[:-4]}")
-                        border_list.append([border,image,name])
-                        
+                        name_list = list(i[74:].partition('/')[0] for i in df["identity"][:5])
+                        c = Counter(name_list)
+                        name, count = c.most_common()[0]
+                        if count > 2:
+                            #name = "{img_path}/{movies}/{shots}/{shot}/{image}"
+                            shutil.copyfile("cropped.jpg", f"/media/lkunam/DVU-Challenge/HLVU/movie_knowledge_graph/{movies}/image/Person/{name}/{name}_new_{image[:-4]}")
+                            border_list.append([border,image,name])
+                        else:
+                            result_name = euclidean_distance_check(border, border_list)
+                            if result_name!=0:
+                                shutil.copyfile("cropped.jpg", f"/media/lkunam/DVU-Challenge/HLVU/movie_knowledge_graph/{movies}/image/Person/{result_name}/{result_name}_new_{image[:-4]}")
+                                border_list.append([border,image,name])
+                            
                     except ValueError:
                         #print("No face was able to be matched")
                         result_name = euclidean_distance_check(border, border_list)
-                        if result_border!=0:
+                        if result_name!=0:
                             shutil.copyfile("cropped.jpg", f"/media/lkunam/DVU-Challenge/HLVU/movie_knowledge_graph/{movies}/image/Person/{result_name}/{result_name}_new_{image[:-4]}")
                             border_list.append([border,image,name])
                             
+    
+        
+            
     
         
