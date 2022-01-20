@@ -9,6 +9,8 @@ src/models/deepface/.ipynb_checkpoints
 src/models/Keras-VGG16-places365
 src/models/deep-person-reid/torchreid-env
 src/models/DeepSpeech/speech-env
+src/models/DELF/nvidia-machine-learning-repo-ubuntu1804_1.0.0-1_amd64.deb
+src/models/DELF/libnvinfer7_7.1.3-1+cuda11.0_amd64.deb
 src/models/facenet/facenet-env
 src/models/places/places365/places_env
 src/models/speechbrain/speech-env
