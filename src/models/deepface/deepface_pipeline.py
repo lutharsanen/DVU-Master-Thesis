@@ -34,7 +34,7 @@ img_path = "/media/lkunam/DVU-Challenge/HLVU/keyframes/shot_keyf"
 
 #for movies in os.listdir(img_path):
 backends = ['opencv', 'ssd', 'dlib', 'mtcnn', 'retinaface']
-
+models = ["VGG-Face", "Facenet", "OpenFace", "DeepFace", "DeepID", "Dlib", "ArcFace"]
 
 movies = "honey"
 shotlist = os.listdir(f"{img_path}/{movies}")
@@ -79,6 +79,8 @@ for i in tqdm(range(len(shotlist))):
                         if result_name!=0:
                             shutil.copyfile("cropped.jpg", f"/media/lkunam/DVU-Challenge/HLVU/movie_knowledge_graph/{movies}/image/Person/{result_name}/{result_name}_new_{image[:-4]}")
                             border_list.append([border,image,name])
+                        else:
+                            shutil.copyfile("cropped.jpg", f"./clustering/{result_name}_new_{image[:-4]}")
                             
     
         
