@@ -80,7 +80,7 @@ for i in tqdm(range(len(shotlist))):
                             shutil.copyfile("cropped.jpg", f"/media/lkunam/DVU-Challenge/HLVU/movie_knowledge_graph/{movies}/image/Person/{result_name}/{result_name}_new_{image[:-4]}")
                             border_list.append([border,image,name])
                         else:
-                            shutil.copyfile("cropped.jpg", f"./clustering/{result_name}_new_{image[:-4]}")
+                            shutil.copyfile("cropped.jpg", f"./clustering/unknown_{image[:-4]}")
                             
     
         
