@@ -6,10 +6,9 @@ from distutils.dir_util import copy_tree
 
 
 
-def data_creation():
-    print("hello")
+def data_creation(hlvu_location):
 
-    dir = "/media/lkunam/DVU-Challenge/HLVU/movie_knowledge_graph"
+    dir = f"{hlvu_location}/movie_knowledge_graph"
     entity_type = {}
 
 
@@ -26,7 +25,7 @@ def data_creation():
                         lst = f.split("\n")
                         if "" in lst:
                             lst.remove("")
-                            print("Leerzeichen entfernt")
+                            #print("Leerzeichen entfernt")
                         for element in lst:
                             if element != "":
                                 comp_lst = element.replace(" ","").split(":")

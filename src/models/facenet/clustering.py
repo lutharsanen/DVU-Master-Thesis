@@ -10,7 +10,7 @@ import numpy as np
 from sklearn.cluster import DBSCAN
 
 
-def face_clustering(clustering_path):
+def start_face_clustering(clustering_path):
     #Image.fromarray(frame)
     
     mtcnn = MTCNN(image_size=240, margin=0, min_face_size=20) # initializing mtcnn for face detection
@@ -20,7 +20,7 @@ def face_clustering(clustering_path):
     df = pd.DataFrame(data=face_embeddings)
     
     for image in os.listdir(clustering_path):
-        img = Image.open(f"clustering_images/{image}")
+        img = Image.open(f"{clustering_path}/{image}")
         rgb_img = img.convert("RGB")
         face, prob = mtcnn(rgb_img, return_prob=True) 
         print("return prob is: ", prob)
@@ -34,3 +34,4 @@ def face_clustering(clustering_path):
     clustering = DBSCAN(eps=1, min_samples = 3).fit(X)
     cluster = clustering.labels_
     df['dbscan'] = cluster.tolist()
+    return df

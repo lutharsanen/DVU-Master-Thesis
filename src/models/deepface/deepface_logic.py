@@ -34,7 +34,7 @@ def enlargen_image(border):
     border[3]+=20
     return border
 
-def training(image, image_path, movies, border_list):
+def training(image, image_path, movies, border_list, hlvu_location):
     resp = RetinaFace.detect_faces(f"{image_path}/{image}")
     if len(resp) > 0 and type(resp) == dict:
         for face in resp:
@@ -44,19 +44,19 @@ def training(image, image_path, movies, border_list):
             im1 = im.crop(enlarged_border)
             im1.save("cropped.jpg")
             try:
-                df = DeepFace.find(img_path = "cropped.jpg", db_path = f"/media/lkunam/DVU-Challenge/HLVU/movie_knowledge_graph/{movies}/image/Person/", detector_backend = backends[4])
+                df = DeepFace.find(img_path = "cropped.jpg", db_path = f"{hlvu_location}/movie_knowledge_graph/{movies}/image/Person/", detector_backend = backends[4])
                 name_list = list(i[74:].partition('/')[0] for i in df["identity"][:5])
                 c = Counter(name_list)
                 name, count = c.most_common()[0]
                 if count > 2:
                     #name = "{img_path}/{movies}/{shots}/{shot}/{image}"
-                    shutil.copyfile("cropped.jpg", f"/media/lkunam/DVU-Challenge/HLVU/movie_knowledge_graph/{movies}/image/Person/{name}/{name}_new_{image[:-4]}")
+                    shutil.copyfile("cropped.jpg", f"{hlvu_location}/movie_knowledge_graph/{movies}/image/Person/{name}/{name}_new_{image[:-4]}")
                     border_list.append([border,image,name])
                     return border_list
                 else:
                     result_name = euclidean_distance_check(border, border_list)
                     if result_name!=0:
-                        shutil.copyfile("cropped.jpg", f"/media/lkunam/DVU-Challenge/HLVU/movie_knowledge_graph/{movies}/image/Person/{result_name}/{result_name}_new_{image[:-4]}")
+                        shutil.copyfile("cropped.jpg", f"{hlvu_location}/movie_knowledge_graph/{movies}/image/Person/{result_name}/{result_name}_new_{image[:-4]}")
                         border_list.append([border,image,name])
                         return border_list
 
@@ -64,12 +64,12 @@ def training(image, image_path, movies, border_list):
                 #print("No face was able to be matched")
                 result_name = euclidean_distance_check(border, border_list)
                 if result_name!=0:
-                    shutil.copyfile("cropped.jpg", f"/media/lkunam/DVU-Challenge/HLVU/movie_knowledge_graph/{movies}/image/Person/{result_name}/{result_name}_new_{image[:-4]}")
+                    shutil.copyfile("cropped.jpg", f"{hlvu_location}/movie_knowledge_graph/{movies}/image/Person/{result_name}/{result_name}_new_{image[:-4]}")
                     border_list.append([border,image,name])
                     return border_list
 
 
-def evaluation(image, image_path, movies, unknown_counter):
+def evaluation(image, image_path, movies, unknown_counter, hlvu_location, cluster_path):
     resp = RetinaFace.detect_faces(f"{image_path}/{image}")
     if len(resp) > 0 and type(resp) == dict:
         faces = []
@@ -80,7 +80,7 @@ def evaluation(image, image_path, movies, unknown_counter):
             im1 = im.crop(enlarged_border)
             im1.save("cropped.jpg")
             try:
-                df = DeepFace.find(img_path = "cropped.jpg", db_path = f"/media/lkunam/DVU-Challenge/HLVU/movie_knowledge_graph/{movies}/image/Person/", detector_backend = backends[4])
+                df = DeepFace.find(img_path = "cropped.jpg", db_path = f"{hlvu_location}/movie_knowledge_graph/{movies}/image/Person/", detector_backend = backends[4])
                 name_list = list(i[74:].partition('/')[0] for i in df["identity"][:5])
                 c = Counter(name_list)
                 name, count = c.most_common()[0]
@@ -88,7 +88,7 @@ def evaluation(image, image_path, movies, unknown_counter):
                     #name = "{img_path}/{movies}/{shots}/{shot}/{image}"
                     faces.append(name)
             except:
-                shutil.copyfile("cropped.jpg", f"./clustering/unknown{unknown_counter}")
+                shutil.copyfile("cropped.jpg", f"{cluster_path}/unknown{unknown_counter}.jpg")
                 faces.append(f"unknown{unknown_counter}")
                 
         return faces
