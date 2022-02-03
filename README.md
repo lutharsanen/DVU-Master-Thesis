@@ -80,3 +80,35 @@ doi = {10.1109/CVPR.2015.7298682}
   note={arXiv:2106.04624}
 }
 ```
+
+#### Cluster Models
+```
+@article{scikit-learn,
+ title={Scikit-learn: Machine Learning in {P}ython},
+ author={Pedregosa, F. and Varoquaux, G. and Gramfort, A. and Michel, V.
+         and Thirion, B. and Grisel, O. and Blondel, M. and Prettenhofer, P.
+         and Weiss, R. and Dubourg, V. and Vanderplas, J. and Passos, A. and
+         Cournapeau, D. and Brucher, M. and Perrot, M. and Duchesnay, E.},
+ journal={Journal of Machine Learning Research},
+ volume={12},
+ pages={2825--2830},
+ year={2011}
+}
+
+@inproceedings{wang2018speaker,
+  title={{Speaker Diarization with LSTM}},
+  author={Wang, Quan and Downey, Carlton and Wan, Li and Mansfield, Philip Andrew and Moreno, Ignacio Lopz},
+  booktitle={2018 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)},
+  pages={5239--5243},
+  year={2018},
+  organization={IEEE}
+}
+
+@article{xia2021turn,
+  title={{Turn-to-Diarize: Online Speaker Diarization Constrained by Transformer Transducer Speaker Turn Detection}},
+  author={Wei Xia and Han Lu and Quan Wang and Anshuman Tripathi and Ignacio Lopez Moreno and Hasim Sak},
+  journal={arXiv preprint arXiv:2109.11641},
+  year={2021}
+}
+
+```
