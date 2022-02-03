@@ -1,9 +1,9 @@
 from tqdm import tqdm
 import os
-from models.deepface import deepface_logic as deepface
+from models.face_models import deepface_logic as deepface
 from models.delf import run_delf as delf
 from visual_preprocessing import training_data as training
-from models.facenet import clustering
+from models.face_models import clustering
 import settings as s
 import pandas as pd
 
