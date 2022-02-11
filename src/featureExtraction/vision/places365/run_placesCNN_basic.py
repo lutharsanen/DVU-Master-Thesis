@@ -11,13 +11,15 @@ import os
 from PIL import Image
 
 
-def run_places365(image):
+def run_places365(image, dir_path):
 
     # th architecture to use
     arch = 'resnet18'
 
+    places_dir = f"{dir_path}/featureExtraction/vision/places365"
+
     # load the pre-trained weights
-    model_file = 'models/%s_places365.pth.tar' % arch
+    model_file = f'{places_dir}/models/{arch}_places365.pth.tar'
 
     model = models.__dict__[arch](num_classes=365)
     checkpoint = torch.load(model_file, map_location=lambda storage, loc: storage)
@@ -35,7 +37,7 @@ def run_places365(image):
     ])
 
     # load the class label
-    file_name = 'labels/categories_places365.txt'
+    file_name = f'{places_dir}/labels/categories_places365.txt'
     classes = list()
     with open(file_name) as class_file:
         for line in class_file:

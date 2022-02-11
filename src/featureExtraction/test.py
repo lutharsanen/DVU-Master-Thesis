@@ -1,3 +1,6 @@
-import vision.places365.run_placesCNN_basic as places
+import tensorflow as tf
+print("Num GPUs Available: ", len(tf.config.experimental.list_physical_devices('GPU')))
 
-print(places.test())
+
+import torch
+print(torch.cuda.is_available())
