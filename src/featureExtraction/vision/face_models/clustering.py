@@ -27,7 +27,7 @@ def start_face_clustering(clustering_path):
     
     X = np.asarray(df['embedding'].values.tolist())
     
-    clustering = DBSCAN(eps=1, min_samples = 3).fit(X)
+    clustering = DBSCAN(eps=0.9, min_samples = 3).fit(X)
     cluster = clustering.labels_
     df['dbscan'] = cluster.tolist()
     return df
