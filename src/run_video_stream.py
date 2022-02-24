@@ -6,6 +6,11 @@ from video import video_preprocessing as video
 from video import action_recognition as action
 import pandas as pd
 from datetime import datetime, timedelta
+from tinydb import TinyDB
+from tinydb_serialization import SerializationMiddleware
+from tinydb_serialization.serializers import DateTimeSerializer
+from tinydb.storages import JSONStorage
+
 
 
 hlvu_location = s.HLVU_LOCATION
@@ -31,15 +36,14 @@ def get_timestamp(movie, movie_scene, hlvu_location, shot_name):
         shot_starttime = scene_start_time
     else:
         start_stamp = df_frames.iloc[[start_frame-1]]["Timecode"].tolist()[0]
-        end_stamp = df_frames.iloc[[end_frame-1]]["Timecode"].tolist()[0]
-        start_t = datetime.strptime(end_stamp, '%H:%M:%S.%f')
+        start_t = datetime.strptime(start_stamp, '%H:%M:%S.%f')
         start_delta = timedelta(hours=start_t.hour, minutes=start_t.minute, seconds=start_t.second)
         shot_starttime = scene_start_time + start_delta
     end_stamp = df_frames.iloc[[end_frame-1]]["Timecode"].tolist()[0]
     end_t = datetime.strptime(end_stamp, '%H:%M:%S.%f')
     end_delta = timedelta(hours=end_t.hour, minutes=end_t.minute, seconds=end_t.second)
     shot_endtime = scene_start_time + end_delta
-    return shot_starttime.time(), shot_endtime.time()
+    return shot_starttime, shot_endtime
 
 
 
@@ -60,8 +64,12 @@ frames_per_second = 30
 one_movie = True
 movie = "honey"
 
-action_frame = {'shot_name': [], 'action': [], 'start_time': [], 'end_time': [], 'scene_name': []}
-video_df = pd.DataFrame(data=action_frame)
+#action_frame = {'shot_name': [], 'action': [], 'start_time': [], 'end_time': [], 'scene_name': []}
+#video_df = pd.DataFrame(data=action_frame)
+serialization = SerializationMiddleware(JSONStorage)
+serialization.register_serializer(DateTimeSerializer(), 'TinyDate')
+action_db = TinyDB(f'database/action_{movie}.json', storage=serialization)
+
 
 for scene in os.listdir(video_path):
     if one_movie:
@@ -81,5 +89,8 @@ for scene in os.listdir(video_path):
                 )
 
                 start_time, end_time = get_timestamp(movie, scene, hlvu_location, split)
-                video_df.loc[video_df.shape[0]] = [split, action_list[0], start_time, end_time, scene]
+                #video_df.loc[video_df.shape[0]] = [split, action_list[0], start_time, end_time, scene]
+                action_db.insert(
+                    {'shot_name': split, 'action':action_list[0], 'start_time': start_time, 'end_time':end_time, 'scene': scene})
+
 

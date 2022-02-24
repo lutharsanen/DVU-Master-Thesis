@@ -14,6 +14,12 @@ import shutil
 import vision.places365.run_placesCNN_basic as places365 
 import tensorflow as tf
 from datetime import datetime, timedelta
+from tinydb import TinyDB
+from tinydb_serialization import SerializationMiddleware
+from tinydb_serialization.serializers import DateTimeSerializer
+from tinydb.storages import JSONStorage
+import torch
+import tensorflow_hub as hub
 
 hlvu_location = s.HLVU_LOCATION
 dir_path = s.DIR_PATH
@@ -44,22 +50,23 @@ def get_timestamp_from_shot(movie, movie_scene, shot_name):
     new_time = scene_start_time + delta
     # return timestamp
     #print(new_time.time())
-    return str(new_time.time())
-
+    return new_time
 
 
 def run():
 
     #training.data_creation()
 
-
     movies = "honey"
+    serialization = SerializationMiddleware(JSONStorage)
+    serialization.register_serializer(DateTimeSerializer(), 'TinyDate')
+    vision_db = TinyDB(f'database/vision_{movies}.json', storage=serialization)
     scenelist = os.listdir(f"{img_path}/{movies}")
     orderedshotlist = [i.partition('-')[2] for i in scenelist]
 
     # finetuning face recognition model
 
-    for i in tqdm(range(len(scenelist[1:3]))):
+    for i in tqdm(range(len(scenelist))):
         num = i+1
         list_index = orderedshotlist.index(str(num))
         shots = scenelist[list_index]
@@ -68,7 +75,7 @@ def run():
             training(path, movies, hlvu_location)
 
     # delete existing model to generate new one
-    model_loc = f"{hlvu_location}/movie_knowledge_graph/{movies}/image/Person/representations_vgg_face.pkl"
+    model_loc = f"{hlvu_location}/movie_knowledge_graph/{movies}/image/Person/representations_arcface.pkl"
     
     if os.path.isfile(model_loc):
         os.remove(model_loc)
@@ -85,12 +92,13 @@ def run():
             shutil.copyfile(image, f"{cluster_path}/{images}")
     
 
-    knowledge_frame = {'persons': [],'emotions':[], 'shot_name': [], 'location': [], 'places365' : [], 'timestamp': [], 'scene_name':[]}
-    knowledge_df = pd.DataFrame(data=knowledge_frame)
-#
-    ## vision evaluation of dataset
+    #knowledge_frame = {'persons': [],'emotions':[], 'shot_name': [], 'location': [], 'places365' : [], 'timestamp': [], 'scene_name':[]}
+    #knowledge_df = pd.DataFrame(data=knowledge_frame)
+
+    # vision evaluation of dataset
     unknown_counter = 0
-    for i in tqdm(range(len(scenelist[1:3]))):
+    delf = hub.load('https://tfhub.dev/google/delf/1').signatures['default']
+    for i in tqdm(range(len(scenelist))):
         num = i+1
         list_index = orderedshotlist.index(str(num))
         shots = scenelist[list_index]
@@ -100,16 +108,18 @@ def run():
                 path = f"{img_path}/{movies}/{shots}/{shot}"
                 loc_path = f"{hlvu_location}/movie_knowledge_graph/{movies}/image/Location"
                 faces, emotions, unknown_counter = evaluation(image, path, movies, unknown_counter, hlvu_location, cluster_path)
-                location = compare(image, path,loc_path)
+                location = compare(image, path,loc_path, delf)
                 places365_data = places365.run_places365(f"{path}/{image}", dir_path)
                 timestamp = get_timestamp_from_shot(movies, shots, image)
-                knowledge_df.loc[knowledge_df.shape[0]] = [faces, emotions, image, location, places365_data, timestamp, shots]
+                #knowledge_df.loc[knowledge_df.shape[0]] = [faces, emotions, image, location, places365_data, timestamp, shots]
+                vision_db.insert(
+                    {'faces': faces, 'emotions': emotions, 'image': image,'location': location, 'places365':places365_data,'timestamp': timestamp, 'shots': shots})
                 
 
     cluster_df = start_face_clustering(cluster_path)
     # then cluster with facenet and replace unknown images by person images
 
-    knowledge_df.to_json(f"knowledge_{movies}.json")
+    #knowledge_df.to_json(f"knowledge_{movies}.json")
     cluster_df.to_json(f"cluster_{movies}.json")
 
 
@@ -123,6 +133,7 @@ if gpus:
         [tf.config.LogicalDeviceConfiguration(memory_limit=2500)])
     logical_gpus = tf.config.list_logical_devices('GPU')
     print(len(gpus), "Physical GPUs,", len(logical_gpus), "Logical GPU")
+    torch.cuda.set_device(0)
     run()
   except RuntimeError as e:
     # Visible devices must be set before GPUs have been initialized

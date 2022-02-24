@@ -34,17 +34,19 @@ def start_face_clustering(clustering_path):
 
 def crop_unrecognized_faces(image, unknown_counter,cluster_path):
     for i in range(2):
-        img = Image.open(image)
-        rgb_img = img.convert("RGB")
         mtcnn = MTCNN(image_size=160, margin=10, keep_all=True, min_face_size=20)
+        img = Image.open(image)       
+        rgb_img = img.convert("RGB")
         boxes = mtcnn.detect(rgb_img)
-    
-    for box in boxes[0]:
-        im1 = img.crop(list(box))
-        rgba_img = im1.convert("RGB")
-        rgba_img.save(f"{cluster_path}/unknown_{unknown_counter}.jpg")
-        unknown_counter += 1
+        
+    try:
+        for box in boxes[0]:
+            im1 = img.crop(list(box))
+            rgba_img = im1.convert("RGB")
+            rgba_img.save(f"{cluster_path}/unknown_{unknown_counter}.jpg")
+            unknown_counter += 1
 
-    return unknown_counter
-
+        return unknown_counter
+    except:
+        return unknown_counter
     

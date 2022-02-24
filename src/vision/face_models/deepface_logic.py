@@ -52,7 +52,7 @@ def training(image_path, movies, hlvu_location,unknown_counter=None, cluster_pat
                 im = Image.open(f"{image_path}/{image}")
                 im1 = im.crop(enlarged_border)
                 im1.save("cropped.jpg")
-                df = DeepFace.find(img_path = "cropped.jpg", model_name = models[0], db_path = f"{hlvu_location}/movie_knowledge_graph/{movies}/image/Person/", detector_backend = backends[4], enforce_detection = False)
+                df = DeepFace.find(img_path = "cropped.jpg", model_name = models[6], db_path = f"{hlvu_location}/movie_knowledge_graph/{movies}/image/Person/", detector_backend = backends[4], enforce_detection = False)
                 if len(df) > 0:
                     path_to_db = f"/movie_knowledge_graph/{movies}/image/Person/"
                     idx = len(hlvu_location)+ len(path_to_db)
@@ -81,8 +81,8 @@ def evaluation(image, image_path, movies, unknown_counter, hlvu_location, cluste
             im = Image.open(f"{image_path}/{image}")
             im1 = im.crop(enlarged_border)
             im1.save("cropped.jpg")
-            obj = DeepFace.analyze(img_path = "cropped.jpg", actions = ['emotion'])
-            df = DeepFace.find(img_path = "cropped.jpg", db_path = f"{hlvu_location}/movie_knowledge_graph/{movies}/image/Person/", detector_backend = backends[4],enforce_detection = False)
+            obj = DeepFace.analyze(img_path = "cropped.jpg", actions = ['emotion'], enforce_detection = False)
+            df = DeepFace.find(img_path = "cropped.jpg", model_name = models[6], db_path = f"{hlvu_location}/movie_knowledge_graph/{movies}/image/Person/", detector_backend = backends[4], enforce_detection = False)
             path_to_db = f"/movie_knowledge_graph/{movies}/image/Person/"
             idx = len(hlvu_location)+ len(path_to_db)
             name_list = list(i[idx:].partition('/')[0] for i in df["identity"][:5])

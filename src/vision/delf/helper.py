@@ -30,8 +30,7 @@ def download_and_resize(path, new_width=256, new_height=256):
   image = ImageOps.fit(image, (new_width, new_height), Image.ANTIALIAS)
   return image
 
-def custom_delf(image):
-    delf = hub.load('https://tfhub.dev/google/delf/1').signatures['default']
+def custom_delf(image, delf):
     np_image = np.array(image)
     float_image = tf.image.convert_image_dtype(np_image, tf.float32)
 
@@ -42,12 +41,12 @@ def custom_delf(image):
       max_feature_num=tf.constant(1000))
 
 #@title TensorFlow is not needed for this post-processing and visualization
-def match_images(image1, image2):
+def match_images(image1, image2, delf):
   if check_similarity(image1, image2):
     image1 = download_and_resize(image1)
     image2 = download_and_resize(image2)
-    result1 = custom_delf(image1)
-    result2 = custom_delf(image2)
+    result1 = custom_delf(image1, delf)
+    result2 = custom_delf(image2, delf)
     distance_threshold = 0.8
 
      # Read features.
@@ -85,10 +84,10 @@ def match_images(image1, image2):
             max_trials=1000)
 
         if type(inliers) != np.ndarray:
-          print(inliers)
+          #print(inliers)
           return False
 
-        print('Found %d inliers' % sum(inliers))
+        #print('Found %d inliers' % sum(inliers))
         if sum(inliers) > 20:
           return True
         else:
@@ -99,5 +98,4 @@ def match_images(image1, image2):
   else:
     return False
 
-def say_hello():
-  print("hi")
+

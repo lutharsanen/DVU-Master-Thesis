@@ -5,6 +5,10 @@ import settings as s
 from audio import scene_diarization
 from tqdm import tqdm
 import torch
+from tinydb import TinyDB
+from tinydb_serialization import SerializationMiddleware
+from tinydb_serialization.serializers import DateTimeSerializer
+from tinydb.storages import JSONStorage
 
 
 torch.cuda.set_device(0)
@@ -20,6 +24,13 @@ if not os.path.exists(audio_chunk_path):
 
 movie = "honey"
 custom_chunk_path = f"{hlvu_location}/audiochunk/{movie}"
+
+serialization = SerializationMiddleware(JSONStorage)
+serialization.register_serializer(DateTimeSerializer(), 'TinyDate')
+audio_db = TinyDB(f'database/audio_{movie}.json', storage=serialization)
+
+
+
 if not os.path.exists(custom_chunk_path):
     os.mkdir(custom_chunk_path)
 if not os.path.exists(f"{audio_path}/{movie}/data"):
@@ -31,5 +42,5 @@ for audio_file in tqdm(os.listdir(f"{audio_path}/{movie}")[:3]):
     chunk_part_path = f"{custom_chunk_path}/{audio_name}"
     if not os.path.exists(chunk_part_path):
         os.mkdir(chunk_part_path)
-    scene_diarization(f"{audio_path}/{movie}/{audio_file}", chunk_part_path, audio_file, f"{audio_path}/{movie}/data")
+    scene_diarization(f"{audio_path}/{movie}/{audio_file}", chunk_part_path, audio_file, f"{audio_path}/{movie}/data", audio_db)
 

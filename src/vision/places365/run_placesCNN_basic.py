@@ -2,21 +2,25 @@
 #
 # by Bolei Zhou
 # last modified by Bolei Zhou, Dec.27, 2017 with latest pytorch and torchvision (upgrade your torchvision please if there is trn.Resize error)
+import sys, os
+os.environ["CUDA_VISIBLE_DEVICES"]="4"
+
 import torch
 from torch.autograd import Variable as V
 import torchvision.models as models
 from torchvision import transforms as trn
 from torch.nn import functional as F
-import os
 from PIL import Image
 
 
 def run_places365(image, dir_path):
 
+    torch.cuda.set_device(0)
+
     # th architecture to use
     arch = 'resnet18'
 
-    places_dir = f"{dir_path}/featureExtraction/vision/places365"
+    places_dir = f"{dir_path}/vision/places365"
 
     # load the pre-trained weights
     model_file = f'{places_dir}/models/{arch}_places365.pth.tar'

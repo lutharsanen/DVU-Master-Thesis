@@ -2,12 +2,14 @@
 # by Bolei Zhou, sep 2, 2017
 # updated, making it compatible to pytorch 1.x in a hacky way
 
+import sys, os
+os.environ["CUDA_VISIBLE_DEVICES"]="4"
+
 import torch
 from torch.autograd import Variable as V
 import torchvision.models as models
 from torchvision import transforms as trn
 from torch.nn import functional as F
-import os
 import numpy as np
 import cv2
 from PIL import Image

@@ -14,7 +14,7 @@ import os
 available_pipelines = [p.modelId for p in HfApi().list_models(filter="pyannote-audio-pipeline")]
 
 
-def scene_diarization(audio_path, chunk_loc,name, data_path):
+def scene_diarization(audio_path, chunk_loc,name, data_path, audio_db):
     #print(audio_path)
     audio_name = name.partition(".")[0]
     pipeline = Pipeline.from_pretrained("pyannote/speaker-diarization")
