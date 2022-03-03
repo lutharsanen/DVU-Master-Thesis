@@ -1,6 +1,7 @@
 import settings as s
 import os
-import tqdm as tqdm
+os.environ['CUDA_VISIBLE_DEVICES']='5'
+from tqdm import tqdm
 import shutil
 from video import video_preprocessing as video
 from video import action_recognition as action
@@ -10,13 +11,14 @@ from tinydb import TinyDB
 from tinydb_serialization import SerializationMiddleware
 from tinydb_serialization.serializers import DateTimeSerializer
 from tinydb.storages import JSONStorage
-
+import torch
 
 
 hlvu_location = s.HLVU_LOCATION
 video_path = f"{hlvu_location}/keyframes/shot_split_video"
+data_loc = s.DIR_PATH
 
-video.process_data(video_path)
+#video.process_data(video_path)
 
 def get_timestamp(movie, movie_scene, hlvu_location, shot_name):
     path = f"{hlvu_location}/scene.segmentation.reference/{movie}.csv"
@@ -29,9 +31,9 @@ def get_timestamp(movie, movie_scene, hlvu_location, shot_name):
     # calculate scene start time
     scene_ind = int(movie_scene.split("-")[1]) -1
     scene_start_time = datetime.strptime(df_scenes.iloc[[scene_ind]][0].to_list()[0], '%H:%M:%S')
-    splits = shot_name.strip(".mp4").split("_")
+    splits = shot_name.replace(".mp4", "").split("_")
     shot_num = int(splits[1])
-    start_frame, end_frame = df_shots[shot_num][0], df_shots[shot_num][1]
+    start_frame, end_frame = df_shots[0][shot_num], df_shots[1][shot_num]
     if start_frame == 0:
         shot_starttime = scene_start_time
     else:
@@ -64,20 +66,24 @@ frames_per_second = 30
 one_movie = True
 movie = "honey"
 
+# Pick a pretrained model and load the pretrained weights
+model_name = "slowfast_r50"
+model = torch.hub.load("facebookresearch/pytorchvideo", model=model_name, pretrained=True)
+
 #action_frame = {'shot_name': [], 'action': [], 'start_time': [], 'end_time': [], 'scene_name': []}
 #video_df = pd.DataFrame(data=action_frame)
 serialization = SerializationMiddleware(JSONStorage)
 serialization.register_serializer(DateTimeSerializer(), 'TinyDate')
 action_db = TinyDB(f'database/action_{movie}.json', storage=serialization)
 
-
-for scene in os.listdir(video_path):
+torch.cuda.set_device(0)
+for scene in tqdm(os.listdir(video_path)):
     if one_movie:
         if movie in scene:
-            for split in os.listdir(f"{video_path}/{movie}"):
-
+            for split in os.listdir(f"{video_path}/{scene}"):
                 action_list = action.get_action_from_video(
-                    f"{video_path}/{movie}/{split}", 
+                    model,
+                    f"{video_path}/{scene}/{split}", 
                     num_frames, 
                     mean, 
                     std, 
@@ -85,12 +91,13 @@ for scene in os.listdir(video_path):
                     crop_size, 
                     alpha, 
                     sampling_rate, 
-                    frames_per_second
+                    frames_per_second,
+                    data_loc
                 )
 
                 start_time, end_time = get_timestamp(movie, scene, hlvu_location, split)
                 #video_df.loc[video_df.shape[0]] = [split, action_list[0], start_time, end_time, scene]
                 action_db.insert(
-                    {'shot_name': split, 'action':action_list[0], 'start_time': start_time, 'end_time':end_time, 'scene': scene})
+                    {'shot_name': split, 'action': action_list[0], 'start_time': start_time, 'end_time': end_time, 'scene': scene})
 
 

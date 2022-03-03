@@ -10,33 +10,48 @@ import numpy as np
 from audio.speechbrain.run import get_speech_emotion, get_speech_to_text
 import shutil
 import os
+from transformers import Wav2Vec2FeatureExtractor 
+from datetime import datetime, timedelta
 
 available_pipelines = [p.modelId for p in HfApi().list_models(filter="pyannote-audio-pipeline")]
 
 
-def scene_diarization(audio_path, chunk_loc,name, data_path, audio_db):
+def get_timestamp(movie, movie_scene, hlvu_location, segment):
+    path = f"{hlvu_location}/scene.segmentation.reference/{movie}.csv"
+    df_scenes = pd.read_csv(path, header=None)
+    scene_ind = int(movie_scene.split("-")[1]) -1
+    scene_start_time = datetime.strptime(df_scenes.iloc[[scene_ind]][0].to_list()[0], '%H:%M:%S')
+    start_delta = timedelta(seconds=segment["segment"]["start"])
+    end_delta = timedelta(seconds=segment["segment"]["end"])
+    starttime = scene_start_time + start_delta
+    endtime = scene_start_time + end_delta
+    return starttime, endtime
+
+
+
+def scene_diarization(audio_path, chunk_loc,name, audio_db, movie, hlvu_location):
     #print(audio_path)
     audio_name = name.partition(".")[0]
     pipeline = Pipeline.from_pretrained("pyannote/speaker-diarization")
     output = pipeline(audio_path)
     audio = AudioSegment.from_wav(audio_path)
     if len(output) != 0:
-        for segment in output.for_json():
+        for segment in output.for_json()["content"]:
             #speech_diarization = {'name': [], "start": [], "end": [], "label": [], "emotion":[], "text":[]}
             #speech_diarization = {'name': [], "start": [], "end": [], "label": []}
             #df = pd.DataFrame(data=speech_diarization)
             for idx,segments in enumerate(output.for_json()["content"]):
-                name = f"chunk_{idx}.wav"
-                start = segments["segment"]["start"] 
-                end = segments["segment"]["end"]
-                generate_chunk(audio, start, end, chunk_loc, name)
+                chunk_name = f"chunk_{idx}.wav"
+                start, end = get_timestamp(movie, audio_name, hlvu_location , segment)
+                generate_chunk(audio, segment["segment"]["start"], segment["segment"]["end"], chunk_loc, name)
                 text = get_speech_to_text(f"{chunk_loc}/{name}")
                 emotion = get_speech_emotion(f"{chunk_loc}/{name}")
                 label = segments["label"]
                 #df.loc[df.shape[0]] = [ name, start, end, label, emotion, text]
                 #df.loc[df.shape[0]] = [ name, start, end, label]
+                #print(type(name), type(start), type(end), type(label), type(emotion), type(text))
                 audio_db.insert(
-                    {'name': name, 'start':start, 'end': end, 'label':label, 'emotion': emotion, "text": text})
+                    {'chunk_name': chunk_name, 'start': start, 'end': end, 'label': label, 'emotion': emotion[0], 'text': text, 'scene': name})
 
         #df.to_csv(f'{data_path}/speech_diarization_{audio_name}.csv')
     
@@ -55,14 +70,14 @@ def scene_diarization(audio_path, chunk_loc,name, data_path, audio_db):
         if len(vad) > 0:
             inference = Inference("pyannote/embedding",window="whole")
             counter = 0
-            speech_embeddings = {'embedding': [], 'name': [], "start": [], "end": [],  "emotion":[], "text":[]}
+            speech_embeddings = {'embedding': [], 'name': [], "start": [], "end": [],  "emotion":[], "text":[], "scene": []}
             #speech_embeddings = {'embedding': [], 'name': [], "start": [], "end": []}
             df = pd.DataFrame(data=speech_embeddings)
             for excerpt in vad.itertracks(yield_label=False):
                 segment = excerpt[0]
                 start = segment.for_json()["start"]
                 end = segment.for_json()["end"]
-                name = f"chunk_{counter}.wav"
+                chunk_name = f"chunk_{counter}.wav"
                 generate_chunk(audio, start, end, chunk_loc, name)
                 #print(f"{chunk_loc}/{name}")
                 text = get_speech_to_text(f"{chunk_loc}/{name}")
@@ -72,7 +87,7 @@ def scene_diarization(audio_path, chunk_loc,name, data_path, audio_db):
                 try:
                     embedding = inference.crop(audio_path, segment)
                     #print(len(embedding))
-                    df.loc[df.shape[0]] = [embedding, name, start, end, emotion, text]
+                    df.loc[df.shape[0]] = [embedding, chunk_name, start, end, emotion[0], text, name]
                     #df.loc[df.shape[0]] = [embedding, name, start, end]
                     counter += 1
                 except:
@@ -111,4 +126,4 @@ def generate_chunk( audio, start, end, chunk_loc, name):
 def dataframe_to_db(df, audio_db):
     for _, row in df.iterrows():
         audio_db.insert(
-            {'name': row["name"], 'start':row["start"], 'end': row["end"], 'label':row["label"], 'emotion': row["emotion"], "text": row["text"]})
+            {'name': row["name"], 'start':row["start"], 'end': row["end"], 'label':row["label"], 'emotion': row["emotion"], "text": row["text"], "scene": row["scene"]})

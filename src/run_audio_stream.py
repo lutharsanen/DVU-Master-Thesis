@@ -16,6 +16,8 @@ torch.cuda.set_device(0)
 #extractor.run_extractor()
 hlvu_location = s.HLVU_LOCATION
 audio_path = f"{hlvu_location}/audio"
+code_loc = s.DIR_PATH
+
 
 audio_chunk_path = f"{hlvu_location}/audiochunk"
 
@@ -33,8 +35,8 @@ audio_db = TinyDB(f'database/audio_{movie}.json', storage=serialization)
 
 if not os.path.exists(custom_chunk_path):
     os.mkdir(custom_chunk_path)
-if not os.path.exists(f"{audio_path}/{movie}/data"):
-    os.mkdir(f"{audio_path}/{movie}/data")
+#if not os.path.exists(f"{audio_path}/{movie}/data"):
+#    os.mkdir(f"{audio_path}/{movie}/data")
 
 
 for audio_file in tqdm(os.listdir(f"{audio_path}/{movie}")[:3]):
@@ -42,5 +44,5 @@ for audio_file in tqdm(os.listdir(f"{audio_path}/{movie}")[:3]):
     chunk_part_path = f"{custom_chunk_path}/{audio_name}"
     if not os.path.exists(chunk_part_path):
         os.mkdir(chunk_part_path)
-    scene_diarization(f"{audio_path}/{movie}/{audio_file}", chunk_part_path, audio_file, f"{audio_path}/{movie}/data", audio_db)
+    scene_diarization(f"{audio_path}/{movie}/{audio_file}", chunk_part_path, audio_file, audio_db, movie, hlvu_location, code_loc)
 

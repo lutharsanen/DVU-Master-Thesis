@@ -4,24 +4,22 @@ import json
 from pytorchvideo.models.hub.vision_transformers import mvit_base_32x3
 from pytorchvideo.data.encoded_video import EncodedVideo
 from typing import Dict
-from transformer import transformator
+from video.transformer import transformator
 
 
-def get_action_from_video(video_path, num_frames, mean, std, side_size, crop_size, alpha, sampling_rate, frames_per_second):
+def get_action_from_video(model,video_path, num_frames, mean, std, side_size, crop_size, alpha, sampling_rate, frames_per_second, data_loc):
     # Device on which to run the model
     # Set to cuda to load on GPU
-    device = "cpu"
+    device = "cuda"
 
-    # Pick a pretrained model and load the pretrained weights
-    model_name = "slowfast_r50"
-    model = torch.hub.load("facebookresearch/pytorchvideo", model=model_name, pretrained=True)
     #model = mvit_base_32x3(pretrained = True)
 
     # Set to eval mode and move to desired device
     model = model.to(device)
     model = model.eval()
 
-    with open("kinetics_classnames.json", "r") as f:
+    loc = f"{data_loc}/video/"
+    with open(f"{loc}/kinetics_classnames.json", "r") as f:
         kinetics_classnames = json.load(f)
 
     # Create an id to label name mapping

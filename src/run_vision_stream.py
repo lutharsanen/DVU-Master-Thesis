@@ -113,7 +113,7 @@ def run():
                 timestamp = get_timestamp_from_shot(movies, shots, image)
                 #knowledge_df.loc[knowledge_df.shape[0]] = [faces, emotions, image, location, places365_data, timestamp, shots]
                 vision_db.insert(
-                    {'faces': faces, 'emotions': emotions, 'image': image,'location': location, 'places365':places365_data,'timestamp': timestamp, 'shots': shots})
+                    {'faces': faces, 'emotions': emotions, 'image': image,'location': location, 'places365':places365_data,'timestamp': timestamp, 'scene': shots, 'shots': shot})
                 
 
     cluster_df = start_face_clustering(cluster_path)
