@@ -63,8 +63,8 @@ alpha = 4
 sampling_rate = 2
 frames_per_second = 30
 
-one_movie = True
-movie = "honey"
+one_movie = False
+#movie = "honey"
 
 # Pick a pretrained model and load the pretrained weights
 model_name = "slowfast_r50"
@@ -74,30 +74,34 @@ model = torch.hub.load("facebookresearch/pytorchvideo", model=model_name, pretra
 #video_df = pd.DataFrame(data=action_frame)
 serialization = SerializationMiddleware(JSONStorage)
 serialization.register_serializer(DateTimeSerializer(), 'TinyDate')
-action_db = TinyDB(f'database/action_{movie}.json', storage=serialization)
+action_db = TinyDB(f'database/action.json', storage=serialization)
 
 torch.cuda.set_device(0)
 for scene in tqdm(os.listdir(video_path)):
-    if one_movie:
-        if movie in scene:
-            for split in os.listdir(f"{video_path}/{scene}"):
-                action_list = action.get_action_from_video(
-                    model,
-                    f"{video_path}/{scene}/{split}", 
-                    num_frames, 
-                    mean, 
-                    std, 
-                    side_size, 
-                    crop_size, 
-                    alpha, 
-                    sampling_rate, 
-                    frames_per_second,
-                    data_loc
-                )
-
-                start_time, end_time = get_timestamp(movie, scene, hlvu_location, split)
-                #video_df.loc[video_df.shape[0]] = [split, action_list[0], start_time, end_time, scene]
-                action_db.insert(
-                    {'shot_name': split, 'action': action_list[0], 'start_time': start_time, 'end_time': end_time, 'scene': scene})
+    #if one_movie:
+        #if movie in scene:
+    for split in os.listdir(f"{video_path}/{scene}"):
+        try:
+            action_list = action.get_action_from_video(
+                model,
+                f"{video_path}/{scene}/{split}", 
+                num_frames, 
+                mean, 
+                std, 
+                side_size, 
+                crop_size, 
+                alpha, 
+                sampling_rate, 
+                frames_per_second,
+                data_loc
+            )
+            movie = scene.partition("-")[0]
+            start_time, end_time = get_timestamp(movie, scene, hlvu_location, split)
+            #video_df.loc[video_df.shape[0]] = [split, action_list[0], start_time, end_time, scene]
+            action_db.insert(
+                {'shot_name': split, 'action': action_list[0], 'start_time': start_time, 'end_time': end_time, 'scene': scene})
+        
+        except:
+            pass
 
 

@@ -15,6 +15,6 @@ def crop_unrecognized_faces(image, unknown_counter,cluster_path):
             rgba_img.save(f"{cluster_path}/unknown_{unknown_counter}.jpg")
             unknown_counter += 1
 
-        return unknown_counter
+        return unknown_counter, True
     except:
-        return unknown_counter
+        return unknown_counter , False

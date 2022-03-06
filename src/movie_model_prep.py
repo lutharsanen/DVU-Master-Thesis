@@ -24,3 +24,7 @@ def character_checker(name1, name2, level):
     outcome = all(truth_check)
     return outcome
 
+
+
+
+

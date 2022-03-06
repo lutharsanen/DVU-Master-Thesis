@@ -86,17 +86,21 @@ def evaluation(image, image_path, movies, unknown_counter, hlvu_location, cluste
             path_to_db = f"/movie_knowledge_graph/{movies}/image/Person/"
             idx = len(hlvu_location)+ len(path_to_db)
             name_list = list(i[idx:].partition('/')[0] for i in df["identity"][:5])
-            c = Counter(name_list)
-            name, count = c.most_common()[0]
-            if count > 2:
-                #name = "{img_path}/{movies}/{shots}/{shot}/{image}"
-                faces.append(name)
-                emotions.append(obj["dominant_emotion"])
-            #else:
-            #    faces.append(f"unknown_{unknown_counter}.jpg")
-            #    emotions.append(obj["dominant_emotion"])
+            if len(name_list) > 0:
+                c = Counter(name_list)
+                name, count = c.most_common()[0]
+                if count > 2:
+                    #name = "{img_path}/{movies}/{shots}/{shot}/{image}"
+                    faces.append(name)
+                    emotions.append(obj["dominant_emotion"])
+                else:
+                    faces.append(f"unknown_{unknown_counter}.jpg")
+                    emotions.append(obj["dominant_emotion"])
     else:
-        unknown_counter = crop.crop_unrecognized_faces(f"{image_path}/{image}", unknown_counter,cluster_path)
+        unknown_counter, face_detected = crop.crop_unrecognized_faces(f"{image_path}/{image}", unknown_counter,cluster_path)
+        if face_detected:
+            faces.append(f"unknown_{unknown_counter}.jpg")
+            unknown_counter += 1
                 
     return faces, emotions, unknown_counter
 

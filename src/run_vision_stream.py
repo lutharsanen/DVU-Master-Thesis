@@ -57,70 +57,76 @@ def run():
 
     #training.data_creation()
 
-    movies = "honey"
-    serialization = SerializationMiddleware(JSONStorage)
-    serialization.register_serializer(DateTimeSerializer(), 'TinyDate')
-    vision_db = TinyDB(f'database/vision_{movies}.json', storage=serialization)
-    scenelist = os.listdir(f"{img_path}/{movies}")
-    orderedshotlist = [i.partition('-')[2] for i in scenelist]
-
-    # finetuning face recognition model
-
-    for i in tqdm(range(len(scenelist))):
-        num = i+1
-        list_index = orderedshotlist.index(str(num))
-        shots = scenelist[list_index]
-        for shot in os.listdir(f"{img_path}/{movies}/{shots}"):
-            path = f"{img_path}/{movies}/{shots}/{shot}"
-            training(path, movies, hlvu_location)
-
-    # delete existing model to generate new one
-    model_loc = f"{hlvu_location}/movie_knowledge_graph/{movies}/image/Person/representations_arcface.pkl"
     
-    if os.path.isfile(model_loc):
-        os.remove(model_loc)
-        #print("model deleted")
+    #movies = "honey"
     
-
-    cluster_path = f"{hlvu_location}/movie_knowledge_graph/{movies}/clustering"
-    training_image_path = f"{hlvu_location}/movie_knowledge_graph/{movies}/image/Person"
-    if not os.path.exists(cluster_path):
-        os.mkdir(cluster_path)
-    for folder in os.listdir(training_image_path):
-        for images in os.listdir(f"{training_image_path}/{folder}/"):
-            image = f"{training_image_path}/{folder}/{images}"
-            shutil.copyfile(image, f"{cluster_path}/{images}")
-    
-
-    #knowledge_frame = {'persons': [],'emotions':[], 'shot_name': [], 'location': [], 'places365' : [], 'timestamp': [], 'scene_name':[]}
-    #knowledge_df = pd.DataFrame(data=knowledge_frame)
-
-    # vision evaluation of dataset
-    unknown_counter = 0
+    # preload delf model
     delf = hub.load('https://tfhub.dev/google/delf/1').signatures['default']
-    for i in tqdm(range(len(scenelist))):
-        num = i+1
-        list_index = orderedshotlist.index(str(num))
-        shots = scenelist[list_index]
-        for shot in os.listdir(f"{img_path}/{movies}/{shots}"):
-            border_list = []
-            for image in os.listdir(f"{img_path}/{movies}/{shots}/{shot}"):
+
+    for movies in os.listdir(img_path):
+    
+        serialization = SerializationMiddleware(JSONStorage)
+        serialization.register_serializer(DateTimeSerializer(), 'TinyDate')
+        vision_db = TinyDB(f'database/vision_{movies}.json', storage=serialization)
+        scenelist = os.listdir(f"{img_path}/{movies}")
+        orderedshotlist = [i.partition('-')[2] for i in scenelist]
+
+        # finetuning face recognition model
+
+        for i in tqdm(range(len(scenelist))):
+            num = i+1
+            list_index = orderedshotlist.index(str(num))
+            shots = scenelist[list_index]
+            for shot in os.listdir(f"{img_path}/{movies}/{shots}"):
                 path = f"{img_path}/{movies}/{shots}/{shot}"
-                loc_path = f"{hlvu_location}/movie_knowledge_graph/{movies}/image/Location"
-                faces, emotions, unknown_counter = evaluation(image, path, movies, unknown_counter, hlvu_location, cluster_path)
-                location = compare(image, path,loc_path, delf)
-                places365_data = places365.run_places365(f"{path}/{image}", dir_path)
-                timestamp = get_timestamp_from_shot(movies, shots, image)
-                #knowledge_df.loc[knowledge_df.shape[0]] = [faces, emotions, image, location, places365_data, timestamp, shots]
-                vision_db.insert(
-                    {'faces': faces, 'emotions': emotions, 'image': image,'location': location, 'places365':places365_data,'timestamp': timestamp, 'scene': shots, 'shots': shot})
-                
+                training(path, movies, hlvu_location)
 
-    cluster_df = start_face_clustering(cluster_path)
-    # then cluster with facenet and replace unknown images by person images
+        # delete existing model to generate new one
+        model_loc = f"{hlvu_location}/movie_knowledge_graph/{movies}/image/Person/representations_arcface.pkl"
+        
+        if os.path.isfile(model_loc):
+            os.remove(model_loc)
+            #print("model deleted")
+        
 
-    #knowledge_df.to_json(f"knowledge_{movies}.json")
-    cluster_df.to_json(f"cluster_{movies}.json")
+        cluster_path = f"{hlvu_location}/movie_knowledge_graph/{movies}/clustering"
+        training_image_path = f"{hlvu_location}/movie_knowledge_graph/{movies}/image/Person"
+        if not os.path.exists(cluster_path):
+            os.mkdir(cluster_path)
+        for folder in os.listdir(training_image_path):
+            for images in os.listdir(f"{training_image_path}/{folder}/"):
+                image = f"{training_image_path}/{folder}/{images}"
+                shutil.copyfile(image, f"{cluster_path}/{images}")
+        
+
+        #knowledge_frame = {'persons': [],'emotions':[], 'shot_name': [], 'location': [], 'places365' : [], 'timestamp': [], 'scene_name':[]}
+        #knowledge_df = pd.DataFrame(data=knowledge_frame)
+
+        # vision evaluation of dataset
+        unknown_counter = 0
+        for i in tqdm(range(len(scenelist))):
+            num = i+1
+            list_index = orderedshotlist.index(str(num))
+            shots = scenelist[list_index]
+            for shot in os.listdir(f"{img_path}/{movies}/{shots}"):
+                border_list = []
+                for image in os.listdir(f"{img_path}/{movies}/{shots}/{shot}"):
+                    path = f"{img_path}/{movies}/{shots}/{shot}"
+                    loc_path = f"{hlvu_location}/movie_knowledge_graph/{movies}/image/Location"
+                    faces, emotions, unknown_counter = evaluation(image, path, movies, unknown_counter, hlvu_location, cluster_path)
+                    location = compare(image, path,loc_path, delf)
+                    places365_data = places365.run_places365(f"{path}/{image}", dir_path)
+                    timestamp = get_timestamp_from_shot(movies, shots, image)
+                    #knowledge_df.loc[knowledge_df.shape[0]] = [faces, emotions, image, location, places365_data, timestamp, shots]
+                    vision_db.insert(
+                        {'faces': faces, 'emotions': emotions, 'image': image,'location': location, 'places365':places365_data,'timestamp': timestamp, 'scene': shots, 'shots': shot})
+                    
+
+        cluster_df = start_face_clustering(cluster_path)
+        # then cluster with facenet and replace unknown images by person images
+
+        #knowledge_df.to_json(f"knowledge_{movies}.json")
+        cluster_df.to_json(f"cluster_{movies}.json")
 
 
 

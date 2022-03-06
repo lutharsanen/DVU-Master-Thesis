@@ -5,12 +5,13 @@ def get_speech_emotion(audio_file):
     classifier = foreign_class(
         source="speechbrain/emotion-recognition-wav2vec2-IEMOCAP", 
         pymodule_file="custom_interface.py", 
-        classname="CustomEncoderWav2vec2Classifier")
+        classname="CustomEncoderWav2vec2Classifier",
+        run_opts={"device":"cuda"} )
     _, score, _, text_lab = classifier.classify_file(audio_file)
     return text_lab, score
 
 
 def get_speech_to_text(audio_file):
-    asr_model = EncoderDecoderASR.from_hparams(source="speechbrain/asr-crdnn-rnnlm-librispeech", savedir="./pretrained_ASR")
+    asr_model = EncoderDecoderASR.from_hparams(source="speechbrain/asr-crdnn-rnnlm-librispeech", savedir="./pretrained_ASR",run_opts={"device":"cuda"} )
     text = asr_model.transcribe_file(audio_file)
     return text

@@ -1,5 +1,5 @@
 import os
-#os.environ['CUDA_VISIBLE_DEVICES']='4'
+os.environ['CUDA_VISIBLE_DEVICES']='5'
 import audio.audio_preprocessing.extract_audio as extractor
 import settings as s
 from audio import scene_diarization
@@ -12,6 +12,7 @@ from tinydb.storages import JSONStorage
 
 
 torch.cuda.set_device(0)
+torch.cuda.set_per_process_memory_fraction(0.6, 0)
 # extract audio from video
 #extractor.run_extractor()
 hlvu_location = s.HLVU_LOCATION
@@ -25,24 +26,28 @@ if not os.path.exists(audio_chunk_path):
     os.mkdir(audio_chunk_path)
 
 movie = "honey"
-custom_chunk_path = f"{hlvu_location}/audiochunk/{movie}"
-
-serialization = SerializationMiddleware(JSONStorage)
-serialization.register_serializer(DateTimeSerializer(), 'TinyDate')
-audio_db = TinyDB(f'database/audio_{movie}.json', storage=serialization)
 
 
+for movie in os.listdir(audio_path):
+    custom_chunk_path = f"{hlvu_location}/audiochunk/{movie}"
 
-if not os.path.exists(custom_chunk_path):
-    os.mkdir(custom_chunk_path)
-#if not os.path.exists(f"{audio_path}/{movie}/data"):
-#    os.mkdir(f"{audio_path}/{movie}/data")
+    serialization = SerializationMiddleware(JSONStorage)
+    serialization.register_serializer(DateTimeSerializer(), 'TinyDate')
+    audio_db = TinyDB(f'database/audio_{movie}.json', storage=serialization)
 
 
-for audio_file in tqdm(os.listdir(f"{audio_path}/{movie}")[:3]):
-    audio_name = audio_file.partition(".")[0]
-    chunk_part_path = f"{custom_chunk_path}/{audio_name}"
-    if not os.path.exists(chunk_part_path):
-        os.mkdir(chunk_part_path)
-    scene_diarization(f"{audio_path}/{movie}/{audio_file}", chunk_part_path, audio_file, audio_db, movie, hlvu_location, code_loc)
+
+    if not os.path.exists(custom_chunk_path):
+        os.mkdir(custom_chunk_path)
+    #if not os.path.exists(f"{audio_path}/{movie}/data"):
+    #    os.mkdir(f"{audio_path}/{movie}/data")
+
+    for audio_file in tqdm(os.listdir(f"{audio_path}/{movie}")):
+        audio_name = audio_file.partition(".")[0]
+        chunk_part_path = f"{custom_chunk_path}/{audio_name}"
+        if not os.path.exists(chunk_part_path):
+            os.mkdir(chunk_part_path)
+        scene_diarization(f"{audio_path}/{movie}/{audio_file}", chunk_part_path, audio_file, audio_db, movie, hlvu_location, code_loc)
+        torch.cuda.empty_cache()
+
 

@@ -12,6 +12,7 @@ import shutil
 import os
 from transformers import Wav2Vec2FeatureExtractor 
 from datetime import datetime, timedelta
+import torch
 
 available_pipelines = [p.modelId for p in HfApi().list_models(filter="pyannote-audio-pipeline")]
 
@@ -29,31 +30,33 @@ def get_timestamp(movie, movie_scene, hlvu_location, segment):
 
 
 
-def scene_diarization(audio_path, chunk_loc,name, audio_db, movie, hlvu_location):
-    #print(audio_path)
+def scene_diarization(audio_path, chunk_loc,name, audio_db, movie, hlvu_location, code_loc):
     audio_name = name.partition(".")[0]
     pipeline = Pipeline.from_pretrained("pyannote/speaker-diarization")
     output = pipeline(audio_path)
     audio = AudioSegment.from_wav(audio_path)
     if len(output) != 0:
-        for segment in output.for_json()["content"]:
-            #speech_diarization = {'name': [], "start": [], "end": [], "label": [], "emotion":[], "text":[]}
-            #speech_diarization = {'name': [], "start": [], "end": [], "label": []}
-            #df = pd.DataFrame(data=speech_diarization)
-            for idx,segments in enumerate(output.for_json()["content"]):
-                chunk_name = f"chunk_{idx}.wav"
-                start, end = get_timestamp(movie, audio_name, hlvu_location , segment)
-                generate_chunk(audio, segment["segment"]["start"], segment["segment"]["end"], chunk_loc, name)
-                text = get_speech_to_text(f"{chunk_loc}/{name}")
-                emotion = get_speech_emotion(f"{chunk_loc}/{name}")
-                label = segments["label"]
-                #df.loc[df.shape[0]] = [ name, start, end, label, emotion, text]
-                #df.loc[df.shape[0]] = [ name, start, end, label]
-                #print(type(name), type(start), type(end), type(label), type(emotion), type(text))
-                audio_db.insert(
-                    {'chunk_name': chunk_name, 'start': start, 'end': end, 'label': label, 'emotion': emotion[0], 'text': text, 'scene': name})
 
-        #df.to_csv(f'{data_path}/speech_diarization_{audio_name}.csv')
+        for idx,segments in enumerate(output.for_json()["content"]):
+            chunk_name = f"chunk_{idx}.wav"
+            start, end = get_timestamp(movie, audio_name, hlvu_location , segments)
+            print(segments["segment"]["start"], segments["segment"]["end"])
+            generate_chunk(audio, segments["segment"]["start"], segments["segment"]["end"], chunk_loc, chunk_name)
+            try:
+                text = get_speech_to_text(f"{chunk_loc}/{chunk_name}")
+            except:
+                text = "unknown"
+            try:
+                emotion = get_speech_emotion(f"{chunk_loc}/{chunk_name}")
+            except:
+                emotion = "unknown"
+            label = segments["label"]
+            audio_db.insert(
+                {'chunk_name': chunk_name, 'start': start, 'end': end, 'label': label, 'emotion': emotion[0], 'text': text, 'scene': name})
+            os.remove(f"{code_loc}/{chunk_name}")
+
+            # empty not used gpu storage
+            torch.cuda.empty_cache()
     
     else:
         pipeline = VoiceActivityDetection(segmentation="pyannote/segmentation")
@@ -67,31 +70,35 @@ def scene_diarization(audio_path, chunk_loc,name, audio_db, movie, hlvu_location
         }
         pipeline.instantiate(HYPER_PARAMETERS)
         vad = pipeline(audio_path)
-        if len(vad) > 0:
+        if len(vad) > 2:
             inference = Inference("pyannote/embedding",window="whole")
             counter = 0
             speech_embeddings = {'embedding': [], 'name': [], "start": [], "end": [],  "emotion":[], "text":[], "scene": []}
-            #speech_embeddings = {'embedding': [], 'name': [], "start": [], "end": []}
             df = pd.DataFrame(data=speech_embeddings)
             for excerpt in vad.itertracks(yield_label=False):
                 segment = excerpt[0]
                 start = segment.for_json()["start"]
                 end = segment.for_json()["end"]
                 chunk_name = f"chunk_{counter}.wav"
-                generate_chunk(audio, start, end, chunk_loc, name)
-                #print(f"{chunk_loc}/{name}")
-                text = get_speech_to_text(f"{chunk_loc}/{name}")
-                emotion = get_speech_emotion(f"{chunk_loc}/{name}")
-                #print(text,emotion)
-                os.remove(name)
+                generate_chunk(audio, start, end, chunk_loc, chunk_name)
+                try:
+                    text = get_speech_to_text(f"{chunk_loc}/{chunk_name}")
+                except:
+                    text = "unknown"
+                try:
+                    emotion = get_speech_emotion(f"{chunk_loc}/{chunk_name}")
+                except:
+                    emotion = "unknown"
+                os.remove(f"{code_loc}/{chunk_name}")
                 try:
                     embedding = inference.crop(audio_path, segment)
-                    #print(len(embedding))
                     df.loc[df.shape[0]] = [embedding, chunk_name, start, end, emotion[0], text, name]
-                    #df.loc[df.shape[0]] = [embedding, name, start, end]
                     counter += 1
                 except:
                     pass
+
+                # empty not used gpu storage
+                torch.cuda.empty_cache()
             
             #check for NaN values
             for idx,value in enumerate(df["embedding"]):
