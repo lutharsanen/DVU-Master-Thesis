@@ -7,7 +7,6 @@ import os
 from vision import evaluation, training
 from vision import compare
 from vision import data_creation
-from vision import start_face_clustering
 import settings as s
 import pandas as pd
 import shutil
@@ -59,20 +58,30 @@ def run():
 
     
     #movies = "honey"
-    
+    movie_list = ["shooters", "The_Big_Something", "time_expired", "Valkaama", "Huckleberry_Finn", "spiritual_contact", "honey", "sophie", "Nuclear_Family", "SuperHero"]
     # preload delf model
     delf = hub.load('https://tfhub.dev/google/delf/1').signatures['default']
 
-    for movies in os.listdir(img_path):
-    
+    #for movies in os.listdir(img_path):
+    for movies in movie_list:
         serialization = SerializationMiddleware(JSONStorage)
         serialization.register_serializer(DateTimeSerializer(), 'TinyDate')
         vision_db = TinyDB(f'database/vision_{movies}.json', storage=serialization)
         scenelist = os.listdir(f"{img_path}/{movies}")
         orderedshotlist = [i.partition('-')[2] for i in scenelist]
 
-        # finetuning face recognition model
 
+        # extend cluster path with original training images
+        cluster_path = f"{hlvu_location}/movie_knowledge_graph/{movies}/clustering"
+        training_image_path = f"{hlvu_location}/movie_knowledge_graph/{movies}/image/Person"
+        if not os.path.exists(cluster_path):
+            os.mkdir(cluster_path)
+        for folder in os.listdir(training_image_path):
+            for images in os.listdir(f"{training_image_path}/{folder}/"):
+                image = f"{training_image_path}/{folder}/{images}"
+                shutil.copyfile(image, f"{cluster_path}/{images}")
+
+        # finetuning face recognition model
         for i in tqdm(range(len(scenelist))):
             num = i+1
             list_index = orderedshotlist.index(str(num))
@@ -87,16 +96,6 @@ def run():
         if os.path.isfile(model_loc):
             os.remove(model_loc)
             #print("model deleted")
-        
-
-        cluster_path = f"{hlvu_location}/movie_knowledge_graph/{movies}/clustering"
-        training_image_path = f"{hlvu_location}/movie_knowledge_graph/{movies}/image/Person"
-        if not os.path.exists(cluster_path):
-            os.mkdir(cluster_path)
-        for folder in os.listdir(training_image_path):
-            for images in os.listdir(f"{training_image_path}/{folder}/"):
-                image = f"{training_image_path}/{folder}/{images}"
-                shutil.copyfile(image, f"{cluster_path}/{images}")
         
 
         #knowledge_frame = {'persons': [],'emotions':[], 'shot_name': [], 'location': [], 'places365' : [], 'timestamp': [], 'scene_name':[]}
@@ -120,13 +119,13 @@ def run():
                     #knowledge_df.loc[knowledge_df.shape[0]] = [faces, emotions, image, location, places365_data, timestamp, shots]
                     vision_db.insert(
                         {'faces': faces, 'emotions': emotions, 'image': image,'location': location, 'places365':places365_data,'timestamp': timestamp, 'scene': shots, 'shots': shot})
-                    
+                    torch.cuda.empty_cache()
 
-        cluster_df = start_face_clustering(cluster_path)
+        #cluster_df = start_face_clustering(cluster_path)
         # then cluster with facenet and replace unknown images by person images
 
         #knowledge_df.to_json(f"knowledge_{movies}.json")
-        cluster_df.to_json(f"cluster_{movies}.json")
+        #cluster_df.to_json(f"cluster_{movies}.json")
 
 
 
@@ -136,7 +135,7 @@ if gpus:
   try:
     tf.config.set_logical_device_configuration(
         gpus[0],
-        [tf.config.LogicalDeviceConfiguration(memory_limit=2500)])
+        [tf.config.LogicalDeviceConfiguration(memory_limit=4500)])
     logical_gpus = tf.config.list_logical_devices('GPU')
     print(len(gpus), "Physical GPUs,", len(logical_gpus), "Logical GPU")
     torch.cuda.set_device(0)

@@ -11,7 +11,7 @@ os.mkdir(keyframe_path)
 
 for video in os.listdir(hlvu_location):
     
-    dir = f"/media/lkunam/DVU-Challenge/HLVU/movie.shots/{video}"
+    dir = f"/media/lkunam/DVU-Challenge/HLVU-testing/movie.shots/{video}"
     create_keyframes(dir, keyframe_path,video[:-5])
 
 

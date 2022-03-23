@@ -12,7 +12,7 @@ from tinydb.storages import JSONStorage
 
 
 torch.cuda.set_device(0)
-torch.cuda.set_per_process_memory_fraction(0.6, 0)
+torch.cuda.set_per_process_memory_fraction(0.7, 0)
 # extract audio from video
 #extractor.run_extractor()
 hlvu_location = s.HLVU_LOCATION
@@ -25,10 +25,11 @@ audio_chunk_path = f"{hlvu_location}/audiochunk"
 if not os.path.exists(audio_chunk_path):
     os.mkdir(audio_chunk_path)
 
-movie = "honey"
+#movie = "Huckleberry_Finn"
+movie_list = ["honey", "SuperHero", "shooters", "The_Big_Something", "time_expired", "spiritual_contact"]
 
 
-for movie in os.listdir(audio_path):
+for movie in movie_list:
     custom_chunk_path = f"{hlvu_location}/audiochunk/{movie}"
 
     serialization = SerializationMiddleware(JSONStorage)

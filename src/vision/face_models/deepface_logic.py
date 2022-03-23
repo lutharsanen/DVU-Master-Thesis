@@ -96,7 +96,10 @@ def evaluation(image, image_path, movies, unknown_counter, hlvu_location, cluste
                 else:
                     faces.append(f"unknown_{unknown_counter}.jpg")
                     emotions.append(obj["dominant_emotion"])
+                    shutil.copyfile("cropped.jpg", f"{cluster_path}/unknown_{unknown_counter}.jpg")
+
     else:
+        #print(f"{image_path}/{image}", unknown_counter,cluster_path)
         unknown_counter, face_detected = crop.crop_unrecognized_faces(f"{image_path}/{image}", unknown_counter,cluster_path)
         if face_detected:
             faces.append(f"unknown_{unknown_counter}.jpg")

@@ -7,7 +7,6 @@ def crop_unrecognized_faces(image, unknown_counter,cluster_path):
         img = Image.open(image)       
         rgb_img = img.convert("RGB")
         boxes = mtcnn.detect(rgb_img)
-        
     try:
         for box in boxes[0]:
             im1 = img.crop(list(box))
