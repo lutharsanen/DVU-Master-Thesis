@@ -6,8 +6,9 @@ from distutils.dir_util import copy_tree
 
 
 
-def data_creation(hlvu_location):
-
+def data_creation(hlvu_location, testset = False):
+    if testset:
+        hlvu_location = f"{hlvu_location}/Queries"
     dir = f"{hlvu_location}/movie_knowledge_graph"
     entity_type = {}
 

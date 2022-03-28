@@ -52,7 +52,7 @@ def get_timestamp_from_shot(movie, movie_scene, shot_name):
     return new_time
 
 
-def run():
+def run(testset = False):
 
     #training.data_creation()
 
@@ -72,8 +72,12 @@ def run():
 
 
         # extend cluster path with original training images
-        cluster_path = f"{hlvu_location}/movie_knowledge_graph/{movies}/clustering"
-        training_image_path = f"{hlvu_location}/movie_knowledge_graph/{movies}/image/Person"
+        if testset:
+            cluster_path = f"{hlvu_location}/Queries/movie_knowledge_graph/{movies}/clustering"
+            training_image_path = f"{hlvu_location}/Queries/movie_knowledge_graph/{movies}/image/Person"
+        else:
+            cluster_path = f"{hlvu_location}/movie_knowledge_graph/{movies}/clustering"
+            training_image_path = f"{hlvu_location}/movie_knowledge_graph/{movies}/image/Person"
         if not os.path.exists(cluster_path):
             os.mkdir(cluster_path)
         for folder in os.listdir(training_image_path):
@@ -91,7 +95,11 @@ def run():
                 training(path, movies, hlvu_location)
 
         # delete existing model to generate new one
-        model_loc = f"{hlvu_location}/movie_knowledge_graph/{movies}/image/Person/representations_arcface.pkl"
+        if testset:
+            model_loc = f"{hlvu_location}/Queries/movie_knowledge_graph/{movies}/image/Person/representations_arcface.pkl"
+        else:
+            model_loc = f"{hlvu_location}/movie_knowledge_graph/{movies}/image/Person/representations_arcface.pkl"
+
         
         if os.path.isfile(model_loc):
             os.remove(model_loc)
@@ -111,7 +119,10 @@ def run():
                 border_list = []
                 for image in os.listdir(f"{img_path}/{movies}/{shots}/{shot}"):
                     path = f"{img_path}/{movies}/{shots}/{shot}"
-                    loc_path = f"{hlvu_location}/movie_knowledge_graph/{movies}/image/Location"
+                    if testset:
+                        loc_path = f"{hlvu_location}/Queries/movie_knowledge_graph/{movies}/image/Location"
+                    else:
+                        loc_path = f"{hlvu_location}/movie_knowledge_graph/{movies}/image/Location"
                     faces, emotions, unknown_counter = evaluation(image, path, movies, unknown_counter, hlvu_location, cluster_path)
                     location = compare(image, path,loc_path, delf)
                     places365_data = places365.run_places365(f"{path}/{image}", dir_path)

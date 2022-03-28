@@ -40,7 +40,7 @@ def enlargen_image(border):
     border[3]+=20
     return border
 
-def training(image_path, movies, hlvu_location,unknown_counter=None, cluster_path=None):
+def training(image_path, movies, hlvu_location,unknown_counter=None, cluster_path=None, testset = False):
     border_list = []
     for image in os.listdir(image_path):
         resp = RetinaFace.detect_faces(f"{image_path}/{image}")
@@ -52,6 +52,8 @@ def training(image_path, movies, hlvu_location,unknown_counter=None, cluster_pat
                 im = Image.open(f"{image_path}/{image}")
                 im1 = im.crop(enlarged_border)
                 im1.save("cropped.jpg")
+                if testset:
+                    hlvu_location = f"{hlvu_location}/Queries"
                 df = DeepFace.find(img_path = "cropped.jpg", model_name = models[6], db_path = f"{hlvu_location}/movie_knowledge_graph/{movies}/image/Person/", detector_backend = backends[4], enforce_detection = False)
                 if len(df) > 0:
                     path_to_db = f"/movie_knowledge_graph/{movies}/image/Person/"
@@ -70,7 +72,7 @@ def training(image_path, movies, hlvu_location,unknown_counter=None, cluster_pat
                             border_list.append([border,image,name])
 
 
-def evaluation(image, image_path, movies, unknown_counter, hlvu_location, cluster_path):
+def evaluation(image, image_path, movies, unknown_counter, hlvu_location, cluster_path, testset = False):
     resp = RetinaFace.detect_faces(f"{image_path}/{image}")
     faces = []
     emotions = []
@@ -82,6 +84,8 @@ def evaluation(image, image_path, movies, unknown_counter, hlvu_location, cluste
             im1 = im.crop(enlarged_border)
             im1.save("cropped.jpg")
             obj = DeepFace.analyze(img_path = "cropped.jpg", actions = ['emotion'], enforce_detection = False)
+            if testset:
+                hlvu_location = f"{hlvu_location}/Queries"
             df = DeepFace.find(img_path = "cropped.jpg", model_name = models[6], db_path = f"{hlvu_location}/movie_knowledge_graph/{movies}/image/Person/", detector_backend = backends[4], enforce_detection = False)
             path_to_db = f"/movie_knowledge_graph/{movies}/image/Person/"
             idx = len(hlvu_location)+ len(path_to_db)

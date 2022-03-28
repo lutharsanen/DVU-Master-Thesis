@@ -40,7 +40,7 @@ def scene_diarization(audio_path, chunk_loc,name, audio_db, movie, hlvu_location
         for idx,segments in enumerate(output.for_json()["content"]):
             chunk_name = f"chunk_{idx}.wav"
             start, end = get_timestamp(movie, audio_name, hlvu_location , segments)
-            print(segments["segment"]["start"], segments["segment"]["end"])
+            #print(segments["segment"]["start"], segments["segment"]["end"])
             generate_chunk(audio, segments["segment"]["start"], segments["segment"]["end"], chunk_loc, chunk_name)
             try:
                 text = get_speech_to_text(f"{chunk_loc}/{chunk_name}")
@@ -77,10 +77,11 @@ def scene_diarization(audio_path, chunk_loc,name, audio_db, movie, hlvu_location
             df = pd.DataFrame(data=speech_embeddings)
             for excerpt in vad.itertracks(yield_label=False):
                 segment = excerpt[0]
-                start = segment.for_json()["start"]
-                end = segment.for_json()["end"]
+                start, end = get_timestamp(movie, audio_name, hlvu_location , segment)
+                start_chunk = segment.for_json()["start"]
+                end_chunk = segment.for_json()["end"]
                 chunk_name = f"chunk_{counter}.wav"
-                generate_chunk(audio, start, end, chunk_loc, chunk_name)
+                generate_chunk(audio, start_chunk, end_chunk, chunk_loc, chunk_name)
                 try:
                     text = get_speech_to_text(f"{chunk_loc}/{chunk_name}")
                 except:
@@ -133,4 +134,4 @@ def generate_chunk( audio, start, end, chunk_loc, name):
 def dataframe_to_db(df, audio_db):
     for _, row in df.iterrows():
         audio_db.insert(
-            {'name': row["name"], 'start':row["start"], 'end': row["end"], 'label':row["label"], 'emotion': row["emotion"], "text": row["text"], "scene": row["scene"]})
+            {'chunk_name': row["name"], 'start':row["start"], 'end': row["end"], 'label':row["label"], 'emotion': row["emotion"], "text": row["text"], "scene": row["scene"]})

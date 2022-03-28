@@ -11,7 +11,7 @@ os.mkdir(keyframe_path)
 
 for video in os.listdir(hlvu_location):
     
-    dir = f"/media/lkunam/DVU-Challenge/HLVU-testing/movie.shots/{video}"
+    dir = f"{hlvu_location}/{video}"
     create_keyframes(dir, keyframe_path,video[:-5])
 
 
@@ -30,13 +30,9 @@ for movie in all_movies:
 dir_path = f"{keyframe_path}/shot_keyf"
 
 for file in tqdm(os.listdir(dir_path)):
-    #print(file)
     if file not in all_movies:
         movie_name = file.partition("-")[0]
-        #print(file,movie_name)
         file_path = f"{dir_path}/{file}"
-        #print(file_path)
-        #print(f"{dir_path}/{movie_name}")
         shutil.copytree(file_path, f"{dir_path}/{movie_name}/{file}")
         shutil.rmtree(file_path)
 for movies in tqdm(os.listdir(dir_path)):
