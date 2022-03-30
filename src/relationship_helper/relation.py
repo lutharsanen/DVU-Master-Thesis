@@ -100,8 +100,10 @@ def get_stats(name1, name2, movie, path, vision_db, video_db, audio_db, location
     action_hist = get_top3_actions(action_list, action_classes)
 
     sentiment_final = [j for i in text_emotions for j in i]
-    average_sentiment = sum(sentiment_final)/len(sentiment_final)
-
+    if len(sentiment_final) > 0:
+        average_sentiment = sum(sentiment_final)/len(sentiment_final)
+    else:
+        average_sentiment = 0
     return scene_counter, shot_counter, text_counter, emo_hist, location_hist, action_hist, average_sentiment
 
 def get_person_location_stats(location, person, vision_db, location_classes):
@@ -130,6 +132,7 @@ def get_person_concept_stats(concept, person, audio_db):
     ### talk about features ###
     results = audio_db.search(where('label') == person)
     counter = 0
+    average_polarity = 0
     polarity_list = []
     emotion_list = []
     for i in results:
@@ -141,64 +144,54 @@ def get_person_concept_stats(concept, person, audio_db):
         emotion_list.append(i["emotion"][0])
 
     emotion_hist = get_audio_emo_hist(emotion_list)
-    average_polarity = sum(polarity_list)/len(polarity_list)
+
+    if len(polarity_list) > 0: 
+        average_polarity = sum(polarity_list)/len(polarity_list)
 
     return counter, average_polarity, emotion_hist
 
 def get_emo_hist(lst):
-    
-    emo_hist = []
     counter = Counter(lst)
-    if counter["angry"]:
-        emo_hist.append(counter["angry"])
-    else:
-        emo_hist.append(0)
-    if counter["fear"]:
-        emo_hist.append(counter["fear"])
-    else:
-        emo_hist.append(0)
-    if counter["happy"]:
-        emo_hist.append(counter["happy"])
-    else:
-        emo_hist.append(0)
-    if counter["neutral"]:
-        emo_hist.append(counter["neutral"])
-    else:
-        emo_hist.append(0)
-    if counter["sad"]:
-        emo_hist.append(counter["sad"])
-    else:
-        emo_hist.append(0)
-    if counter["surprise"]:
-        emo_hist.append(counter["surprise"])
-    else:
-        emo_hist.append(0)
-        
-    return emo_hist
+    return counter
 
 def get_top3_actions(lst, action_classes):
     a = [i for i in lst if i != None]
-    counter=Counter(a)
-
-    #print(kinetics_id_to_classname)        
+    counter=Counter(a)     
     top = counter.most_common(3)
-    #print(top)
     return_list = []
 
     for i in top:
         return_list.append([action_classes[i[0]],i[1]])
 
-    return_list
+    if len(return_list) < 3:
+        if len(return_list) == 2:
+            return_list.append([0,0])
+        elif len(return_list) == 1:
+            return_list.append([0,0])
+            return_list.append([0,0])
+        elif len(return_list) == 0:
+            return_list = [[0,0],[0,0],[0,0]]
+
     return return_list
 
 def get_top3_locations(lst, location_classes):
     a = [i for i in lst if i != None]
     counter=Counter(a)
     top = counter.most_common(3)
-
     return_list = []
+
     for i in top:
-        return_list.append([location_classes.index(i[0]),i[1]])
+        loc_index = location_classes.index(i[0])
+        return_list.append([loc_index,i[1]])
+
+    if len(return_list) < 3:
+        if len(return_list) == 2:
+            return_list.append([0,0])
+        elif len(return_list) == 1:
+            return_list.append([0,0])
+            return_list.append([0,0])
+        elif len(return_list) == 0:
+            return_list = [[0,0],[0,0],[0,0]]
 
     return return_list
 
@@ -221,26 +214,5 @@ def get_location_classes(loc):
     return classes
 
 def get_audio_emo_hist(lst):
-    emo_hist = []
     counter = Counter(lst)
-    if counter["ang"]:
-        emo_hist.append(counter["ang"])
-    else:
-        emo_hist.append(0)
-    if counter["hap"]:
-        emo_hist.append(counter["hap"])
-    else:
-        emo_hist.append(0)
-    if counter["neu"]:
-        emo_hist.append(counter["neu"])
-    else:
-        emo_hist.append(0)
-    if counter["sad"]:
-        emo_hist.append(counter["sad"])
-    else:
-        emo_hist.append(0)
-    if counter["u"]:
-        emo_hist.append(counter["surprise"])
-    else:
-        emo_hist.append(0)        
-    return emo_hist
+    return counter

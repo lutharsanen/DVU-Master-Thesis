@@ -51,15 +51,13 @@ def get_timestamp_from_shot(movie, movie_scene, shot_name):
     #print(new_time.time())
     return new_time
 
+movie_list = ["shooters", "The_Big_Something", "time_expired", "Valkaama", "Huckleberry_Finn", "spiritual_contact", "honey", "sophie", "Nuclear_Family", "SuperHero"]
 
-def run(testset = False):
 
-    #training.data_creation()
+def run(movie_list, hlvu_location, dir_path, img_path, testset = False):
 
-    
     #movies = "honey"
-    movie_list = ["shooters", "The_Big_Something", "time_expired", "Valkaama", "Huckleberry_Finn", "spiritual_contact", "honey", "sophie", "Nuclear_Family", "SuperHero"]
-    # preload delf model
+    #preload delf model
     delf = hub.load('https://tfhub.dev/google/delf/1').signatures['default']
 
     #for movies in os.listdir(img_path):
@@ -127,19 +125,12 @@ def run(testset = False):
                     location = compare(image, path,loc_path, delf)
                     places365_data = places365.run_places365(f"{path}/{image}", dir_path)
                     timestamp = get_timestamp_from_shot(movies, shots, image)
-                    #knowledge_df.loc[knowledge_df.shape[0]] = [faces, emotions, image, location, places365_data, timestamp, shots]
                     vision_db.insert(
                         {'faces': faces, 'emotions': emotions, 'image': image,'location': location, 'places365':places365_data,'timestamp': timestamp, 'scene': shots, 'shots': shot})
                     torch.cuda.empty_cache()
 
-        #cluster_df = start_face_clustering(cluster_path)
-        # then cluster with facenet and replace unknown images by person images
 
-        #knowledge_df.to_json(f"knowledge_{movies}.json")
-        #cluster_df.to_json(f"cluster_{movies}.json")
-
-
-
+'''
 gpus = tf.config.list_physical_devices('GPU')
 if gpus:
   # Restrict TensorFlow to only use the first GPU
@@ -150,9 +141,9 @@ if gpus:
     logical_gpus = tf.config.list_logical_devices('GPU')
     print(len(gpus), "Physical GPUs,", len(logical_gpus), "Logical GPU")
     torch.cuda.set_device(0)
-    run()
+    run(movie_list, hlvu_location, dir_path, img_path)
   except RuntimeError as e:
-    # Visible devices must be set before GPUs have been initialized
+    #Visible devices must be set before GPUs have been initialized
     print(e)
 
-#run()
+'''

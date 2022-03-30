@@ -4,10 +4,8 @@ import settings as s
 
 # Insert Local Video File Path 
 
-hlvu_location = s.HLVU_LOCATION
 
-
-def run_extractor():
+def run_extractor(hlvu_location):
     movie_list = []
     for file in os.listdir(f"{hlvu_location}/movie.shots"):
         shot_frame = file[:-5]
@@ -16,7 +14,7 @@ def run_extractor():
     
     os.mkdir(f"{hlvu_location}/audio")
     for i in set(movie_list):
-        print(i)
+        #print(i)
         os.mkdir(f"{hlvu_location}/audio/{i}")
     
     for file in os.listdir(f"{hlvu_location}/movie.shots"):

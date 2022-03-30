@@ -23,13 +23,62 @@ movie_list = ["shooters",
               "SuperHero"
              ]
 
-d = {'person1': [], 'person2': [],'shotlevel': [], 'scenelevel': [], "emotions_text" : [], "action": [], "places365" : [], 'text_sentiment':[], 'text_level':[], "relation":[]}
+d = {
+    'person1': [], 
+    'person2': [],
+    'shotlevel': [], 
+    'scenelevel': [], 
+    'face_angry' : [],
+    'face_fear' : [],
+    'face_neutral' : [],
+    'face_sad' : [],
+    'face_surprise' : [], 
+    'action_1': [],
+    'action_1_freq': [],
+    'action_2': [],
+    'action_2_freq': [],
+    'action_3': [],
+    'action_3_freq': [], 
+    'places365_1' : [],
+    'places365_1_freq' : [],
+    'places365_2' : [],
+    'places365_2_freq' : [],
+    'places365_3' : [],
+    'places365_3_freq' : [], 
+    'text_sentiment':[], 
+    'text_level':[], 
+    'relation':[]
+    }
+
 movie_dfpp = pd.DataFrame(data=d)
 
-d = {'location': [], 'person': [],'delf': [], 'places365': [], 'relation':[]}
+d = {
+    'location': [], 
+    'person': [],
+    'delf': [], 
+    'places365_1' : [],
+    'places365_1_freq' : [],
+    'places365_2' : [],
+    'places365_2_freq' : [],
+    'places365_3' : [],
+    'places365_3_freq' : [],
+    'relation':[]
+    }
+
 movie_dfpl = pd.DataFrame(data=d)
 
-d = {'concept': [], 'person': [],'concept_stat': [], 'polarity': [], 'emotion':[], 'relation':[]}
+d = {
+    'concept': [], 
+    'person': [],
+    'concept_stat': [], 
+    'polarity': [], 
+    'voice_angry':[],
+    'voice_happy':[],
+    'voice_neutral':[],
+    'voice_sad':[], 
+    'relation':[]
+    }
+
 movie_dfpc = pd.DataFrame(data=d)
 
 action_classes = get_action_classes(DIR_PATH)
@@ -87,11 +136,31 @@ for movie in movie_list:
 
     for i in tqdm(combis_pp):
         try:
-            scene_stat, shot_stat, text_stat, emotions, places365, action, sentiment = get_stats(person_d[i[0]], person_d[i[1]], movie, path, vision_db, video_db, audio_db, action_classes, location_classes)
-            movie_dfpp.loc[movie_dfpp.shape[0]] = [person_d[i[0]], person_d[i[1]], scene_stat, shot_stat, emotions , action, places365 , sentiment, text_stat,' '.join(relation_d[i])]
+            scene_stat, shot_stat, text_stat, emotions, places365, action, sentiment = get_stats(person_d[i[0]], person_d[i[1]], movie, path, vision_db, video_db, audio_db, location_classes, action_classes)
+            movie_dfpp.loc[movie_dfpp.shape[0]] = [
+                person_d[i[0]], person_d[i[1]], 
+                scene_stat, 
+                shot_stat, 
+                emotions["angry"], emotions["fear"], emotions["neutral"], emotions["sad"], emotions["suprise"],
+                action[0][0], action[0][1], action[1][0], action[1][1], action[2][0], action[2][1],
+                places365[0][0], places365[0][1], places365[1][0], places365[1][1], places365[2][0], places365[2][1], 
+                sentiment, 
+                text_stat
+                ,' '.join(relation_d[i])
+            ]
         except:
-            scene_stat, shot_stat, text_stat, emotions, places365, action, sentiment = get_stats(person_d[i[0]], person_d[i[1]], movie, path,vision_db, video_db, audio_db, action_classes, location_classes)
-            movie_dfpp.loc[movie_dfpp.shape[0]] = [person_d[i[0]], person_d[i[1]],scene_stat, shot_stat,emotions , action, places365, sentiment, text_stat, None]
+            scene_stat, shot_stat, text_stat, emotions, places365, action, sentiment = get_stats(person_d[i[0]], person_d[i[1]], movie, path,vision_db, video_db, audio_db, location_classes, action_classes)
+            movie_dfpp.loc[movie_dfpp.shape[0]] = [
+                person_d[i[0]], person_d[i[1]],
+                scene_stat, 
+                shot_stat,
+                emotions["angry"], emotions["fear"], emotions["neutral"], emotions["sad"], emotions["suprise"],
+                action[0][0], action[0][1], action[1][0], action[1][1], action[2][0], action[2][1],
+                places365[0][0], places365[0][1], places365[1][0], places365[1][1], places365[2][0], places365[2][1], 
+                sentiment, 
+                text_stat, 
+                None
+            ]
 
     t1 = tuple(person_d.keys())
     combis_pl = []
@@ -103,10 +172,20 @@ for movie in movie_list:
     for i in tqdm(combis_pl):
         try:
             delf, places365 = get_person_location_stats(person_d[i[0]], person_d[i[1]], vision_db, location_classes)
-            movie_dfpl.loc[movie_dfpl.shape[0]] = [person_d[i[0]], person_d[i[1]], delf, places365 ,' '.join(relation_d[i])]
+            movie_dfpl.loc[movie_dfpl.shape[0]] = [
+                person_d[i[0]], person_d[i[1]], 
+                delf, 
+                places365[0][0], places365[0][1], places365[1][0], places365[1][1], places365[2][0], places365[2][1],
+                ' '.join(relation_d[i])
+            ]
         except:
             delf, places365 = get_person_location_stats(person_d[i[0]], person_d[i[1]], vision_db, location_classes)
-            movie_dfpl.loc[movie_dfpl.shape[0]] = [person_d[i[0]], person_d[i[1]],delf, places365, None]
+            movie_dfpl.loc[movie_dfpl.shape[0]] = [
+                person_d[i[0]], person_d[i[1]],
+                delf, 
+                places365[0][0], places365[0][1], places365[1][0], places365[1][1], places365[2][0], places365[2][1],
+                None
+            ]
 
     t1 = tuple(person_d.keys())
     combis_pc = []
@@ -114,19 +193,29 @@ for movie in movie_list:
     for i in itertools.product(t1,t1):
         if i[0] != i[1] and ((i[1], i[0]) not in combis_pc):
             if (entity_type[person_d[i[0]]] == "Person" and entity_type[person_d[i[1]]] == "Concept"):
-                combis_pl.append((i[0], i[1]))
+                combis_pc.append((i[0], i[1]))
 
-    for i in tqdm(combis_pl):
+    for i in tqdm(combis_pc):
         try:
-            concept_stat, polarity_list, emotion_list = get_person_concept_stats(person_d[i[0]], person_d[i[1]], audio_db)
-            movie_dfpc.loc[movie_dfpc.shape[0]] = [person_d[i[0]], person_d[i[1]], concept_stat, polarity_list , emotion_list, ' '.join(relation_d[i])]
+            concept_stat, average_polarity, emotion_list = get_person_concept_stats(person_d[i[0]], person_d[i[1]], audio_db)
+            movie_dfpc.loc[movie_dfpc.shape[0]] = [
+                person_d[i[0]], person_d[i[1]], 
+                concept_stat, 
+                average_polarity, 
+                emotion_list["ang"], emotion_list["hap"], emotion_list["neu"], emotion_list["sad"], 
+                ' '.join(relation_d[i])
+            ]
         except:
-            concept_stat, polarity_list, emotion_list = get_person_concept_stats(person_d[i[0]], person_d[i[1]], audio_db)
-            movie_dfpc.loc[movie_dfpc.shape[0]] = [person_d[i[0]], person_d[i[1]],concept_stat, polarity_list , emotion_list, None]
+            concept_stat, average_polarity, emotion_list = get_person_concept_stats(person_d[i[0]], person_d[i[1]], audio_db)
+            movie_dfpc.loc[movie_dfpc.shape[0]] = [
+                person_d[i[0]], person_d[i[1]],
+                concept_stat, 
+                average_polarity, 
+                emotion_list["ang"], emotion_list["hap"], emotion_list["neu"], emotion_list["sad"], 
+                None
+            ]
 
 
 movie_dfpp.to_json('people2people.json')
-
 movie_dfpl.to_json('people2location.json')
-
 movie_dfpc.to_json('people2concept.json')
