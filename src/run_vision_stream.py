@@ -1,5 +1,5 @@
 import sys, os
-os.environ["CUDA_VISIBLE_DEVICES"]="4"
+#os.environ["CUDA_VISIBLE_DEVICES"]="4"
 
 from sklearn import cluster
 from tqdm import tqdm
@@ -20,11 +20,11 @@ from tinydb.storages import JSONStorage
 import torch
 import tensorflow_hub as hub
 
-hlvu_location = s.HLVU_LOCATION
-dir_path = s.DIR_PATH
-img_path = f"{hlvu_location}/keyframes/shot_keyf"
+#hlvu_location = s.HLVU_LOCATION
+#dir_path = s.DIR_PATH
+#img_path = f"{hlvu_location}/keyframes/shot_keyf"
 
-def get_timestamp_from_shot(movie, movie_scene, shot_name):
+def get_timestamp_from_shot(movie, movie_scene, shot_name, hlvu_location):
     # load scene segmentation csv
     path = f"{hlvu_location}/scene.segmentation.reference/{movie}.csv"
     df_scenes = pd.read_csv(path, header=None)
@@ -51,7 +51,7 @@ def get_timestamp_from_shot(movie, movie_scene, shot_name):
     #print(new_time.time())
     return new_time
 
-movie_list = ["shooters", "The_Big_Something", "time_expired", "Valkaama", "Huckleberry_Finn", "spiritual_contact", "honey", "sophie", "Nuclear_Family", "SuperHero"]
+#movie_list = ["shooters", "The_Big_Something", "time_expired", "Valkaama", "Huckleberry_Finn", "spiritual_contact", "honey", "sophie", "Nuclear_Family", "SuperHero"]
 
 
 def run(movie_list, hlvu_location, dir_path, img_path, testset = False):
@@ -70,6 +70,7 @@ def run(movie_list, hlvu_location, dir_path, img_path, testset = False):
 
 
         # extend cluster path with original training images
+        
         if testset:
             cluster_path = f"{hlvu_location}/Queries/movie_knowledge_graph/{movies}/clustering"
             training_image_path = f"{hlvu_location}/Queries/movie_knowledge_graph/{movies}/image/Person"
@@ -78,6 +79,7 @@ def run(movie_list, hlvu_location, dir_path, img_path, testset = False):
             training_image_path = f"{hlvu_location}/movie_knowledge_graph/{movies}/image/Person"
         if not os.path.exists(cluster_path):
             os.mkdir(cluster_path)
+        
         for folder in os.listdir(training_image_path):
             for images in os.listdir(f"{training_image_path}/{folder}/"):
                 image = f"{training_image_path}/{folder}/{images}"
@@ -90,8 +92,11 @@ def run(movie_list, hlvu_location, dir_path, img_path, testset = False):
             shots = scenelist[list_index]
             for shot in os.listdir(f"{img_path}/{movies}/{shots}"):
                 path = f"{img_path}/{movies}/{shots}/{shot}"
-                training(path, movies, hlvu_location)
-
+                if testset:
+                    training(path, movies, hlvu_location, testset = True)
+                else:
+                    training(path, movies, hlvu_location)
+        
         # delete existing model to generate new one
         if testset:
             model_loc = f"{hlvu_location}/Queries/movie_knowledge_graph/{movies}/image/Person/representations_arcface.pkl"
@@ -119,12 +124,13 @@ def run(movie_list, hlvu_location, dir_path, img_path, testset = False):
                     path = f"{img_path}/{movies}/{shots}/{shot}"
                     if testset:
                         loc_path = f"{hlvu_location}/Queries/movie_knowledge_graph/{movies}/image/Location"
+                        faces, emotions, unknown_counter = evaluation(image, path, movies, unknown_counter, hlvu_location, cluster_path, testset = testset)
                     else:
                         loc_path = f"{hlvu_location}/movie_knowledge_graph/{movies}/image/Location"
-                    faces, emotions, unknown_counter = evaluation(image, path, movies, unknown_counter, hlvu_location, cluster_path)
+                        faces, emotions, unknown_counter = evaluation(image, path, movies, unknown_counter, hlvu_location, cluster_path,testset = testset)
                     location = compare(image, path,loc_path, delf)
                     places365_data = places365.run_places365(f"{path}/{image}", dir_path)
-                    timestamp = get_timestamp_from_shot(movies, shots, image)
+                    timestamp = get_timestamp_from_shot(movies, shots, image, hlvu_location)
                     vision_db.insert(
                         {'faces': faces, 'emotions': emotions, 'image': image,'location': location, 'places365':places365_data,'timestamp': timestamp, 'scene': shots, 'shots': shot})
                     torch.cuda.empty_cache()

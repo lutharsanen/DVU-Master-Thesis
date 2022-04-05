@@ -17,7 +17,7 @@ from vision.visual_preprocessing.shotdetect.keyf_img_saver import generate_image
 
 def create_keyframes(video_path, data_root, video_prefix, split_video = True):
     
-    print(video_prefix)
+    #print(video_prefix)
     stats_file_folder_path = osp.join(data_root, "shot_stats")
     mkdir_ifmiss(stats_file_folder_path)
 

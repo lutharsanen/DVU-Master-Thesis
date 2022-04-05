@@ -1,3 +1,5 @@
+import os
+os.environ["CUDA_VISIBLE_DEVICES"]="2"
 import tensorflow as tf
 import torch
 from run_vision_stream import run as run_vision
@@ -10,12 +12,12 @@ import settings as s
 from vision import data_creation
 import audio.audio_preprocessing.extract_audio as extractor
 from video import video_preprocessing as video
-import os
+
 
 
 #############################  paths and movie-list ###################################
 
-movie_list = ["Bagman", "Manos", "Road_To_Bali", "The_Illusionist"]
+movie_list = [ "Manos", "Road_To_Bali", "The_Illusionist"]
 
 hlvu_location = s.HLVU_LOCATION_TEST
 code_loc = s.DIR_PATH
@@ -51,10 +53,11 @@ if gpus:
     logical_gpus = tf.config.list_logical_devices('GPU')
     print(len(gpus), "Physical GPUs,", len(logical_gpus), "Logical GPU")
     torch.cuda.set_device(0)
-    run_vision(movie_list)
+    run_vision(movie_list, hlvu_location, code_loc, img_path, testset= True)
   except RuntimeError as e:
     #Visible devices must be set before GPUs have been initialized
-    print(e)
+    #print(e)
+    print("GPU not working")
 
 ########################################################################################
 """

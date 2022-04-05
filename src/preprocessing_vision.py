@@ -1,4 +1,5 @@
-from vision import create_keyframes, data_creation
+from vision import data_creation
+from vision.visual_preprocessing.shotdetect_f import create_keyframes
 import os
 import shutil
 from tqdm import tqdm
