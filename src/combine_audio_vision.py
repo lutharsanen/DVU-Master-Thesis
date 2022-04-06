@@ -21,7 +21,7 @@ from tqdm import tqdm
 #              "SuperHero"
 #             ]
 
-movie_list = ["Nuclear_Family"]
+#movie_list = ["Nuclear_Family"]
 
 def most_frequent(List):
     return max(set(List), key = List.count)

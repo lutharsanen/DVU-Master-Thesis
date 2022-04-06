@@ -28,13 +28,13 @@ torch.cuda.set_per_process_memory_fraction(0.4, 0)
 #movie = "Huckleberry_Finn"
 #movie_list = ["Nuclear_Family"]
 
-def audio_stream(hlvu_location, movie_list, audio_path):
+def audio_stream(hlvu_location, movie_list, audio_path, code_loc):
     for movie in movie_list:
         custom_chunk_path = f"{hlvu_location}/audiochunk/{movie}"
 
         serialization = SerializationMiddleware(JSONStorage)
         serialization.register_serializer(DateTimeSerializer(), 'TinyDate')
-        audio_db = TinyDB(f'database/audio_{movie}.json', storage=serialization)
+        audio_db = TinyDB(f'{code_loc}/database/audio_{movie}.json', storage=serialization)
 
 
 

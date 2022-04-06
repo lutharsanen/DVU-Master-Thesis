@@ -10,6 +10,7 @@ import numpy as np
 from audio.speechbrain.run import get_speech_emotion, get_speech_to_text
 import shutil
 import os
+from os import path
 from transformers import Wav2Vec2FeatureExtractor 
 from datetime import datetime, timedelta
 import torch
@@ -33,7 +34,9 @@ def get_timestamp(movie, movie_scene, hlvu_location, segment):
 def scene_diarization(audio_path, chunk_loc,name, audio_db, movie, hlvu_location, code_loc):
     audio_name = name.partition(".")[0]
     pipeline = Pipeline.from_pretrained("pyannote/speaker-diarization")
+    print(audio_path)
     output = pipeline(audio_path)
+    print("cam until here")
     audio = AudioSegment.from_wav(audio_path)
     if len(output) != 0:
 
@@ -53,7 +56,8 @@ def scene_diarization(audio_path, chunk_loc,name, audio_db, movie, hlvu_location
             label = segments["label"]
             audio_db.insert(
                 {'chunk_name': chunk_name, 'start': start, 'end': end, 'label': label, 'emotion': emotion[0], 'text': text, 'scene': name})
-            os.remove(f"{code_loc}/{chunk_name}")
+            if path.exists(f"{code_loc}/{chunk_name}"):
+                os.remove(f"{code_loc}/{chunk_name}")
 
             # empty not used gpu storage
             torch.cuda.empty_cache()

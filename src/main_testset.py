@@ -17,7 +17,7 @@ from video import video_preprocessing as video
 
 #############################  paths and movie-list ###################################
 
-movie_list = [ "Manos", "Road_To_Bali", "The_Illusionist"]
+movie_list = [ "Road_To_Bali", "Bagman", "The_Illusionist"]
 
 hlvu_location = s.HLVU_LOCATION_TEST
 code_loc = s.DIR_PATH
@@ -42,7 +42,7 @@ img_path = f"{hlvu_location}/keyframes/shot_keyf"
 ########################################################################################
 
 ########################## vision stream ###############################################
-
+"""
 gpus = tf.config.list_physical_devices('GPU')
 if gpus:
   # Restrict TensorFlow to only use the first GPU
@@ -60,19 +60,26 @@ if gpus:
     print("GPU not working")
 
 ########################################################################################
-"""
+
+########################## audio stream ###############################################
 torch.cuda.set_device(0)
-torch.cuda.set_per_process_memory_fraction(0.4, 0)
+torch.cuda.set_per_process_memory_fraction(0.7, 0)
 
 
 if not os.path.exists(audio_chunk_path):
     os.mkdir(audio_chunk_path)
 
-run_audio(hlvu_location, movie_list, audio_path)
+run_audio(hlvu_location, movie_list, audio_path, code_loc)
 
+########################################################################################
 
-run_video(video_path, code_loc, hlvu_location)
+########################## video stream ###############################################
 
-combiner(movie_list, hlvu_location, code_loc, img_path)
-audio_vision_combiner(movie_list,hlvu_location, code_loc)
+run_video(video_path, code_loc, hlvu_location, code_loc, testset = True)
+
+#######################################################################################
 """
+
+combiner(movie_list, hlvu_location, code_loc, img_path, testset = True)
+audio_vision_combiner(movie_list,hlvu_location, code_loc)
+

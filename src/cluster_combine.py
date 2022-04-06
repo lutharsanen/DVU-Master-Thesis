@@ -27,7 +27,7 @@ movie_list = ["shooters",
              ]
 """
 
-def combiner(movie_list, hlvu_location, dir_path, img_path):
+def combiner(movie_list, hlvu_location, dir_path, img_path, testset = False):
     serialization = SerializationMiddleware(JSONStorage)
     serialization.register_serializer(DateTimeSerializer(), 'TinyDate')
 
@@ -35,7 +35,10 @@ def combiner(movie_list, hlvu_location, dir_path, img_path):
     for movies in movie_list:
         db_vision = TinyDB(f'{dir_path}/database/vision_{movies}.json', storage=serialization)
    
-        cluster_path = f"{hlvu_location}/movie_knowledge_graph/{movies}/clustering"
+        if testset == True:
+            cluster_path = f"{hlvu_location}/Queries/movie_knowledge_graph/{movies}/clustering"
+        else:
+            cluster_path = f"{hlvu_location}/movie_knowledge_graph/{movies}/clustering"
         #print(cluster_path)
         cluster_df = start_face_clustering(cluster_path)
         #print(type(cluster_df))

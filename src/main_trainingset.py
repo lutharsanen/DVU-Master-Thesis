@@ -46,10 +46,10 @@ extractor.run_extractor()
 
 if not os.path.exists(audio_chunk_path):
     os.mkdir(audio_chunk_path)
-run_audio(hlvu_location, movie_list, audio_path)
+run_audio(hlvu_location, movie_list, audio_path, code_loc)
 
 video.process_data(video_path)
-run_video(video_path, code_loc, hlvu_location)
+run_video(video_path, code_loc, hlvu_location, code_loc)
 
 combiner(movie_list, hlvu_location, code_loc, img_path)
 audio_vision_combiner(movie_list,hlvu_location, code_loc)

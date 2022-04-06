@@ -53,7 +53,7 @@ def get_timestamp(movie, movie_scene, hlvu_location, shot_name):
 
 #movie = "honey"
 
-def video_stream(video_path, data_loc, hlvu_location):
+def video_stream(video_path, data_loc, hlvu_location, code_loc, testset = False):
 
     ####################
     # SlowFast transform
@@ -75,8 +75,11 @@ def video_stream(video_path, data_loc, hlvu_location):
     #video_df = pd.DataFrame(data=action_frame)
     serialization = SerializationMiddleware(JSONStorage)
     serialization.register_serializer(DateTimeSerializer(), 'TinyDate')
-    action_db = TinyDB(f'database/action.json', storage=serialization)
-
+    if testset == True:
+        action_db = TinyDB(f'{code_loc}/database/action_test.json', storage=serialization)
+    else:
+        action_db = TinyDB(f'{code_loc}/database/action.json', storage=serialization)
+    
     torch.cuda.set_device(0)
     for scene in tqdm(os.listdir(video_path)):
         #if one_movie:
