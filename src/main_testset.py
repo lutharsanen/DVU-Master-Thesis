@@ -1,23 +1,23 @@
 import os
-os.environ["CUDA_VISIBLE_DEVICES"]="2"
+#os.environ["CUDA_VISIBLE_DEVICES"]="2"
 import tensorflow as tf
 import torch
-from run_vision_stream import run as run_vision
+#from run_vision_stream import run as run_vision
 from preprocessing_vision import shot_segment
-from run_audio_stream import audio_stream as run_audio
-from run_video_stream import video_stream as run_video
+#from run_audio_stream import audio_stream as run_audio
+#from run_video_stream import video_stream as run_video
 from cluster_combine import combiner
 from combine_audio_vision import audio_vision_combiner
 import settings as s
 from vision import data_creation
 import audio.audio_preprocessing.extract_audio as extractor
 from video import video_preprocessing as video
-
+import movie_model_prep_test as m
 
 
 #############################  paths and movie-list ###################################
 
-movie_list = [ "Road_To_Bali", "Bagman", "The_Illusionist"]
+movie_list = [ "Manos"]
 
 hlvu_location = s.HLVU_LOCATION_TEST
 code_loc = s.DIR_PATH
@@ -25,9 +25,6 @@ video_path = f"{hlvu_location}/keyframes/shot_split_video"
 audio_path = f"{hlvu_location}/audio"
 audio_chunk_path = f"{hlvu_location}/audiochunk"
 img_path = f"{hlvu_location}/keyframes/shot_keyf"
-
-#######################################################################################
-
 
 ########################### preprocessing hlvu data set ###############################
 
@@ -38,8 +35,6 @@ img_path = f"{hlvu_location}/keyframes/shot_keyf"
 #extractor.run_extractor(hlvu_location)
 
 #video.process_data(video_path)
-
-########################################################################################
 
 ########################## vision stream ###############################################
 """
@@ -59,9 +54,9 @@ if gpus:
     #print(e)
     print("GPU not working")
 
-########################################################################################
 
 ########################## audio stream ###############################################
+
 torch.cuda.set_device(0)
 torch.cuda.set_per_process_memory_fraction(0.7, 0)
 
@@ -71,15 +66,18 @@ if not os.path.exists(audio_chunk_path):
 
 run_audio(hlvu_location, movie_list, audio_path, code_loc)
 
-########################################################################################
 
 ########################## video stream ###############################################
 
 run_video(video_path, code_loc, hlvu_location, code_loc, testset = True)
 
-#######################################################################################
-"""
+################### combine audio and vision features #################################
+
 
 combiner(movie_list, hlvu_location, code_loc, img_path, testset = True)
 audio_vision_combiner(movie_list,hlvu_location, code_loc)
+"""
 
+########################## create test data set #########################################
+
+m.create_data(hlvu_location, code_loc, movie_list, answer_path_exists = True)

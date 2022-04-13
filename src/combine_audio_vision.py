@@ -74,6 +74,7 @@ def audio_vision_combiner(movie_list,HLVU_LOCATION, DIR_PATH):
             scene = i["scene"]
             speaker = i["label"]
             chunk_name = i["chunk_name"]
-            name = speaker_dict[scene][speaker]
-            db_audio.update({'label': name}, (User.scene == scene) & (User.chunk_name == chunk_name))
+            if speaker in list(speaker_dict[scene].keys()):
+                name = speaker_dict[scene][speaker]
+                db_audio.update({'label': name}, (User.scene == scene) & (User.chunk_name == chunk_name))
         

@@ -31,7 +31,6 @@ def combiner(movie_list, hlvu_location, dir_path, img_path, testset = False):
     serialization = SerializationMiddleware(JSONStorage)
     serialization.register_serializer(DateTimeSerializer(), 'TinyDate')
 
-
     for movies in movie_list:
         db_vision = TinyDB(f'{dir_path}/database/vision_{movies}.json', storage=serialization)
    
@@ -65,8 +64,12 @@ def combiner(movie_list, hlvu_location, dir_path, img_path, testset = False):
                 for face in row["faces"]:
                     if "unknown" in face:
                         if len(cluster_df.loc[cluster_df['name'] == face]["dbscan"].tolist()) >0:
-                            lab_class = label_class[cluster_df.loc[cluster_df['name'] == face]["dbscan"].tolist()[0]]
-                            replace_face.append(lab_class)
+                            cluster_label = cluster_df.loc[cluster_df['name'] == face]["dbscan"].tolist()[0]
+                            if cluster_label in list(label_class.keys()):
+                                lab_class = label_class[cluster_label]
+                                replace_face.append(lab_class)
+                            else:
+                                replace_face.append(face)
                         else:
                             replace_face.append(face)
                     else:

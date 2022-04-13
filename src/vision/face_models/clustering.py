@@ -25,7 +25,8 @@ def start_face_clustering(clustering_path):
                 #print(emb)
                 df = df.append({"embedding":emb.cpu().detach().numpy()[0], "name": image},ignore_index=True)
         except:
-            print(f"{image} not analyzed")
+            #print(f"{image} not analyzed")
+            pass
     
     X = np.asarray(df['embedding'].values.tolist())
     

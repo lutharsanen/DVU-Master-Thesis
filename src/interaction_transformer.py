@@ -1,4 +1,3 @@
-from re import M
 
 
 kinetics400_to_interaction ={ 

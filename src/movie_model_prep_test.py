@@ -1,29 +1,15 @@
 import pandas as pd
-from tinydb import TinyDB,Query,where
-from datetime import datetime
+import itertools
+from tqdm import tqdm
+from relationship_helper.relation import *
 from tinydb.storages import JSONStorage
 from tinydb_serialization import SerializationMiddleware
 from tinydb_serialization.serializers import DateTimeSerializer
-import itertools
-from relationship_helper.relation import *
-from settings import HLVU_LOCATION, DIR_PATH
-from tqdm import tqdm
-import itertools
+from settings import HLVU_LOCATION
 
 
-movie_list = ["shooters", 
-              "The_Big_Something", 
-              "time_expired", 
-              "Valkaama", 
-              "Huckleberry_Finn", 
-              "spiritual_contact", 
-              "honey", 
-              "sophie", 
-              "Nuclear_Family", 
-              "SuperHero"
-             ]
 
-def create_dataframe(movie_list, dir_path, hlvu_location):
+def create_data(hlvu_location, dir_path, movie_list, answer_path_exists = False):
 
     d = {
         'person1': [], 
@@ -79,7 +65,7 @@ def create_dataframe(movie_list, dir_path, hlvu_location):
         'voice_neutral':[],
         'voice_sad':[], 
         'relation':[]
-        }
+    }
 
     movie_dfpc = pd.DataFrame(data=d)
 
@@ -87,42 +73,6 @@ def create_dataframe(movie_list, dir_path, hlvu_location):
     location_classes = get_location_classes(dir_path)
 
     for movie in movie_list:
-
-        person_d = {}
-        relation_d = {}
-        entity_type ={}
-
-
-        
-        file = f"{hlvu_location}/movie_knowledge_graph/{movie}/{movie}.entity.types.txt"
-        data=pd.read_table(file, delimiter = ':', header= None)
-
-        for _,row in data.iterrows():
-            entity_type[row[0].replace(" ","")] = row[1].replace(" ","")
-        
-        f = open(f"{hlvu_location}/movie_knowledge_graph/{movie}/{movie}.tgf", "r")
-        relation_change = False
-
-        for line in f.readlines():
-            if not relation_change:
-                split_lines = line.strip("\n").split(" ")
-                if split_lines[0] == "#":
-                    relation_change = True
-                else:
-                    value = ''.join(split_lines[1:])
-                    person_d[split_lines[0]] = value
-            else:
-                split_lines = line.strip("\n").split(" ")
-                relation_d[(split_lines[0],split_lines[1])] = split_lines[2:]
-
-
-        t1 = tuple(person_d.keys())
-        combis_pp = []
-        for i in itertools.product(t1,t1):
-            if i[0] != i[1] and ((i[1], i[0]) not in combis_pp):
-                if not (entity_type[person_d[i[0]]] == "Location" or entity_type[person_d[i[1]]] == "Location"):
-                    combis_pp.append((i[0], i[1]))
-
         path = f"{hlvu_location}/keyframes/shot_keyf/{movie}"
 
         serialization_vision = SerializationMiddleware(JSONStorage)
@@ -136,14 +86,69 @@ def create_dataframe(movie_list, dir_path, hlvu_location):
 
 
         vision_db = TinyDB(f'{dir_path}/database/vision_{movie}.json', storage=serialization_vision)
-        video_db = TinyDB(f'{dir_path}/database/action.json', storage=serialization_video)
+
+        video_db = TinyDB(f'{dir_path}/database/action_test.json', storage=serialization_video)
+
         audio_db = TinyDB(f'{dir_path}/database/audio_{movie}.json', storage=serialization_audio)
+
+        entity_type ={}
+        data=pd.read_table(f"{hlvu_location}/Queries/movie_knowledge_graph/{movie}/{movie}.entity.types.txt", delimiter = ':', header= None)
+
+        for _,row in data.iterrows():
+            entity_type[row[0].replace(" ","")] = row[1].replace(" ","")
+
+        if answer_path_exists:
+            f = open(f"{hlvu_location}/Queries/movie_knowledge_graph/{movie}/{movie}.Movie-level.txt", "r")
+            lines = [i.strip("\n") for i in f.readlines()]
+
+            df = pd.read_excel(f"{HLVU_LOCATION}/movie_knowledge_graph/HLVU_Relationships_Definitions.xlsx")
+
+            relation_dict = {}
+            for _,row in df.iterrows():
+                relation_dict[row["Inverse"]] = row["Relation"]
+
+            entity_1 = []
+            entity_2 = []
+            relationship = []
+            for line in lines:
+                line_parsed = line.split("-.->")
+                if len(line_parsed) > 1:
+                    non_space = [i.strip(" ") for i in line_parsed]
+                    entities = non_space[0::2]
+                    relation = non_space[1::2]
+                    for x,y,z in zip(range(0,len(entities)-1),range(1, len(entities)), range(0, len(relation))):
+                        if relation[z] in list(relation_dict.values()):
+                            entity_1.append(entities[x].lower())
+                            entity_2.append(entities[y].lower())
+                            relationship.append(relation[z])
+                        else:
+                            inverse_relation = relation_dict[relation[z]]
+                            entity_1.append(entities[y].lower())
+                            entity_2.append(entities[x].lower())
+                            relationship.append(inverse_relation)
+
+            df = pd.DataFrame(list(zip(entity_1, entity_2, relationship)),
+            columns =['entity_1', 'entity_2', "relation"])
+
+            relation_d = {}
+
+            df_relation = df.drop_duplicates()
+            for _, row in df_relation.iterrows():
+                relation_d[(row["entity_1"], row["entity_2"])] = row["relation"]
+
+
+        t1 = tuple(entity_type.keys())
+        combis_pp = []
+        for i in itertools.product(t1,t1):
+            if i[0] != i[1] and ((i[1], i[0]) not in combis_pp):
+                if entity_type[i[0]] == "Person" and entity_type[i[1]] == "Person":
+                    combis_pp.append((i[0], i[1]))
 
         for i in tqdm(combis_pp):
             try:
-                scene_stat, shot_stat, text_stat, emotions, places365, action, sentiment = get_stats(person_d[i[0]], person_d[i[1]], movie, path, vision_db, video_db, audio_db, location_classes, action_classes)
+                scene_stat, shot_stat, text_stat, emotions, places365, action, sentiment = get_stats(i[0], i[1], movie, path, vision_db, video_db, audio_db, location_classes, action_classes)
                 movie_dfpp.loc[movie_dfpp.shape[0]] = [
-                    person_d[i[0]], person_d[i[1]], 
+                    i[0], i[1], 
                     scene_stat, 
                     shot_stat, 
                     emotions["angry"], emotions["fear"], emotions["neutral"], emotions["sad"], emotions["suprise"],
@@ -151,12 +156,12 @@ def create_dataframe(movie_list, dir_path, hlvu_location):
                     places365[0][0], places365[0][1], places365[1][0], places365[1][1], places365[2][0], places365[2][1], 
                     sentiment, 
                     text_stat
-                    ,' '.join(relation_d[i])
+                    ,relation_d[i]
                 ]
             except:
-                scene_stat, shot_stat, text_stat, emotions, places365, action, sentiment = get_stats(person_d[i[0]], person_d[i[1]], movie, path,vision_db, video_db, audio_db, location_classes, action_classes)
+                scene_stat, shot_stat, text_stat, emotions, places365, action, sentiment = get_stats(i[0], i[1], movie, path,vision_db, video_db, audio_db, location_classes, action_classes)
                 movie_dfpp.loc[movie_dfpp.shape[0]] = [
-                    person_d[i[0]], person_d[i[1]],
+                    i[0], i[1],
                     scene_stat, 
                     shot_stat,
                     emotions["angry"], emotions["fear"], emotions["neutral"], emotions["sad"], emotions["suprise"],
@@ -167,59 +172,63 @@ def create_dataframe(movie_list, dir_path, hlvu_location):
                     None
                 ]
 
-        t1 = tuple(person_d.keys())
+        t1 = tuple(entity_type.keys())
         combis_pl = []
+        
         for i in itertools.product(t1,t1):
             if i[0] != i[1] and ((i[1], i[0]) not in combis_pl):
-                if (entity_type[person_d[i[0]]] == "Location" and entity_type[person_d[i[1]]] == "Person"):
+                if (entity_type[i[0]] == "Location" and entity_type[i[1]] == "Person"):
                     combis_pl.append((i[0], i[1]))
 
         for i in tqdm(combis_pl):
             try:
-                delf, places365 = get_person_location_stats(person_d[i[0]], person_d[i[1]], vision_db, location_classes)
+                delf, places365 = get_person_location_stats(i[0], i[1], vision_db, location_classes)
                 movie_dfpl.loc[movie_dfpl.shape[0]] = [
-                    person_d[i[0]], person_d[i[1]], 
+                    i[0], i[1], 
                     delf, 
                     places365[0][0], places365[0][1], places365[1][0], places365[1][1], places365[2][0], places365[2][1],
-                    ' '.join(relation_d[i])
+                    relation_d[i]
                 ]
             except:
-                delf, places365 = get_person_location_stats(person_d[i[0]], person_d[i[1]], vision_db, location_classes)
+                delf, places365 = get_person_location_stats(i[0], i[1], vision_db, location_classes)
                 movie_dfpl.loc[movie_dfpl.shape[0]] = [
-                    person_d[i[0]], person_d[i[1]],
+                    i[0], i[1],
                     delf, 
                     places365[0][0], places365[0][1], places365[1][0], places365[1][1], places365[2][0], places365[2][1],
                     None
                 ]
 
-        t1 = tuple(person_d.keys())
+        t1 = tuple(entity_type.keys())
         combis_pc = []
 
         for i in itertools.product(t1,t1):
             if i[0] != i[1] and ((i[1], i[0]) not in combis_pc):
-                if (entity_type[person_d[i[0]]] == "Person" and entity_type[person_d[i[1]]] == "Concept"):
+                if (entity_type[i[0]] == "Person" and entity_type[i[1]] == "Concept"):
                     combis_pc.append((i[0], i[1]))
 
         for i in tqdm(combis_pc):
             try:
-                concept_stat, average_polarity, emotion_list = get_person_concept_stats(person_d[i[0]], person_d[i[1]], audio_db)
+                concept_stat, average_polarity, emotion_list = get_person_concept_stats(i[0], i[1], audio_db)
                 movie_dfpc.loc[movie_dfpc.shape[0]] = [
-                    person_d[i[0]], person_d[i[1]], 
+                    i[0], i[1], 
                     concept_stat, 
                     average_polarity, 
                     emotion_list["ang"], emotion_list["hap"], emotion_list["neu"], emotion_list["sad"], 
-                    ' '.join(relation_d[i])
+                    relation_d[i]
                 ]
             except:
-                concept_stat, average_polarity, emotion_list = get_person_concept_stats(person_d[i[0]], person_d[i[1]], audio_db)
+                concept_stat, average_polarity, emotion_list = get_person_concept_stats(i[0], i[1], audio_db)
                 movie_dfpc.loc[movie_dfpc.shape[0]] = [
-                    person_d[i[0]], person_d[i[1]],
+                    i[0], i[1],
                     concept_stat, 
                     average_polarity, 
                     emotion_list["ang"], emotion_list["hap"], emotion_list["neu"], emotion_list["sad"], 
                     None
                 ]
-    
-    movie_dfpp.to_json('people2people.json')
-    movie_dfpl.to_json('people2location.json')
-    movie_dfpc.to_json('people2concept.json')
+
+    movie_dfpp.to_json('people2people_test.json')
+    movie_dfpl.to_json('people2location_test.json')
+    movie_dfpc.to_json('people2concept_test.json')
+
+def test():
+    print("hi")
