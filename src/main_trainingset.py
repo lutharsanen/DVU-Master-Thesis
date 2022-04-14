@@ -11,6 +11,7 @@ from vision import training
 from video import video_preprocessing as video
 import settings as s
 import os
+import movie_model_prep as m
 
 
 movie_list = ["shooters", "The_Big_Something", "time_expired", "Valkaama", "Huckleberry_Finn", "spiritual_contact", "honey", "sophie", "Nuclear_Family", "SuperHero"]
@@ -22,6 +23,7 @@ audio_path = f"{hlvu_location}/audio"
 audio_chunk_path = f"{hlvu_location}/audiochunk"
 img_path = f"{hlvu_location}/keyframes/shot_keyf"
 
+"""
 shot_segment(hlvu_location)
 training.data_creation()
 gpus = tf.config.list_physical_devices('GPU')
@@ -53,3 +55,7 @@ run_video(video_path, code_loc, hlvu_location, code_loc)
 
 combiner(movie_list, hlvu_location, code_loc, img_path)
 audio_vision_combiner(movie_list,hlvu_location, code_loc)
+
+"""
+
+m.create_dataframe(movie_list, code_loc , hlvu_location)

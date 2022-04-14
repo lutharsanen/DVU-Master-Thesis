@@ -17,7 +17,7 @@ import movie_model_prep_test as m
 
 #############################  paths and movie-list ###################################
 
-movie_list = [ "Manos"]
+movie_list = [ "Manos", "Bagman", "Road_To_Bali", "The_Illusionist"]
 
 hlvu_location = s.HLVU_LOCATION_TEST
 code_loc = s.DIR_PATH

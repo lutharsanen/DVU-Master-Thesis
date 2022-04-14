@@ -14,6 +14,7 @@ def create_data(hlvu_location, dir_path, movie_list, answer_path_exists = False)
     d = {
         'person1': [], 
         'person2': [],
+        'movie':[],
         'shotlevel': [], 
         'scenelevel': [], 
         'face_angry' : [],
@@ -43,6 +44,7 @@ def create_data(hlvu_location, dir_path, movie_list, answer_path_exists = False)
     d = {
         'location': [], 
         'person': [],
+        'movie':[],
         'delf': [], 
         'places365_1' : [],
         'places365_1_freq' : [],
@@ -58,6 +60,7 @@ def create_data(hlvu_location, dir_path, movie_list, answer_path_exists = False)
     d = {
         'concept': [], 
         'person': [],
+        'movie':[],
         'concept_stat': [], 
         'polarity': [], 
         'voice_angry':[],
@@ -122,10 +125,11 @@ def create_data(hlvu_location, dir_path, movie_list, answer_path_exists = False)
                             entity_2.append(entities[y].lower())
                             relationship.append(relation[z])
                         else:
-                            inverse_relation = relation_dict[relation[z]]
-                            entity_1.append(entities[y].lower())
-                            entity_2.append(entities[x].lower())
-                            relationship.append(inverse_relation)
+                            if relation[z] in list(relation_dict.keys()):
+                                inverse_relation = relation_dict[relation[z]]
+                                entity_1.append(entities[y].lower())
+                                entity_2.append(entities[x].lower())
+                                relationship.append(inverse_relation)
 
             df = pd.DataFrame(list(zip(entity_1, entity_2, relationship)),
             columns =['entity_1', 'entity_2', "relation"])
@@ -148,7 +152,7 @@ def create_data(hlvu_location, dir_path, movie_list, answer_path_exists = False)
             try:
                 scene_stat, shot_stat, text_stat, emotions, places365, action, sentiment = get_stats(i[0], i[1], movie, path, vision_db, video_db, audio_db, location_classes, action_classes)
                 movie_dfpp.loc[movie_dfpp.shape[0]] = [
-                    i[0], i[1], 
+                    i[0], i[1], movie,
                     scene_stat, 
                     shot_stat, 
                     emotions["angry"], emotions["fear"], emotions["neutral"], emotions["sad"], emotions["suprise"],
@@ -161,7 +165,7 @@ def create_data(hlvu_location, dir_path, movie_list, answer_path_exists = False)
             except:
                 scene_stat, shot_stat, text_stat, emotions, places365, action, sentiment = get_stats(i[0], i[1], movie, path,vision_db, video_db, audio_db, location_classes, action_classes)
                 movie_dfpp.loc[movie_dfpp.shape[0]] = [
-                    i[0], i[1],
+                    i[0], i[1], movie,
                     scene_stat, 
                     shot_stat,
                     emotions["angry"], emotions["fear"], emotions["neutral"], emotions["sad"], emotions["suprise"],
@@ -184,7 +188,7 @@ def create_data(hlvu_location, dir_path, movie_list, answer_path_exists = False)
             try:
                 delf, places365 = get_person_location_stats(i[0], i[1], vision_db, location_classes)
                 movie_dfpl.loc[movie_dfpl.shape[0]] = [
-                    i[0], i[1], 
+                    i[0], i[1], movie,
                     delf, 
                     places365[0][0], places365[0][1], places365[1][0], places365[1][1], places365[2][0], places365[2][1],
                     relation_d[i]
@@ -192,7 +196,7 @@ def create_data(hlvu_location, dir_path, movie_list, answer_path_exists = False)
             except:
                 delf, places365 = get_person_location_stats(i[0], i[1], vision_db, location_classes)
                 movie_dfpl.loc[movie_dfpl.shape[0]] = [
-                    i[0], i[1],
+                    i[0], i[1], movie,
                     delf, 
                     places365[0][0], places365[0][1], places365[1][0], places365[1][1], places365[2][0], places365[2][1],
                     None
@@ -210,7 +214,7 @@ def create_data(hlvu_location, dir_path, movie_list, answer_path_exists = False)
             try:
                 concept_stat, average_polarity, emotion_list = get_person_concept_stats(i[0], i[1], audio_db)
                 movie_dfpc.loc[movie_dfpc.shape[0]] = [
-                    i[0], i[1], 
+                    i[0], i[1], movie,
                     concept_stat, 
                     average_polarity, 
                     emotion_list["ang"], emotion_list["hap"], emotion_list["neu"], emotion_list["sad"], 
@@ -219,7 +223,7 @@ def create_data(hlvu_location, dir_path, movie_list, answer_path_exists = False)
             except:
                 concept_stat, average_polarity, emotion_list = get_person_concept_stats(i[0], i[1], audio_db)
                 movie_dfpc.loc[movie_dfpc.shape[0]] = [
-                    i[0], i[1],
+                    i[0], i[1], movie,
                     concept_stat, 
                     average_polarity, 
                     emotion_list["ang"], emotion_list["hap"], emotion_list["neu"], emotion_list["sad"], 
@@ -229,6 +233,3 @@ def create_data(hlvu_location, dir_path, movie_list, answer_path_exists = False)
     movie_dfpp.to_json('people2people_test.json')
     movie_dfpl.to_json('people2location_test.json')
     movie_dfpc.to_json('people2concept_test.json')
-
-def test():
-    print("hi")

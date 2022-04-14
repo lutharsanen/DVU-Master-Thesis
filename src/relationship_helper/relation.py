@@ -3,6 +3,7 @@ from textblob import TextBlob
 import os
 from collections import Counter
 import json
+import statistics
 
 def character_checker(name1, name2, shot_level, scene_level, vision_db, video_db):
     User = Query()
@@ -101,10 +102,10 @@ def get_stats(name1, name2, movie, path, vision_db, video_db, audio_db, location
 
     sentiment_final = [j for i in text_emotions for j in i]
     if len(sentiment_final) > 0:
-        average_sentiment = sum(sentiment_final)/len(sentiment_final)
+        median_sentiment = statistics.median(sentiment_final)
     else:
-        average_sentiment = 0
-    return scene_counter, shot_counter, text_counter, emo_hist, location_hist, action_hist, average_sentiment
+        median_sentiment = 0
+    return scene_counter, shot_counter, text_counter, emo_hist, location_hist, action_hist, median_sentiment
 
 def get_person_location_stats(location, person, vision_db, location_classes):
     
@@ -132,7 +133,7 @@ def get_person_concept_stats(concept, person, audio_db):
     ### talk about features ###
     results = audio_db.search(where('label') == person)
     counter = 0
-    average_polarity = 0
+    median_polarity = 0
     polarity_list = []
     emotion_list = []
     for i in results:
@@ -146,9 +147,9 @@ def get_person_concept_stats(concept, person, audio_db):
     emotion_hist = get_audio_emo_hist(emotion_list)
 
     if len(polarity_list) > 0: 
-        average_polarity = sum(polarity_list)/len(polarity_list)
+        median_polarity = statistics.median(polarity_list)
 
-    return counter, average_polarity, emotion_hist
+    return counter, median_polarity, emotion_hist
 
 def get_emo_hist(lst):
     counter = Counter(lst)
