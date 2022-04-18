@@ -1,5 +1,6 @@
 import tensorflow as tf
 import torch
+from classifier.scene_clf import interaction_classifier
 from run_vision_stream import run as run_vision
 from preprocessing_vision import shot_segment
 from run_audio_stream import audio_stream as run_audio
@@ -12,7 +13,8 @@ from video import video_preprocessing as video
 import settings as s
 import os
 import movie_model_prep as m
-
+from classifier.movie_clf import *
+from scene_model_prep import scene_data_creation
 
 movie_list = ["shooters", "The_Big_Something", "time_expired", "Valkaama", "Huckleberry_Finn", "spiritual_contact", "honey", "sophie", "Nuclear_Family", "SuperHero"]
 
@@ -47,7 +49,7 @@ torch.cuda.set_per_process_memory_fraction(0.4, 0)
 extractor.run_extractor()
 
 if not os.path.exists(audio_chunk_path):
-    os.mkdir(audio_chunk_path)
+  os.mkdir(audio_chunk_path)
 run_audio(hlvu_location, movie_list, audio_path, code_loc)
 
 video.process_data(video_path)
@@ -58,4 +60,16 @@ audio_vision_combiner(movie_list,hlvu_location, code_loc)
 
 """
 
-m.create_dataframe(movie_list, code_loc , hlvu_location)
+#m.create_dataframe(movie_list, code_loc , hlvu_location)
+
+############################## movie-level ########################################
+if not os.path.exists(f"{code_loc}/models"):
+  os.mkdir(f"{code_loc}/models")
+people_classifier(f"{code_loc}/data/people2people.json", f"{code_loc}/models/person_classifier.sav", code_loc)
+location_classifier(f"{code_loc}/data/people2location.json", f"{code_loc}/models/location_classifier.sav", code_loc)
+concept_classifier(f"{code_loc}/data/people2concept.json", f"{code_loc}/models/concept_classifier.sav", code_loc)
+
+############################# scene-level #########################################
+
+scene_data_creation(movie_list, code_loc, hlvu_location)
+interaction_classifier(f"{code_loc}/data/df_interaction.json", f"{code_loc}/models/interaction_classifier.sav", code_loc)

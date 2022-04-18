@@ -229,7 +229,10 @@ def create_data(hlvu_location, dir_path, movie_list, answer_path_exists = False)
                     emotion_list["ang"], emotion_list["hap"], emotion_list["neu"], emotion_list["sad"], 
                     None
                 ]
+    
+    if not os.path.exists(f"{dir_path}/data"):
+        os.mkdir(f"{dir_path}/data")
 
-    movie_dfpp.to_json('people2people_test.json')
-    movie_dfpl.to_json('people2location_test.json')
-    movie_dfpc.to_json('people2concept_test.json')
+    movie_dfpp.to_json(f'{dir_path}/people2people_test.json')
+    movie_dfpl.to_json(f'{dir_path}/people2location_test.json')
+    movie_dfpc.to_json(f'{dir_path}/people2concept_test.json')

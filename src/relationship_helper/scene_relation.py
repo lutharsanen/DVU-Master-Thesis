@@ -183,6 +183,57 @@ def get_scene_features(person1, person2, scene, split_list, kinetics400_to_inter
                 text_emo_lst.append(text_emo)
                 text_lst.append(text)
         ########################
-            
-    
     return transformed_action_lst, emo_lst, text_emo_lst, text_lst
+
+
+
+def get_test_scene_features(person1, person2, scene, shot, kinetics400_to_interaction, vision_db, video_db, audio_db):
+    transformed_action_lst = []
+    emo_lst = []
+    text_emo_lst = []
+    text_lst = []
+    emotions = []
+    ####### vision ###########
+    vis_query = vision_query(person1, person2, scene, shot, vision_db)
+    if len(vis_query) > 0:
+        if len(vis_query) > 0:
+            for resp in vis_query:
+                if person1 in resp["faces"]:
+                    index = resp["faces"].index(person1)
+                    emotions.append(resp["emotions"][index])
+                elif person2 in vis_query:
+                    index = resp["faces"].index(person2)
+                    emotions.append(resp["emotions"][index])
+            emo = get_emo_hist(emotions)
+            ####### video ###########
+            vid_query = action_query(scene, shot, video_db)
+            if len(vid_query) > 0:
+                action = vid_query[0]["action"]
+                start = vid_query[0]["start_time"]
+                end = vid_query[0]["end_time"]
+                if action in kinetics400_to_interaction.keys():
+                    transformed_action = kinetics400_to_interaction[action]
+                else:
+                    transformed_action = "unknown"
+                ####### audio ##########
+                aud_query = audio_query(scene, start, end, audio_db )
+                if len(aud_query) > 0:
+                    text_emo = get_emo_hist(aud_query[0]["emotion"])
+                    text = aud_query[0]["text"]
+                    transformed_action_lst.append(transformed_action)
+                    emo_lst.append(emo)
+                    text_emo_lst.append(text_emo)
+                    text_lst.append(text)
+                ########################
+            else:
+                return 0
+        else:
+            return 0
+        if len(emo_lst) == 0:
+            return 0       
+        return transformed_action_lst, emo_lst, text_emo_lst, text_lst
+    else:
+        return 0
+
+def most_frequent(List):
+    return max(set(List), key = List.count)

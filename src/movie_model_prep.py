@@ -220,6 +220,9 @@ def create_dataframe(movie_list, dir_path, hlvu_location):
                     None
                 ]
     
-    movie_dfpp.to_json('people2people.json')
-    movie_dfpl.to_json('people2location.json')
-    movie_dfpc.to_json('people2concept.json')
+    if not os.path.exists(f"{dir_path}/data"):
+        os.mkdir(f"{dir_path}/data")
+    
+    movie_dfpp.to_json(f'{dir_path}/people2people.json')
+    movie_dfpl.to_json(f'{dir_path}/people2location.json')
+    movie_dfpc.to_json(f'{dir_path}/people2concept.json')

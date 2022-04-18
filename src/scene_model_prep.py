@@ -7,6 +7,7 @@ from tinydb_serialization import SerializationMiddleware
 from tinydb_serialization.serializers import DateTimeSerializer
 from tqdm import tqdm
 from relationship_helper.scene_relation import get_scene_features,action_query,audio_query,vision_query,prep_data_creator
+from interaction_transformer import kinetics400_to_interaction as kinetics400
 
 
 
@@ -63,7 +64,7 @@ def scene_data_creation(movie_list, dir_path, hlvu_location):
                 chunk_list = split_list[idx]
                 #print(row["action"],row["person1"],row["person2"],row["sequence"])
                 transformed_action, emo, text_emo, text = get_scene_features(
-                    row["person1"], row["person2"], scene, chunk_list, 
+                    row["person1"], row["person2"], scene, chunk_list, kinetics400,
                     vision_db, video_db, audio_db
                 )
 
@@ -86,3 +87,6 @@ def scene_data_creation(movie_list, dir_path, hlvu_location):
                         t_em["sad"],
                         interaction
                     ]
+
+    df_interaction.to_json(f"{dir_path}/data/df_interaction.json")
+    
