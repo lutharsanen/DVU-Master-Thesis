@@ -1,0 +1,77 @@
+<?xml version="1.0" ?>
+<DeepVideoUnderstandingSceneResult scenes="Road_To_Bali">
+	<DeepVideoUnderstandingTopicResult question="1" id="1">
+		<item order="1" scene="Road_To_Bali-13" confidence="0"/>
+		<item order="2" scene="Road_To_Bali-13" confidence="0"/>
+		<item order="3" scene="Road_To_Bali-13" confidence="0"/>
+		<item order="4" scene="Road_To_Bali-13" confidence="0"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="1" id="2">
+		<item order="1" scene="Road_To_Bali-13" confidence="0"/>
+		<item order="2" scene="Road_To_Bali-13" confidence="0"/>
+		<item order="3" scene="Road_To_Bali-13" confidence="0"/>
+		<item order="4" scene="Road_To_Bali-13" confidence="0"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="1" id="3">
+		<item order="1" scene="Road_To_Bali-13" confidence="0"/>
+		<item order="2" scene="Road_To_Bali-13" confidence="0"/>
+		<item order="3" scene="Road_To_Bali-13" confidence="0"/>
+		<item order="4" scene="Road_To_Bali-13" confidence="0"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="1" id="4">
+		<item order="1" scene="Road_To_Bali-13" confidence="0"/>
+		<item order="2" scene="Road_To_Bali-13" confidence="0"/>
+		<item order="3" scene="Road_To_Bali-13" confidence="0"/>
+		<item order="4" scene="Road_To_Bali-13" confidence="0"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="2" id="1">
+		<item order="1" subject="Person:unknown" confidence="0"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="2" id="2">
+		<item order="1" subject="Person:unknown" confidence="0"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="2" id="3">
+		<item order="1" subject="Person:unknown" confidence="0"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="2" id="4">
+		<item order="1" subject="Person:unknown" confidence="0"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="3" id="1">
+		<item type="Interaction" answer="unknown"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="3" id="2">
+		<item type="Interaction" answer="unknown"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="3" id="3">
+		<item type="Interaction" answer="unknown"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="3" id="4">
+		<item type="Interaction" answer="unknown"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="4" id="1">
+		<item type="Interaction" answer="unknown"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="4" id="2">
+		<item type="Interaction" answer="unknown"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="4" id="3">
+		<item type="Interaction" answer="unknown"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="4" id="4">
+		<item type="Interaction" answer="unknown"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="5" id="1"/>
+	<DeepVideoUnderstandingTopicResult question="5" id="2"/>
+	<DeepVideoUnderstandingTopicResult question="5" id="3"/>
+	<DeepVideoUnderstandingTopicResult question="5" id="4"/>
+	<DeepVideoUnderstandingTopicResult question="5" id="5"/>
+	<DeepVideoUnderstandingTopicResult question="5" id="6"/>
+	<DeepVideoUnderstandingTopicResult question="5" id="7"/>
+	<DeepVideoUnderstandingTopicResult question="5" id="8"/>
+	<DeepVideoUnderstandingTopicResult question="5" id="9"/>
+	<DeepVideoUnderstandingTopicResult question="5" id="10"/>
+	<DeepVideoUnderstandingTopicResult question="6" id="1"/>
+	<DeepVideoUnderstandingTopicResult question="6" id="2"/>
+	<DeepVideoUnderstandingTopicResult question="6" id="3"/>
+	<DeepVideoUnderstandingTopicResult question="6" id="4"/>
+</DeepVideoUnderstandingSceneResult>

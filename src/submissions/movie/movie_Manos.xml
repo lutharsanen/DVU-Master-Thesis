@@ -1,0 +1,77 @@
+<?xml version="1.0" ?>
+<DeepVideoUnderstandingResults movie="Manos">
+	<DeepVideoUnderstandingTopicResult question="2" id="1">
+		<item order="1" subject="mike" confidence="33"/>
+		<item order="2" subject="margaret" confidence="33"/>
+		<item order="3" subject="wife1" confidence="33"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="2" id="2">
+		<item order="1" subject="officer1" confidence="33"/>
+		<item order="2" subject="mike" confidence="17"/>
+		<item order="3" subject="margaret" confidence="17"/>
+		<item order="4" subject="wife1" confidence="17"/>
+		<item order="5" subject="wife2" confidence="17"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="2" id="3">
+		<item order="1" subject="officer1" confidence="100"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="2" id="4">
+		<item order="1" subject="officer1" confidence="25"/>
+		<item order="2" subject="mike" confidence="25"/>
+		<item order="3" subject="margaret" confidence="25"/>
+		<item order="4" subject="wife1" confidence="25"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="2" id="5">
+		<item order="1" subject="officer1" confidence="33"/>
+		<item order="2" subject="wife2" confidence="17"/>
+		<item order="3" subject="mike" confidence="17"/>
+		<item order="4" subject="margaret" confidence="17"/>
+		<item order="5" subject="wife1" confidence="17"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="2" id="6">
+		<item order="1" subject="officer1" confidence="67"/>
+		<item order="2" subject="wife2" confidence="33"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="2" id="7">
+		<item order="1" subject="officer1" confidence="67"/>
+		<item order="2" subject="wife2" confidence="33"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="2" id="8">
+		<item order="1" subject="none" confidence="0"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="2" id="9">
+		<item order="1" subject="officer1" confidence="67"/>
+		<item order="2" subject="wife2" confidence="33"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="2" id="10">
+		<item order="1" subject="none" confidence="0"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="3" id="1">
+		<item type="Integer" answer="0"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="3" id="2">
+		<item type="Relation" answer="unknown"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="3" id="3">
+		<item type="Relation" answer="unknown"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="3" id="4">
+		<item type="Relation" answer="parent of"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="3" id="5">
+		<item type="Relation" answer="unknown"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="3" id="6">
+		<item type="Integer" answer="0"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="3" id="7">
+		<item type="Integer" answer="0"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="3" id="8">
+		<item type="Relation" answer="unknown"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="3" id="9"/>
+	<DeepVideoUnderstandingTopicResult question="3" id="10">
+		<item type="Relation" answer="unknown"/>
+	</DeepVideoUnderstandingTopicResult>
+</DeepVideoUnderstandingResults>

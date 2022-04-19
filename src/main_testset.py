@@ -1,17 +1,17 @@
 import os
 #os.environ["CUDA_VISIBLE_DEVICES"]="2"
-import tensorflow as tf
+#import tensorflow as tf
 import torch
 #from run_vision_stream import run as run_vision
-from preprocessing_vision import shot_segment
+#from preprocessing_vision import shot_segment
 #from run_audio_stream import audio_stream as run_audio
 #from run_video_stream import video_stream as run_video
-from cluster_combine import combiner
-from combine_audio_vision import audio_vision_combiner
+#from cluster_combine import combiner
+#from combine_audio_vision import audio_vision_combiner
 import settings as s
-from vision import data_creation
-import audio.audio_preprocessing.extract_audio as extractor
-from video import video_preprocessing as video
+#from vision import data_creation
+#import audio.audio_preprocessing.extract_audio as extractor
+#from video import video_preprocessing as video
 import movie_model_prep_test as m
 from movie_query_solver import movie_queries
 from scene_query_solver import solve_query
@@ -84,13 +84,12 @@ audio_vision_combiner(movie_list,hlvu_location, code_loc)
 ########################## create test data set #########################################
 
 #m.create_data(hlvu_location, code_loc, movie_list, answer_path_exists = True)
-movie_queries(
-  f"{code_loc}/data/people2location_test.json", 
-  f"{code_loc}/data/people2people_test.json", 
-  f"{code_loc}/data/people2concept_test.json", 
-  movie_list, code_loc, hlvu_training , hlvu_location)
+#movie_queries(
+#  f"{code_loc}/data/people2location_test.json", 
+#  f"{code_loc}/data/people2people_test.json", 
+#  #f"{code_loc}/data/people2concept_test.json", 
+#  movie_list, code_loc, hlvu_training , hlvu_location)
 
 ############################# scene-level #########################################
-
 
 solve_query(code_loc, movie_list, hlvu_location, kinetics400)

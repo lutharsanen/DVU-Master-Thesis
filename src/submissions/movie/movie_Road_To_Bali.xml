@@ -1,0 +1,67 @@
+<?xml version="1.0" ?>
+<DeepVideoUnderstandingResults movie="Road_To_Bali">
+	<DeepVideoUnderstandingTopicResult question="2" id="1">
+		<item order="1" subject="none" confidence="0"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="2" id="2">
+		<item order="1" subject="none" confidence="0"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="2" id="3">
+		<item order="1" subject="none" confidence="0"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="2" id="4">
+		<item order="1" subject="none" confidence="0"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="2" id="5">
+		<item order="1" subject="none" confidence="0"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="2" id="6">
+		<item order="1" subject="none" confidence="0"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="2" id="7">
+		<item order="1" subject="none" confidence="0"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="2" id="8">
+		<item order="1" subject="none" confidence="0"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="2" id="9">
+		<item order="1" subject="none" confidence="0"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="2" id="10">
+		<item order="1" subject="none" confidence="0"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="2" id="11">
+		<item order="1" subject="none" confidence="0"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="3" id="1">
+		<item type="Relation" answer="unknown"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="3" id="2">
+		<item type="Relation" answer="unknown"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="3" id="3"/>
+	<DeepVideoUnderstandingTopicResult question="3" id="4"/>
+	<DeepVideoUnderstandingTopicResult question="3" id="5">
+		<item type="Relation" answer="None"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="3" id="6">
+		<item type="Relation" answer="unknown"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="3" id="7">
+		<item type="Relation" answer="unknown"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="3" id="8">
+		<item type="Relation" answer="unknown"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="3" id="9">
+		<item type="Relation" answer="unknown"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="3" id="10"/>
+	<DeepVideoUnderstandingTopicResult question="3" id="11"/>
+	<DeepVideoUnderstandingTopicResult question="3" id="12">
+		<item type="Integer" answer="0"/>
+	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="3" id="13">
+		<item type="Relation" answer="unknown"/>
+	</DeepVideoUnderstandingTopicResult>
+</DeepVideoUnderstandingResults>

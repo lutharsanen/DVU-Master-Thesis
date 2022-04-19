@@ -28,6 +28,7 @@ def solve_query(dir_path, movie_list, hlvu_test, kinetics400_to_interaction):
         serialization_video = SerializationMiddleware(JSONStorage)
         serialization_video.register_serializer(DateTimeSerializer(), 'TinyDate')
 
+        shot_keyframes = f"{hlvu_test}/keyframes/shot_keyf/{movie}"
 
         vision_db = TinyDB(f"{dir_path}/database/vision_{movie}.json", storage=serialization_vision)
         video_db = TinyDB(f"{dir_path}/database/action_test.json", storage=serialization_video)
@@ -52,68 +53,71 @@ def solve_query(dir_path, movie_list, hlvu_test, kinetics400_to_interaction):
     
         df_interaction = pd.DataFrame(data=d)
         User = Query()
-        for scene in os.listdir(hlvu_test):
-            for shot in sorted(os.listdir(f"{hlvu_test}/{scene}")):
-                faces = []
-                query = vision_db.search((User["scene"] == scene) & (where("shots") == shot))
-                for res in query:
-                    for face in res["faces"]:
-                        if "unknown" not in face:
-                            faces.append(face)
-                if len(faces) == 1:
-                    query = get_test_scene_features(faces[0], faces[0], scene, shot, kinetics400_to_interaction, vision_db, video_db, audio_db)
-                    if query != 0:
-                        df_interaction.loc[df_interaction.shape[0]] = [
-                            faces[0], faces[0], scene, shot, query[0][0],
-                            query[1][0]["happy"], 
-                            query[1][0]["angry"], 
-                            query[1][0]["neutral"], 
-                            query[1][0]["sad"], 
-                            query[1][0]["surprise"],
-                            query[2][0]["hap"], 
-                            query[2][0]["ang"], 
-                            query[2][0]["neu"], 
-                            query[2][0]["sad"]
-                        ]
-                elif len(faces) == 2:
-                    query = get_test_scene_features(faces[0], faces[1], scene, shot, kinetics400_to_interaction, vision_db, video_db, audio_db)
-                    if query != 0:
-                        df_interaction.loc[df_interaction.shape[0]] = [
-                            faces[0], faces[1], scene, shot, query[0][0],
-                            query[1][0]["happy"], 
-                            query[1][0]["angry"], 
-                            query[1][0]["neutral"], 
-                            query[1][0]["sad"], 
-                            query[1][0]["surprise"],
-                            query[2][0]["hap"], 
-                            query[2][0]["ang"], 
-                            query[2][0]["neu"], 
-                            query[2][0]["sad"]
-                        ]
-                elif len(list(set(faces))) > 2:
-                    unique_faces = list(set(faces))
-                    combos = combinations(unique_faces, 2)
-                    for i in list(combos):
-                        query = get_test_scene_features(i[0], i[1], scene, shot, kinetics400_to_interaction, vision_db, video_db, audio_db)
+        for scene in os.listdir(shot_keyframes):
+                for shot in sorted(os.listdir(f"{shot_keyframes}/{scene}")):
+                    faces = []
+                    query = vision_db.search((User["scene"] == scene) & (where("shots") == shot))
+                    for res in query:
+                        for face in res["faces"]:
+                            if "unknown" not in face:
+                                faces.append(face)
+                    if len(faces) == 1:
+                        query = get_test_scene_features(faces[0], faces[0], scene, shot, kinetics400_to_interaction, vision_db, video_db, audio_db)
                         if query != 0:
                             df_interaction.loc[df_interaction.shape[0]] = [
-                            i[0], i[1], scene, shot, query[0][0],
-                            query[1][0]["happy"], 
-                            query[1][0]["angry"], 
-                            query[1][0]["neutral"], 
-                            query[1][0]["sad"], 
-                            query[1][0]["surprise"],
-                            query[2][0]["hap"], 
-                            query[2][0]["ang"], 
-                            query[2][0]["neu"], 
-                            query[2][0]["sad"]
-                        ]
+                                faces[0], faces[0], scene, shot, query[0][0],
+                                query[1][0]["happy"], 
+                                query[1][0]["angry"], 
+                                query[1][0]["neutral"], 
+                                query[1][0]["sad"], 
+                                query[1][0]["surprise"],
+                                query[2][0]["hap"], 
+                                query[2][0]["ang"], 
+                                query[2][0]["neu"], 
+                                query[2][0]["sad"]
+                            ]
+                    elif len(faces) == 2:
+                        query = get_test_scene_features(faces[0], faces[1], scene, shot, kinetics400_to_interaction, vision_db, video_db, audio_db)
+                        if query != 0:
+                            df_interaction.loc[df_interaction.shape[0]] = [
+                                faces[0], faces[1], scene, shot, query[0][0],
+                                query[1][0]["happy"], 
+                                query[1][0]["angry"], 
+                                query[1][0]["neutral"], 
+                                query[1][0]["sad"], 
+                                query[1][0]["surprise"],
+                                query[2][0]["hap"], 
+                                query[2][0]["ang"], 
+                                query[2][0]["neu"], 
+                                query[2][0]["sad"]
+                            ]
+                    elif len(list(set(faces))) > 2:
+                        unique_faces = list(set(faces))
+                        combos = combinations(unique_faces, 2)
+                        for i in list(combos):
+                            query = get_test_scene_features(i[0], i[1], scene, shot, kinetics400_to_interaction, vision_db, video_db, audio_db)
+                            if query != 0:
+                                df_interaction.loc[df_interaction.shape[0]] = [
+                                i[0], i[1], scene, shot, query[0][0],
+                                query[1][0]["happy"], 
+                                query[1][0]["angry"], 
+                                query[1][0]["neutral"], 
+                                query[1][0]["sad"], 
+                                query[1][0]["surprise"],
+                                query[2][0]["hap"], 
+                                query[2][0]["ang"], 
+                                query[2][0]["neu"], 
+                                query[2][0]["sad"]
+                            ]
 
+        #print("length: ", len(df_interaction))
         X_test = df_interaction.drop(columns = ["person1", "person2", "scene", "shot"])
+        #print("length: ", len(X_test))
         kinetics_values = list(kinetics400_to_interaction.values())
         kinetics_values.append("unknown")
         action_list = [kinetics_values.index(i) for i in df_interaction["action"]]
         X_test["action"] = action_list
+        #print("length: ", len(X_test))
         clf = joblib.load(f"{dir_path}/models/interaction_classifier.sav")
         y_predicted = clf.predict(X_test)
         y_proba = clf.predict_proba(X_test)
@@ -145,8 +149,7 @@ def solve_query(dir_path, movie_list, hlvu_test, kinetics400_to_interaction):
         scene_interaction = []
 
         for scene in scenes:
-            mysql = lambda q: sqldf(q, globals())
-            df_query = mysql(f"SELECT * FROM df WHERE scene='{scene}'")
+            df_query = sqldf(f"SELECT * FROM df WHERE scene='{scene}'", locals())
             scene_interaction.append(list(df_query["interaction"].unique()))
 
         path = f"{hlvu_test}/Queries/Scene-level/{movie}.Scene_Level.xml"
@@ -204,11 +207,10 @@ def solve_query(dir_path, movie_list, hlvu_test, kinetics400_to_interaction):
                         scene = f"{movie}-{scene_nr}"
                         predicate = item["@predicate"].split(":")[1]
                         obj = item["@object"].split(":")[1]
-                        mysql = lambda q: sqldf(q, globals())
-                        df_query1 = mysql(
-                            f"SELECT * FROM df WHERE scene='{scene}' AND person1 = '{obj}' AND interaction='{predicate}'")
-                        df_query2 = mysql(
-                            f"SELECT * FROM df WHERE scene='{scene}' AND person2 = '{obj}'AND interaction='{predicate}'")
+                        df_query1 = sqldf(
+                            f"SELECT * FROM df WHERE scene='{scene}' AND person1 = '{obj}' AND interaction='{predicate}'", locals())
+                        df_query2 = sqldf(
+                            f"SELECT * FROM df WHERE scene='{scene}' AND person2 = '{obj}'AND interaction='{predicate}'", locals())
                         if len(df_query1) > 0:
                             answers.append(df_query1["person2"])
                         elif len(df_query2) > 0:
@@ -241,10 +243,10 @@ def solve_query(dir_path, movie_list, hlvu_test, kinetics400_to_interaction):
                         predicate = item["@predicate"].split(":")[1]
                         scene_nr = item["@scene"]
                         scene = f"{movie}-{scene_nr}"
-                        df_query1 = mysql(
-                            f"SELECT * FROM df WHERE scene='{scene}' AND person1 = '{obj}' AND person2 = '{subj}'")
-                        df_query2 = mysql(
-                            f"SELECT * FROM df WHERE scene='{scene}' AND person1 = '{subj}' AND person2 = '{obj}'")
+                        df_query1 = sqldf(
+                            f"SELECT * FROM df WHERE scene='{scene}' AND person1 = '{obj}' AND person2 = '{subj}'", locals())
+                        df_query2 = sqldf(
+                            f"SELECT * FROM df WHERE scene='{scene}' AND person1 = '{subj}' AND person2 = '{obj}'", locals())
                         if len(df_query1) > 0:
                             # get next column
                             next_value = False
@@ -298,10 +300,10 @@ def solve_query(dir_path, movie_list, hlvu_test, kinetics400_to_interaction):
                         predicate = item["@object"].split(":")[1]
                         scene_nr = item["@scene"]
                         scene = f"{movie}-{scene_nr}"
-                        df_query1 = mysql(
-                            f"SELECT * FROM df WHERE scene='{scene}' AND person1 = '{obj}' AND person2 = '{subj}'")
-                        df_query2 = mysql(
-                            f"SELECT * FROM df WHERE scene='{scene}' AND person1 = '{subj}' AND person2 = '{obj}'")
+                        df_query1 = sqldf(
+                            f"SELECT * FROM df WHERE scene='{scene}' AND person1 = '{obj}' AND person2 = '{subj}'", locals())
+                        df_query2 = sqldf(
+                            f"SELECT * FROM df WHERE scene='{scene}' AND person1 = '{subj}' AND person2 = '{obj}'", locals())
                         if len(df_query1) > 0:
                             # get previous column
                             next_value = False
@@ -345,7 +347,11 @@ def solve_query(dir_path, movie_list, hlvu_test, kinetics400_to_interaction):
 
         xml_str = root.toprettyxml(indent ="\t") 
         if not os.path.exists(f"{dir_path}/submissions/scene"):
-            os.mkdir(f"{dir_path}/submissions/scene")
+            if not os.path.exists(f"{dir_path}/submissions"):
+                os.mkdir(f"{dir_path}/submissions")
+                os.mkdir(f"{dir_path}/submissions/dir_path")
+            else:
+                os.mkdir(f"{dir_path}/submissions/scene")
         save_path_file = f"{dir_path}/submissions/scene/{movie}_scene.xml"
         with open(save_path_file, "w") as f:
             f.write(xml_str) 

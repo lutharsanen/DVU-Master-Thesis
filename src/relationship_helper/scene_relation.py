@@ -188,6 +188,7 @@ def get_scene_features(person1, person2, scene, split_list, kinetics400_to_inter
 
 
 def get_test_scene_features(person1, person2, scene, shot, kinetics400_to_interaction, vision_db, video_db, audio_db):
+
     transformed_action_lst = []
     emo_lst = []
     text_emo_lst = []
@@ -215,8 +216,9 @@ def get_test_scene_features(person1, person2, scene, shot, kinetics400_to_intera
                     transformed_action = kinetics400_to_interaction[action]
                 else:
                     transformed_action = "unknown"
+
                 ####### audio ##########
-                aud_query = audio_query(scene, start, end, audio_db )
+                aud_query = audio_query(scene, start, end , audio_db)
                 if len(aud_query) > 0:
                     text_emo = get_emo_hist(aud_query[0]["emotion"])
                     text = aud_query[0]["text"]
@@ -229,9 +231,12 @@ def get_test_scene_features(person1, person2, scene, shot, kinetics400_to_intera
                 return 0
         else:
             return 0
+        
         if len(emo_lst) == 0:
-            return 0       
+            return 0
+        
         return transformed_action_lst, emo_lst, text_emo_lst, text_lst
+    
     else:
         return 0
 

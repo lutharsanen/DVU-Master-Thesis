@@ -1,15 +1,15 @@
-import tensorflow as tf
-import torch
+#import tensorflow as tf
+#import torch
 from classifier.scene_clf import interaction_classifier
-from run_vision_stream import run as run_vision
-from preprocessing_vision import shot_segment
-from run_audio_stream import audio_stream as run_audio
-from run_video_stream import video_stream as run_video
+#from run_vision_stream import run as run_vision
+#from preprocessing_vision import shot_segment
+#from run_audio_stream import audio_stream as run_audio
+#from run_video_stream import video_stream as run_video
 from cluster_combine import combiner
 from combine_audio_vision import audio_vision_combiner
 import audio.audio_preprocessing.extract_audio as extractor
-from vision import training
-from video import video_preprocessing as video
+#from vision import training
+#from video import video_preprocessing as video
 import settings as s
 import os
 import movie_model_prep as m
@@ -17,6 +17,7 @@ from classifier.movie_clf import *
 from scene_model_prep import scene_data_creation
 
 movie_list = ["shooters", "The_Big_Something", "time_expired", "Valkaama", "Huckleberry_Finn", "spiritual_contact", "honey", "sophie", "Nuclear_Family", "SuperHero"]
+
 
 hlvu_location = s.HLVU_LOCATION
 code_loc = s.DIR_PATH
@@ -63,11 +64,11 @@ audio_vision_combiner(movie_list,hlvu_location, code_loc)
 #m.create_dataframe(movie_list, code_loc , hlvu_location)
 
 ############################## movie-level ########################################
-if not os.path.exists(f"{code_loc}/models"):
-  os.mkdir(f"{code_loc}/models")
-people_classifier(f"{code_loc}/data/people2people.json", f"{code_loc}/models/person_classifier.sav", code_loc)
-location_classifier(f"{code_loc}/data/people2location.json", f"{code_loc}/models/location_classifier.sav", code_loc)
-concept_classifier(f"{code_loc}/data/people2concept.json", f"{code_loc}/models/concept_classifier.sav", code_loc)
+#if not os.path.exists(f"{code_loc}/models"):
+#  os.mkdir(f"{code_loc}/models")
+#people_classifier(f"{code_loc}/data/people2people.json", f"{code_loc}/models/person_binary_clf.sav", f"{code_loc}/models/person_classifier.sav", code_loc)
+#location_classifier(f"{code_loc}/data/people2location.json", f"{code_loc}/models/location_binary_clf.sav", f"{code_loc}/models/location_classifier.sav", code_loc)
+#concept_classifier(f"{code_loc}/data/people2concept.json", f"{code_loc}/models/concept_classifier.sav", code_loc)
 
 ############################# scene-level #########################################
 

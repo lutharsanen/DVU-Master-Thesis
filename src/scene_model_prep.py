@@ -87,6 +87,10 @@ def scene_data_creation(movie_list, dir_path, hlvu_location):
                         t_em["sad"],
                         interaction
                     ]
+    action_list = list(set(kinetics400.values()))
+    action_list.append("unknown")
+    action_indizes_interaction = [action_list.index(i) for i in df_interaction["action"]]
+    df_interaction["action"] = action_indizes_interaction
 
     df_interaction.to_json(f"{dir_path}/data/df_interaction.json")
     
