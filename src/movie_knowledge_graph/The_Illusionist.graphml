@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="d0" for="edge" attr.name="label" attr.type="string" />
+  <graph edgedefault="directed">
+    <node id="eisenheim" />
+    <node id="young_eisenheim" />
+    <node id="inspector_uhi" />
+    <node id="sophie" />
+    <node id="prince_leopold" />
+    <node id="josef" />
+    <node id="jurka" />
+    <node id="willigut" />
+    <node id="young_sophie" />
+    <node id="travelling_magician" />
+    <node id="theater1" />
+    <node id="house1" />
+    <node id="train_station" />
+    <node id="theater2" />
+    <node id="town1" />
+    <node id="mansion" />
+    <edge source="eisenheim" target="young_eisenheim">
+      <data key="d0">engages with</data>
+    </edge>
+    <edge source="eisenheim" target="inspector_uhi">
+      <data key="d0">in relationship with</data>
+    </edge>
+    <edge source="eisenheim" target="sophie">
+      <data key="d0">engages with</data>
+    </edge>
+    <edge source="eisenheim" target="prince_leopold">
+      <data key="d0">engages with</data>
+    </edge>
+    <edge source="eisenheim" target="josef">
+      <data key="d0">knows in passing</data>
+    </edge>
+    <edge source="eisenheim" target="jurka">
+      <data key="d0">engages with</data>
+    </edge>
+    <edge source="young_eisenheim" target="willigut">
+      <data key="d0">knows in passing</data>
+    </edge>
+    <edge source="inspector_uhi" target="sophie">
+      <data key="d0">engages with</data>
+    </edge>
+    <edge source="inspector_uhi" target="jurka">
+      <data key="d0">engages with</data>
+    </edge>
+    <edge source="sophie" target="prince_leopold">
+      <data key="d0">knows of</data>
+    </edge>
+    <edge source="josef" target="willigut">
+      <data key="d0">knows of</data>
+    </edge>
+    <edge source="willigut" target="jurka">
+      <data key="d0">supervisor of</data>
+    </edge>
+    <edge source="young_sophie" target="willigut">
+      <data key="d0">acquaintance of</data>
+    </edge>
+    <edge source="travelling_magician" target="willigut">
+      <data key="d0">knows of</data>
+    </edge>
+    <edge source="theater1" target="willigut">
+      <data key="d0">residence of</data>
+    </edge>
+    <edge source="house1" target="young_eisenheim">
+      <data key="d0">residence of</data>
+    </edge>
+    <edge source="train_station" target="willigut">
+      <data key="d0">residence of</data>
+    </edge>
+    <edge source="theater2" target="eisenheim">
+      <data key="d0">residence of</data>
+    </edge>
+    <edge source="theater2" target="willigut">
+      <data key="d0">residence of</data>
+    </edge>
+    <edge source="town1" target="young_eisenheim">
+      <data key="d0">residence of</data>
+    </edge>
+    <edge source="mansion" target="willigut">
+      <data key="d0">residence of</data>
+    </edge>
+  </graph>
+</graphml>

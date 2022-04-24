@@ -84,7 +84,7 @@ def movie_queries(location_file, person_file, movie_list, code_loc, hlvu_locatio
                     G.add_edge(row["person2"],row["person1"],label=relation_dict[row["relation"]], weights = y_person_proba[idx])
                     G.edges(data=True)
                     
-                    G_alt.add_edge(row["person1"],row["person2"],label=row["relation"], weights = y_person_proba[idx])
+                    G_alt.add_edge(row["person1"],row["person2"],label=row["relation"])
                     G_alt.edges(data=True)
 
 
@@ -97,8 +97,13 @@ def movie_queries(location_file, person_file, movie_list, code_loc, hlvu_locatio
                     G.add_edge(row["person"],row["location"],label=relation_dict[row["relation"]], weights = y_location_proba[idx])
                     G.edges(data=True)
                     
-                    G_alt.add_edge(row["location"],row["person"],label=row["relation"], weights = y_location_proba[idx])
+                    G_alt.add_edge(row["location"],row["person"],label=row["relation"])
                     G_alt.edges(data=True)
+
+        if not os.path.exists(f"{code_loc}/movie_knowledge_graph"):
+            os.mkdir(f"{code_loc}/movie_knowledge_graph")
+
+        nx.write_graphml_lxml(G_alt, f"{code_loc}/movie_knowledge_graph/{movie}.graphml")
 
         path = f"{hlvu_test}/Queries/Movie-level/{movie}.XMLQueries.xml"
 
@@ -123,7 +128,7 @@ def movie_queries(location_file, person_file, movie_list, code_loc, hlvu_locatio
                 person2 = q["item"][0]["@target"].lower()
                 #print(person1, person2)
                 if person1 in all_nodes and person2 in all_nodes:
-                    paths = nx.all_simple_paths(G, source = person1, target=person2, cutoff = 5)
+                    paths = nx.all_simple_paths(G, source = person1, target=person2, cutoff = 7)
                     for idx, combi in enumerate(list(paths)):
                         #print(idx)
                         productChild = root.createElement('DeepVideoUnderstandingTopicResult')

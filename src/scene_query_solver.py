@@ -167,183 +167,191 @@ def solve_query(dir_path, movie_list, hlvu_test, kinetics400_to_interaction):
         question = list(data_dict["DeepVideoUnderstandingSceneQueries"].values())[1]
 
         for q in question:
-            query_type = q["@question"]
-            query_id = q["@id"]
-            productChild = root.createElement('DeepVideoUnderstandingTopicResult')
-            productChild.setAttribute('question', query_type)
-            productChild.setAttribute('id', query_id)
-            xml.appendChild(productChild)
-            
-            
-            if query_type == "1":
-                interaction_answer = []
-                for item in q["item"]:
-                    if "@predicate" in item.keys():
-                        interaction_answer.append(item["@predicate"].split(":")[1])
-                sim_lst = []
-                for interactions in scene_interaction:
-                    res = len(set(interactions) & set(interaction_answer)) / float(len(set(interactions) | set(interaction_answer))) * 100
-                    sim_lst.append(res)
-                top4 = sorted(sim_lst[:4], reverse=True)
-                for idx, similarity in enumerate(top4):
-                    scene = scenes[sim_lst.index(similarity)]
-                    if sum(top4) > 0:
-                        confidence = similarity/sum(top4) * 100
-                    else:
-                        confidence = 0
-                    item = root.createElement('item')
-                    item.setAttribute('order', str(idx+1))
-                    item.setAttribute('scene', scene)
-                    item.setAttribute('confidence', str(confidence))
-                    productChild.appendChild(item)
-                    
-                    
-            if query_type =="2":
+            if (q["@question"] == "5") or (q["@question"] == "6"):
+                pass
+            else:
+                query_type = q["@question"]
+                query_id = q["@id"]
+                productChild = root.createElement('DeepVideoUnderstandingTopicResult')
+                productChild.setAttribute('question', query_type)
+                productChild.setAttribute('id', query_id)
                 xml.appendChild(productChild)
-                answers = []
-                for item in q["item"]:
-                    if "@subject" in item.keys():
-                        scene_nr = item["@scene"]
-                        scene = f"{movie}-{scene_nr}"
-                        predicate = item["@predicate"].split(":")[1]
-                        obj = item["@object"].split(":")[1]
-                        df_query1 = sqldf(
-                            f"SELECT * FROM df WHERE scene='{scene}' AND person1 = '{obj}' AND interaction='{predicate}'", locals())
-                        df_query2 = sqldf(
-                            f"SELECT * FROM df WHERE scene='{scene}' AND person2 = '{obj}'AND interaction='{predicate}'", locals())
-                        if len(df_query1) > 0:
-                            answers.append(df_query1["person2"])
-                        elif len(df_query2) > 0:
-                            answers.append(df_query1["person1"])
-                if len(answers) > 0:
-                    counter = 1
-                    for person,count in Counter(answers).most_common():
-                        confidence = count/len(answers)
+                
+                if query_type == "1":
+                    interaction_answer = []
+                    for item in q["item"]:
+                        if "@predicate" in item.keys():
+                            interaction_answer.append(item["@predicate"].split(":")[1])
+                    sim_lst = []
+                    for interactions in scene_interaction:
+                        res = len(set(interactions) & set(interaction_answer)) / float(len(set(interactions) | set(interaction_answer))) * 100
+                        sim_lst.append(res)
+                    top = [i for i in sorted(sim_lst, reverse=True) if i!= 0]
+                    if len(top) > 0:
+                        for idx, similarity in enumerate(top):
+                            scene = scenes[sim_lst.index(similarity)]
+                            if sum(top) > 0:
+                                confidence = similarity/sum(top) * 100
+                            else:
+                                confidence = 0
+                            item = root.createElement('item')
+                            item.setAttribute('order', str(idx+1))
+                            item.setAttribute('scene', scene)
+                            item.setAttribute('confidence', str(confidence))
+                            productChild.appendChild(item)
+                    else:
                         item = root.createElement('item')
-                        item.setAttribute('order', str(counter))
-                        item.setAttribute('subject', f"Person:{person}")
-                        item.setAttribute('confidence', str(confidence))
+                        item.setAttribute('order', "1")
+                        item.setAttribute('scene', "None")
+                        item.setAttribute('confidence', "0")
                         productChild.appendChild(item)
-                else:
-                    item = root.createElement('item')
-                    item.setAttribute('order', str(1))
-                    item.setAttribute('subject', "Person:unknown")
-                    item.setAttribute('confidence', str(0))
-                    productChild.appendChild(item)
+                        
+                        
+                if query_type =="2":
+                    xml.appendChild(productChild)
+                    answers = []
+                    for item in q["item"]:
+                        if "@subject" in item.keys():
+                            scene_nr = item["@scene"]
+                            scene = f"{movie}-{scene_nr}"
+                            predicate = item["@predicate"].split(":")[1]
+                            obj = item["@object"].split(":")[1]
+                            df_query1 = sqldf(
+                                f"SELECT * FROM df WHERE scene='{scene}' AND person1 = '{obj}' AND interaction='{predicate}'", locals())
+                            df_query2 = sqldf(
+                                f"SELECT * FROM df WHERE scene='{scene}' AND person2 = '{obj}'AND interaction='{predicate}'", locals())
+                            if len(df_query1) > 0:
+                                answers.append(df_query1["person2"])
+                            elif len(df_query2) > 0:
+                                answers.append(df_query1["person1"])
+                    if len(answers) > 0:
+                        counter = 1
+                        for person,count in Counter(answers).most_common():
+                            confidence = count/len(answers)
+                            item = root.createElement('item')
+                            item.setAttribute('order', str(counter))
+                            item.setAttribute('subject', f"Person:{person}")
+                            item.setAttribute('confidence', str(confidence))
+                            productChild.appendChild(item)
+                    else:
+                        item = root.createElement('item')
+                        item.setAttribute('order', str(1))
+                        item.setAttribute('subject', "Person:unknown")
+                        item.setAttribute('confidence', str(0))
+                        productChild.appendChild(item)
 
-            if query_type =="3":
-                answers = []
-                query_answer = []
-                for answer in q["Answers"]["item"]:
-                    answers.append(answer["@answer"])
-                for item in q["item"]:
-                    if "@subject" in list(item.keys()):
-                        subj = item["@subject"].split(":")[1]
-                        obj = item["@object"].split(":")[1]
-                        predicate = item["@predicate"].split(":")[1]
-                        scene_nr = item["@scene"]
-                        scene = f"{movie}-{scene_nr}"
-                        df_query1 = sqldf(
-                            f"SELECT * FROM df WHERE scene='{scene}' AND person1 = '{obj}' AND person2 = '{subj}'", locals())
-                        df_query2 = sqldf(
-                            f"SELECT * FROM df WHERE scene='{scene}' AND person1 = '{subj}' AND person2 = '{obj}'", locals())
-                        if len(df_query1) > 0:
-                            # get next column
-                            next_value = False
-                            while next_value == False:
-                                idx = df_query1[df_query1["interaction"] == predicate].index +1
-                                next_action = df_query1[idx]["interaction"]
-                                next_id = df_query1.loc[idx]["id"]
-                                if predicate != next_action:
-                                    next_value = True
-                            proba_lst = y_proba[next_id]
-                            for answer in answers:
-                                rel_ind = relation_list.index(answer)
-                                proba_lst.append(relation_list[rel_ind])
-                            final_answer = answers.index(max(proba_lst))
-                            query_answer.append(final_answer)
+                if query_type =="3":
+                    answers = []
+                    for answer in q["Answers"]["item"]:
+                        if answer in relation_list: 
+                            answers.append(answer["@answer"])
+                    for item in q["item"]:
+                        if "@subject" in list(item.keys()):
+                            #subj = item["@subject"].split(":")[1]
+                            obj = item["@object"].split(":")[1]
+                            predicate = item["@predicate"].split(":")[1]
+                            if predicate in relation_list:
+                                scene_nr = item["@scene"]
+                                scene = f"{movie}-{scene_nr}"
+                                df_query = sqldf(
+                                    f"SELECT * FROM df WHERE scene='{scene}'", locals())
+                                if len(df_query) > 0:
+                                    ids = df_query["id"]
+                                    prob_lst = []
+                                    probs = []
+                                    answer_not_found = True
+                                    for i in ids:
+                                        prob_lst.append(y_proba[i])
+                                    predication_idx = relation_list.index(predicate)
+                                    for prob in prob_lst:
+                                        probs.append(prob[predication_idx])
+                                    idx = probs.index(max(probs)) + 1
+                                    if len(prob_lst) > idx:
+                                        while answer_not_found:
+                                            proba = prob_lst[idx]
+                                            proba_list = []
+                                            for answer in answers:
+                                                rel_ind = relation_list.index(answer)
+                                                if proba[rel_ind] > 0:
+                                                    answer_not_found = False
+                                                    proba_list.append(proba[rel_ind])
+                                            idx += 1
+                                            if answer_not_found == False:
+                                                max_val = max(proba_list)
+                                                proba_lst = list(proba)
+                                                answer_idx = proba_lst.index(max_val)
+                                                item = root.createElement('item')
+                                                item.setAttribute('type', "Interaction")
+                                                item.setAttribute('answer', relation_list[answer_idx])
+                                                productChild.appendChild(item)
+                                            if idx == len(prob_lst):
+                                                answer_not_found = False
+                                                item = root.createElement('item')
+                                                item.setAttribute('type', "Interaction")
+                                                item.setAttribute('answer', "relation not found")
+                                                productChild.appendChild(item)
+                            else:
+                                item = root.createElement('item')
+                                item.setAttribute('type', "Interaction")
+                                item.setAttribute('answer', "subject not in list")
+                                productChild.appendChild(item)
 
-                        elif len(df_query2) > 0:
-                            next_value = False
-                            while next_value == False:
-                                idx = df_query1[df_query1["interaction"] == predicate].index +1
-                                next_action = df_query1[idx]["interaction"]
-                                next_id = df_query1.loc[idx]["id"]
-                                if predicate != next_action:
-                                    next_value = True
-                            proba_lst = y_proba[next_id]
-                            for answer in answers:
-                                rel_ind = relation_list.index(answer)
-                                proba_lst.append(relation_list[rel_ind])
-                            final_answer = answers.index(max(proba_lst))
-                            query_answer.append(final_answer)
-                if len(query_answer) > 0:
-                    query_result = most_frequent(query_answer)
-                    item = root.createElement('item')
-                    item.setAttribute('type', "Interaction")
-                    item.setAttribute('answer', query_result)
-                    productChild.appendChild(item)
-                else:
-                    item = root.createElement('item')
-                    item.setAttribute('type', "Interaction")
-                    item.setAttribute('answer', "unknown")
-                    productChild.appendChild(item)
-                    
-            if query_type == "4":
-                answers = []
-                for answer in q["Answers"]["item"]:
-                    answers.append(answer["@answer"])
-                for item in q["item"]:
-                    if "@subject" in list(item.keys()):
-                        subj = item["@subject"].split(":")[1]
-                        obj = item["@object"].split(":")[1]
-                        predicate = item["@object"].split(":")[1]
-                        scene_nr = item["@scene"]
-                        scene = f"{movie}-{scene_nr}"
-                        df_query1 = sqldf(
-                            f"SELECT * FROM df WHERE scene='{scene}' AND person1 = '{obj}' AND person2 = '{subj}'", locals())
-                        df_query2 = sqldf(
-                            f"SELECT * FROM df WHERE scene='{scene}' AND person1 = '{subj}' AND person2 = '{obj}'", locals())
-                        if len(df_query1) > 0:
-                            # get previous column
-                            next_value = False
-                            while next_value == False:
-                                idx = df_query1[df_query1["interaction"] == predicate].index-1
-                                next_action = df_query1[idx]["interaction"]
-                                next_id = df_query1.loc[idx]["id"]
-                                if predicate != next_action:
-                                    next_value = True
-                            proba_lst = y_proba[next_id]
-                            for answer in answers:
-                                rel_ind = relation_list.index(answer)
-                                proba_lst.append(relation_list[rel_ind])
-                            final_answer = answers.index(max(proba_lst))
-                            query_answer.append(final_answer)
-                        elif len(df_query2) > 0:
-                            next_value = False
-                            while next_value == False:
-                                idx = df_query1[df_query1["interaction"] == predicate].index-1
-                                next_action = df_query1[idx]["interaction"]
-                                next_id = df_query1.loc[idx]["id"]
-                                if predicate != next_action:
-                                    next_value = True
-                            proba_lst = y_proba[next_id]
-                            for answer in answers:
-                                rel_ind = relation_list.index(answer)
-                                proba_lst.append(relation_list[rel_ind])
-                            final_answer = answers.index(max(proba_lst))
-                            query_answer.append(final_answer)
-                if len(query_answer) > 0:
-                    query_result = most_frequent(query_answer)
-                    item = root.createElement('item')
-                    item.setAttribute('type', "Interaction")
-                    item.setAttribute('answer', query_result)
-                    productChild.appendChild(item)
-                else:
-                    item = root.createElement('item')
-                    item.setAttribute('type', "Interaction")
-                    item.setAttribute('answer', "unknown")
-                    productChild.appendChild(item)
+                        
+                if query_type == "4":
+                    answers = []
+                    for answer in q["Answers"]["item"]:
+                        if answer in relation_list:
+                            answers.append(answer["@answer"])
+                    for item in q["item"]:
+                        if "@subject" in list(item.keys()):
+                            #subj = item["@subject"].split(":")[1]
+                            obj = item["@object"].split(":")[1]
+                            predicate = item["@predicate"].split(":")[1]
+                            if predicate in relation_list:
+                                scene_nr = item["@scene"]
+                                scene = f"{movie}-{scene_nr}"
+                                df_query = sqldf(
+                                    f"SELECT * FROM df WHERE scene='{scene}'", locals())
+                                if len(df_query) > 0:
+                                    ids = df_query["id"]
+                                    prob_lst = []
+                                    probs = []
+                                    answer_not_found = True
+                                    for i in ids:
+                                        prob_lst.append(y_proba[i])
+                                    predication_idx = relation_list.index(predicate)
+                                    for prob in prob_lst:
+                                        probs.append(prob[predication_idx])
+                                    idx = probs.index(max(probs)) - 1
+                                    if len(prob_lst) > idx:
+                                        while answer_not_found:
+                                            proba = prob_lst[idx]
+                                            proba_list = []
+                                            for answer in answers:
+                                                rel_ind = relation_list.index(answer)
+                                                if proba[rel_ind] > 0:
+                                                    answer_not_found = False
+                                                    proba_list.append(proba[rel_ind])
+                                            idx += 1
+                                            if answer_not_found == False:
+                                                max_val = max(proba_list)
+                                                proba_lst = list(proba)
+                                                answer_idx = proba_lst.index(max_val)
+                                                item = root.createElement('item')
+                                                item.setAttribute('type', "Interaction")
+                                                item.setAttribute('answer', relation_list[answer_idx])
+                                                productChild.appendChild(item)
+                                            if idx == len(prob_lst):
+                                                answer_not_found = False
+                                                item = root.createElement('item')
+                                                item.setAttribute('type', "Interaction")
+                                                item.setAttribute('answer', "relation not found")
+                                                productChild.appendChild(item)
+                            else:
+                                item = root.createElement('item')
+                                item.setAttribute('type', "Interaction")
+                                item.setAttribute('answer', "subject not in list")
+                                productChild.appendChild(item)
 
         xml_str = root.toprettyxml(indent ="\t") 
         if not os.path.exists(f"{dir_path}/submissions/scene"):

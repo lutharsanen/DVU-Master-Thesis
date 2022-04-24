@@ -1,28 +1,44 @@
 <?xml version="1.0" ?>
 <DeepVideoUnderstandingSceneResult scenes="The_Illusionist">
 	<DeepVideoUnderstandingTopicResult question="1" id="1">
-		<item order="1" scene="The_Illusionist-13" confidence="100.0"/>
-		<item order="2" scene="The_Illusionist-1" confidence="0.0"/>
-		<item order="3" scene="The_Illusionist-1" confidence="0.0"/>
-		<item order="4" scene="The_Illusionist-1" confidence="0.0"/>
+		<item order="1" scene="The_Illusionist-13" confidence="18.455638557104624"/>
+		<item order="2" scene="The_Illusionist-13" confidence="18.455638557104624"/>
+		<item order="3" scene="The_Illusionist-27" confidence="12.30375903806975"/>
+		<item order="4" scene="The_Illusionist-27" confidence="12.30375903806975"/>
+		<item order="5" scene="The_Illusionist-23" confidence="10.546079175488357"/>
+		<item order="6" scene="The_Illusionist-42" confidence="9.227819278552312"/>
+		<item order="7" scene="The_Illusionist-24" confidence="7.38225542284185"/>
+		<item order="8" scene="The_Illusionist-41" confidence="6.711141293492591"/>
+		<item order="9" scene="The_Illusionist-18" confidence="4.613909639276156"/>
 	</DeepVideoUnderstandingTopicResult>
 	<DeepVideoUnderstandingTopicResult question="1" id="2">
-		<item order="1" scene="The_Illusionist-13" confidence="100.0"/>
-		<item order="2" scene="The_Illusionist-1" confidence="0.0"/>
-		<item order="3" scene="The_Illusionist-1" confidence="0.0"/>
-		<item order="4" scene="The_Illusionist-1" confidence="0.0"/>
+		<item order="1" scene="The_Illusionist-13" confidence="16.27027915385158"/>
+		<item order="2" scene="The_Illusionist-13" confidence="16.27027915385158"/>
+		<item order="3" scene="The_Illusionist-27" confidence="10.846852769234383"/>
+		<item order="4" scene="The_Illusionist-27" confidence="10.846852769234383"/>
+		<item order="5" scene="The_Illusionist-23" confidence="9.29730237362947"/>
+		<item order="6" scene="The_Illusionist-18" confidence="8.677482215387508"/>
+		<item order="7" scene="The_Illusionist-42" confidence="8.13513957692579"/>
+		<item order="8" scene="The_Illusionist-40" confidence="7.231235179489589"/>
+		<item order="9" scene="The_Illusionist-24" confidence="6.508111661540631"/>
+		<item order="10" scene="The_Illusionist-41" confidence="5.916465146855119"/>
 	</DeepVideoUnderstandingTopicResult>
 	<DeepVideoUnderstandingTopicResult question="1" id="3">
-		<item order="1" scene="The_Illusionist-1" confidence="100.0"/>
-		<item order="2" scene="The_Illusionist-11" confidence="0.0"/>
-		<item order="3" scene="The_Illusionist-11" confidence="0.0"/>
-		<item order="4" scene="The_Illusionist-11" confidence="0.0"/>
+		<item order="1" scene="The_Illusionist-21" confidence="33.89830508474576"/>
+		<item order="2" scene="The_Illusionist-3" confidence="25.423728813559322"/>
+		<item order="3" scene="The_Illusionist-1" confidence="20.33898305084746"/>
+		<item order="4" scene="The_Illusionist-1" confidence="20.33898305084746"/>
 	</DeepVideoUnderstandingTopicResult>
 	<DeepVideoUnderstandingTopicResult question="1" id="4">
-		<item order="1" scene="The_Illusionist-13" confidence="100.0"/>
-		<item order="2" scene="The_Illusionist-1" confidence="0.0"/>
-		<item order="3" scene="The_Illusionist-1" confidence="0.0"/>
-		<item order="4" scene="The_Illusionist-1" confidence="0.0"/>
+		<item order="1" scene="The_Illusionist-41" confidence="19.66854853396467"/>
+		<item order="2" scene="The_Illusionist-23" confidence="18.02950282280095"/>
+		<item order="3" scene="The_Illusionist-13" confidence="12.019668548533966"/>
+		<item order="4" scene="The_Illusionist-13" confidence="12.019668548533966"/>
+		<item order="5" scene="The_Illusionist-13" confidence="12.019668548533966"/>
+		<item order="6" scene="The_Illusionist-27" confidence="9.014751411400475"/>
+		<item order="7" scene="The_Illusionist-42" confidence="7.2118011291203805"/>
+		<item order="8" scene="The_Illusionist-24" confidence="6.009834274266983"/>
+		<item order="9" scene="The_Illusionist-18" confidence="4.006556182844656"/>
 	</DeepVideoUnderstandingTopicResult>
 	<DeepVideoUnderstandingTopicResult question="2" id="1">
 		<item order="1" subject="Person:unknown" confidence="0"/>
@@ -36,42 +52,24 @@
 	<DeepVideoUnderstandingTopicResult question="2" id="4">
 		<item order="1" subject="Person:unknown" confidence="0"/>
 	</DeepVideoUnderstandingTopicResult>
-	<DeepVideoUnderstandingTopicResult question="3" id="1">
-		<item type="Interaction" answer="unknown"/>
-	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="3" id="1"/>
 	<DeepVideoUnderstandingTopicResult question="3" id="2">
-		<item type="Interaction" answer="unknown"/>
+		<item type="Interaction" answer="subject not in list"/>
 	</DeepVideoUnderstandingTopicResult>
-	<DeepVideoUnderstandingTopicResult question="3" id="3">
-		<item type="Interaction" answer="unknown"/>
-	</DeepVideoUnderstandingTopicResult>
+	<DeepVideoUnderstandingTopicResult question="3" id="3"/>
 	<DeepVideoUnderstandingTopicResult question="3" id="4">
-		<item type="Interaction" answer="unknown"/>
+		<item type="Interaction" answer="relation not found"/>
 	</DeepVideoUnderstandingTopicResult>
 	<DeepVideoUnderstandingTopicResult question="4" id="1">
-		<item type="Interaction" answer="unknown"/>
+		<item type="Interaction" answer="relation not found"/>
 	</DeepVideoUnderstandingTopicResult>
 	<DeepVideoUnderstandingTopicResult question="4" id="2">
-		<item type="Interaction" answer="unknown"/>
+		<item type="Interaction" answer="relation not found"/>
 	</DeepVideoUnderstandingTopicResult>
 	<DeepVideoUnderstandingTopicResult question="4" id="3">
-		<item type="Interaction" answer="unknown"/>
+		<item type="Interaction" answer="subject not in list"/>
 	</DeepVideoUnderstandingTopicResult>
 	<DeepVideoUnderstandingTopicResult question="4" id="4">
-		<item type="Interaction" answer="unknown"/>
+		<item type="Interaction" answer="relation not found"/>
 	</DeepVideoUnderstandingTopicResult>
-	<DeepVideoUnderstandingTopicResult question="5" id="1"/>
-	<DeepVideoUnderstandingTopicResult question="5" id="2"/>
-	<DeepVideoUnderstandingTopicResult question="5" id="3"/>
-	<DeepVideoUnderstandingTopicResult question="5" id="4"/>
-	<DeepVideoUnderstandingTopicResult question="5" id="5"/>
-	<DeepVideoUnderstandingTopicResult question="5" id="6"/>
-	<DeepVideoUnderstandingTopicResult question="5" id="7"/>
-	<DeepVideoUnderstandingTopicResult question="5" id="8"/>
-	<DeepVideoUnderstandingTopicResult question="5" id="9"/>
-	<DeepVideoUnderstandingTopicResult question="5" id="10"/>
-	<DeepVideoUnderstandingTopicResult question="6" id="1"/>
-	<DeepVideoUnderstandingTopicResult question="6" id="2"/>
-	<DeepVideoUnderstandingTopicResult question="6" id="3"/>
-	<DeepVideoUnderstandingTopicResult question="6" id="4"/>
 </DeepVideoUnderstandingSceneResult>
