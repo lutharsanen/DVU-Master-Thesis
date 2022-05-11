@@ -1,4 +1,14 @@
 # DVU-Master-Thesis
+In this repository a pipeline was build for the DVU Challenge 2021. This repository has a settings.py file, where the system path of the HLVU training data set, the HLVU test data set and the location of this repository needs to be set. To start the training process you have to run the following command:
+
+```
+python main_trainset.py
+```
+To to solve the DVU queries, you have to run this command:
+
+```
+python main_testset.py
+```
 
 
 ## Citation
