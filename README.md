@@ -1,5 +1,21 @@
 # DVU-Master-Thesis
-In this repository a pipeline was build for the DVU Challenge 2021. This repository has a settings.py file, where the system path of the HLVU training data set, the HLVU test data set and the location of this repository needs to be set. To start the training process you have to run the following command:
+
+First set up the python conda environment. A yaml file is included in the repository. Conda was used to create the environment as it handles all CUDA settings for tensorflow. Run the following command to set up your conda environment.
+
+```
+conda env create --file=dvu_pipeline.yaml
+```
+
+In this repository a pipeline was build for the DVU Challenge 2021. This repository has a settings.py file, where the system path of the HLVU training data set, the HLVU test data set and the location of this repository needs to be set. 
+
+```
+HLVU_LOCATION = "path-to-your-hlvu-training-data-set/HLVU"
+HLVU_LOCATION_TEST = "path-to-your-hlvu-test-data-set/HLVU-testing"
+
+DIR_PATH = "path-to-your-location-of-this-pipeline/DVU-Master-Thesis/src"
+```
+
+To start the training process you have to run the following command:
 
 ```
 python main_trainingset.py
@@ -9,7 +25,7 @@ To to solve the DVU queries, you have to run this command:
 ```
 python main_testset.py
 ```
-The submission files are then located in the submission folder and they are stored as XML files as it is required for the DVU Challenge.
+The submission files are then located in the submission folder and they are stored as XML files as it is required for the DVU Challenge. Both movie and scene level queries will be answered by the pipeline. At the moment sentiment based queries are not supported by this pipeline. This will concern the type 5 and type 6 queries of the DVU Challenge.
 
 ## Citation
 
