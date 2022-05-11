@@ -23,8 +23,7 @@ def people_classifier(training_set, binary_model_location, model_location, dir_p
     df_person_relation = sqldf(f"SELECT * FROM p2p WHERE relation!='None'", locals())
     y_train = [relation_lst.index(x.strip(" ").lower()) for x in df_person_relation["relation"]]
     X_train = df_person_relation.iloc[:, 2:23]
-    clf = GradientBoostingClassifier(n_estimators=100, learning_rate=0.7,
-                                 max_depth=3, random_state=0).fit(X_train, y_train)
+    clf = GradientBoostingClassifier(n_estimators=14, learning_rate=0.01, max_depth=15, random_state=0).fit(X_train, y_train)
     joblib.dump(clf, model_location)
 
 
@@ -44,8 +43,7 @@ def location_classifier(training_set, binary_model_location, model_location, dir
     df_location_relation = sqldf(f"SELECT * FROM p2l WHERE relation!='None'", locals())
     y_train = [relation_lst.index(x.strip(" ").lower()) for x in df_location_relation["relation"]]
     X_train = df_location_relation.iloc[:, 2:9]
-    clf = GradientBoostingClassifier(n_estimators=100, learning_rate=0.7,
-                                 max_depth=4, random_state=0).fit(X_train, y_train)
+    clf = GradientBoostingClassifier(n_estimators=10, learning_rate=0.1, max_depth=2, random_state=0).fit(X_train, y_train)
     joblib.dump(clf, model_location)
 
 

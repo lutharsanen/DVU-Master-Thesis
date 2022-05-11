@@ -64,13 +64,13 @@ audio_vision_combiner(movie_list,hlvu_location, code_loc)
 #m.create_dataframe(movie_list, code_loc , hlvu_location)
 
 ############################## movie-level ########################################
-#if not os.path.exists(f"{code_loc}/models"):
-#  os.mkdir(f"{code_loc}/models")
-#people_classifier(f"{code_loc}/data/people2people.json", f"{code_loc}/models/person_binary_clf.sav", f"{code_loc}/models/person_classifier.sav", code_loc)
-#location_classifier(f"{code_loc}/data/people2location.json", f"{code_loc}/models/location_binary_clf.sav", f"{code_loc}/models/location_classifier.sav", code_loc)
+if not os.path.exists(f"{code_loc}/models"):
+  os.mkdir(f"{code_loc}/models")
+people_classifier(f"{code_loc}/data/people2people.json", f"{code_loc}/models/person_binary_clf.sav", f"{code_loc}/models/person_classifier.sav", code_loc)
+location_classifier(f"{code_loc}/data/people2location.json", f"{code_loc}/models/location_binary_clf.sav", f"{code_loc}/models/location_classifier.sav", code_loc)
 #concept_classifier(f"{code_loc}/data/people2concept.json", f"{code_loc}/models/concept_classifier.sav", code_loc)
 
 ############################# scene-level #########################################
 
-scene_data_creation(movie_list, code_loc, hlvu_location)
-interaction_classifier(f"{code_loc}/data/df_interaction.json", f"{code_loc}/models/interaction_classifier.sav", code_loc)
+#scene_data_creation(movie_list, code_loc, hlvu_location)
+#interaction_classifier(f"{code_loc}/data/df_interaction.json", f"{code_loc}/models/interaction_classifier.sav", code_loc)

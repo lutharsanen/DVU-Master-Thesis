@@ -19,46 +19,46 @@
     <node id="town1" />
     <node id="mansion" />
     <edge source="eisenheim" target="young_eisenheim">
-      <data key="d0">engages with</data>
+      <data key="d0">friend of</data>
     </edge>
     <edge source="eisenheim" target="inspector_uhi">
-      <data key="d0">in relationship with</data>
+      <data key="d0">friend of</data>
     </edge>
     <edge source="eisenheim" target="sophie">
-      <data key="d0">engages with</data>
+      <data key="d0">friend of</data>
     </edge>
     <edge source="eisenheim" target="prince_leopold">
-      <data key="d0">engages with</data>
+      <data key="d0">friend of</data>
     </edge>
     <edge source="eisenheim" target="josef">
-      <data key="d0">knows in passing</data>
+      <data key="d0">friend of</data>
     </edge>
     <edge source="eisenheim" target="jurka">
-      <data key="d0">engages with</data>
+      <data key="d0">friend of</data>
     </edge>
     <edge source="young_eisenheim" target="willigut">
-      <data key="d0">knows in passing</data>
+      <data key="d0">friend of</data>
     </edge>
     <edge source="inspector_uhi" target="sophie">
-      <data key="d0">engages with</data>
+      <data key="d0">friend of</data>
     </edge>
     <edge source="inspector_uhi" target="jurka">
-      <data key="d0">engages with</data>
+      <data key="d0">friend of</data>
     </edge>
     <edge source="sophie" target="prince_leopold">
-      <data key="d0">knows of</data>
+      <data key="d0">friend of</data>
     </edge>
     <edge source="josef" target="willigut">
-      <data key="d0">knows of</data>
+      <data key="d0">friend of</data>
     </edge>
     <edge source="willigut" target="jurka">
-      <data key="d0">supervisor of</data>
+      <data key="d0">parent of</data>
     </edge>
     <edge source="young_sophie" target="willigut">
-      <data key="d0">acquaintance of</data>
+      <data key="d0">friend of</data>
     </edge>
     <edge source="travelling_magician" target="willigut">
-      <data key="d0">knows of</data>
+      <data key="d0">friend of</data>
     </edge>
     <edge source="theater1" target="willigut">
       <data key="d0">residence of</data>

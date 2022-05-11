@@ -84,12 +84,12 @@ audio_vision_combiner(movie_list,hlvu_location, code_loc)
 ########################## create test data set #########################################
 
 #m.create_data(hlvu_location, code_loc, movie_list, answer_path_exists = True)
-#movie_queries(
-#  f"{code_loc}/data/people2location_test.json", 
-#  f"{code_loc}/data/people2people_test.json", 
-#  #f"{code_loc}/data/people2concept_test.json", 
-#  movie_list, code_loc, hlvu_training , hlvu_location)
+movie_queries(
+  f"{code_loc}/data/people2location_test.json", 
+  f"{code_loc}/data/people2people_test.json", 
+  #f"{code_loc}/data/people2concept_test.json", 
+  movie_list, code_loc, hlvu_training , hlvu_location)
 
 ############################# scene-level #########################################
 
-solve_query(code_loc, movie_list, hlvu_location, kinetics400)
+#solve_query(code_loc, movie_list, hlvu_location, kinetics400)

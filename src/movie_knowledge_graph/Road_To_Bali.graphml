@@ -6,10 +6,10 @@
     <node id="prince_ken_arok" />
     <node id="king_ramayana" />
     <edge source="harold" target="prince_ken_arok">
-      <data key="d0">acquaintance of</data>
+      <data key="d0">friend of</data>
     </edge>
     <edge source="prince_ken_arok" target="king_ramayana">
-      <data key="d0">acquaintance of</data>
+      <data key="d0">friend of</data>
     </edge>
   </graph>
 </graphml>
