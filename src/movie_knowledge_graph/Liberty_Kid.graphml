@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="d0" for="edge" attr.name="label" attr.type="string" />
+  <graph edgedefault="directed">
+    <node id="awilda" />
+    <node id="lisa" />
+    <node id="mike" />
+    <node id="denice" />
+    <node id="dequan" />
+    <node id="derrick" />
+    <node id="tico" />
+    <node id="nelson" />
+    <node id="santos" />
+    <node id="carnival" />
+    <node id="house1" />
+    <node id="house2" />
+    <node id="prison" />
+    <node id="statue_of_liberty" />
+    <edge source="awilda" target="lisa">
+      <data key="d0">engages with</data>
+    </edge>
+    <edge source="awilda" target="mike">
+      <data key="d0">knows of</data>
+    </edge>
+    <edge source="mike" target="tico">
+      <data key="d0">friend of</data>
+    </edge>
+    <edge source="denice" target="dequan">
+      <data key="d0">friend of</data>
+    </edge>
+    <edge source="denice" target="derrick">
+      <data key="d0">friend of</data>
+    </edge>
+    <edge source="denice" target="mike">
+      <data key="d0">has met</data>
+    </edge>
+    <edge source="denice" target="tico">
+      <data key="d0">friend of</data>
+    </edge>
+    <edge source="dequan" target="derrick">
+      <data key="d0">friend of</data>
+    </edge>
+    <edge source="derrick" target="lisa">
+      <data key="d0">friend of</data>
+    </edge>
+    <edge source="derrick" target="mike">
+      <data key="d0">friend of</data>
+    </edge>
+    <edge source="derrick" target="nelson">
+      <data key="d0">friend of</data>
+    </edge>
+    <edge source="derrick" target="santos">
+      <data key="d0">engages with</data>
+    </edge>
+    <edge source="derrick" target="tico">
+      <data key="d0">friend of</data>
+    </edge>
+    <edge source="carnival" target="denice">
+      <data key="d0">residence of</data>
+    </edge>
+    <edge source="carnival" target="tico">
+      <data key="d0">residence of</data>
+    </edge>
+    <edge source="house1" target="denice">
+      <data key="d0">residence of</data>
+    </edge>
+    <edge source="house1" target="tico">
+      <data key="d0">residence of</data>
+    </edge>
+    <edge source="house2" target="denice">
+      <data key="d0">residence of</data>
+    </edge>
+    <edge source="house2" target="tico">
+      <data key="d0">residence of</data>
+    </edge>
+    <edge source="prison" target="denice">
+      <data key="d0">residence of</data>
+    </edge>
+    <edge source="prison" target="tico">
+      <data key="d0">residence of</data>
+    </edge>
+    <edge source="statue_of_liberty" target="denice">
+      <data key="d0">residence of</data>
+    </edge>
+    <edge source="statue_of_liberty" target="tico">
+      <data key="d0">residence of</data>
+    </edge>
+  </graph>
+</graphml>

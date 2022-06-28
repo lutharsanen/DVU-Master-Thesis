@@ -18,13 +18,17 @@ import torch
 available_pipelines = [p.modelId for p in HfApi().list_models(filter="pyannote-audio-pipeline")]
 
 
-def get_timestamp(movie, movie_scene, hlvu_location, segment):
+def get_timestamp(movie, movie_scene, hlvu_location, segment, diarization = True):
     path = f"{hlvu_location}/scene.segmentation.reference/{movie}.csv"
     df_scenes = pd.read_csv(path, header=None)
     scene_ind = int(movie_scene.split("-")[1]) -1
     scene_start_time = datetime.strptime(df_scenes.iloc[[scene_ind]][0].to_list()[0], '%H:%M:%S')
-    start_delta = timedelta(seconds=segment["segment"]["start"])
-    end_delta = timedelta(seconds=segment["segment"]["end"])
+    if diarization:
+        start_delta = timedelta(seconds=segment["segment"]["start"])
+        end_delta = timedelta(seconds=segment["segment"]["end"])
+    else:
+        start_delta = timedelta(seconds=segment["start"])
+        end_delta = timedelta(seconds=segment["end"])
     starttime = scene_start_time + start_delta
     endtime = scene_start_time + end_delta
     return starttime, endtime
@@ -34,9 +38,8 @@ def get_timestamp(movie, movie_scene, hlvu_location, segment):
 def scene_diarization(audio_path, chunk_loc,name, audio_db, movie, hlvu_location, code_loc):
     audio_name = name.partition(".")[0]
     pipeline = Pipeline.from_pretrained("pyannote/speaker-diarization")
-    print(audio_path)
+    #print(audio_path)
     output = pipeline(audio_path)
-    print("cam until here")
     audio = AudioSegment.from_wav(audio_path)
     if len(output) != 0:
 
@@ -62,6 +65,7 @@ def scene_diarization(audio_path, chunk_loc,name, audio_db, movie, hlvu_location
             # empty not used gpu storage
             torch.cuda.empty_cache()
     
+    """
     else:
         pipeline = VoiceActivityDetection(segmentation="pyannote/segmentation")
         HYPER_PARAMETERS = {
@@ -80,12 +84,14 @@ def scene_diarization(audio_path, chunk_loc,name, audio_db, movie, hlvu_location
             speech_embeddings = {'embedding': [], 'name': [], "start": [], "end": [],  "emotion":[], "text":[], "scene": []}
             df = pd.DataFrame(data=speech_embeddings)
             for excerpt in vad.itertracks(yield_label=False):
-                segment = excerpt[0]
-                start, end = get_timestamp(movie, audio_name, hlvu_location , segment)
-                start_chunk = segment.for_json()["start"]
-                end_chunk = segment.for_json()["end"]
+                segment = excerpt[0].for_json()
+                start, end = get_timestamp(movie, audio_name, hlvu_location , segment, False)
+                #start_chunk = segment.for_json()["start"]
+                #end_chunk = segment.for_json()["end"]
+                float_start, float_end = start.timestamp(), end.timestamp()
+                print(type(float_start), type(float_end))
                 chunk_name = f"chunk_{counter}.wav"
-                generate_chunk(audio, start_chunk, end_chunk, chunk_loc, chunk_name)
+                generate_chunk(audio, float_start, float_end, chunk_loc, chunk_name)
                 try:
                     text = get_speech_to_text(f"{chunk_loc}/{chunk_name}")
                 except:
@@ -126,9 +132,11 @@ def scene_diarization(audio_path, chunk_loc,name, audio_db, movie, hlvu_location
             df = df.drop(['embedding'], axis=1)
             dataframe_to_db(df, audio_db)
             #df.to_json(f'{data_path}/speech_diarization_{audio_name}.json')
+    """
 
 def generate_chunk( audio, start, end, chunk_loc, name):
     # convert timestamp to ms and add margin of 1s
+    #print(type(start), type(end))
     start_chunk = (start *1000) -1000
     # convert timestamp to ms and add margin of 1s
     end_chunk = (end *1000) +1000

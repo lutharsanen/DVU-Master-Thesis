@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+<!DOCTYPE DeepVideoUnderstandingResults SYSTEM "DeepVideoUnderstandingResults.dtd">
+<DeepVideoUnderstandingResults movie="like_me">
+	<DeepVideoUnderstandingRunResult desc="A Multi-Stream Approach for Video Understanding" pid="UZH" priority="1">
+		<DeepVideoUnderstandingTopicResult question="1" id="1" path="1">
+			<item source="burt" relation="friend of" target="gas_station_clerk"/>
+			<item source="gas_station_clerk" relation="acquaintance of" target="kiya"/>
+			<item source="kiya" relation="friend of" target="marshall"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="1" path="2">
+			<item source="burt" relation="friend of" target="gas_station_clerk"/>
+			<item source="gas_station_clerk" relation="acquaintance of" target="marshall"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="1" path="3">
+			<item source="burt" relation="friend of" target="gas_station_clerk"/>
+			<item source="gas_station_clerk" relation="is treating" target="diner"/>
+			<item source="diner" relation="residence of" target="kiya"/>
+			<item source="kiya" relation="friend of" target="marshall"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="1" path="4">
+			<item source="burt" relation="engages with" target="kiya"/>
+			<item source="kiya" relation="acquaintance of" target="gas_station_clerk"/>
+			<item source="gas_station_clerk" relation="acquaintance of" target="marshall"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="1" path="5">
+			<item source="burt" relation="engages with" target="kiya"/>
+			<item source="kiya" relation="friend of" target="marshall"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="1" path="6">
+			<item source="burt" relation="engages with" target="kiya"/>
+			<item source="kiya" relation="lives at" target="diner"/>
+			<item source="diner" relation="patient at" target="gas_station_clerk"/>
+			<item source="gas_station_clerk" relation="acquaintance of" target="marshall"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="1" path="7">
+			<item source="burt" relation="friend of" target="marshall"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="2" id="1">
+			<item order="1" subject="none" confidence="0"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="3" id="1"/>
+		<DeepVideoUnderstandingTopicResult question="3" id="2">
+			<item type="Relation" answer="unknown"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="3" id="3">
+			<item type="Relation" answer="knows of"/>
+		</DeepVideoUnderstandingTopicResult>
+	</DeepVideoUnderstandingRunResult>
+</DeepVideoUnderstandingResults>

@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<!DOCTYPE DeepVideoUnderstandingSceneResults SYSTEM "DeepVideoUnderstandingSceneResults.dtd">
+<DeepVideoUnderstandingSceneResults movie="ChainedforLife">
+	<DeepVideoUnderstandingRunResult desc="A Multi-Stream Approach for Video Understanding" pid="UZH" priority="1">
+		<DeepVideoUnderstandingTopicResult question="1" id="1">
+			<item order="1" scene="ChainedforLife-10" confidence="26.494565217391308"/>
+			<item order="2" scene="ChainedforLife-10" confidence="26.494565217391308"/>
+			<item order="3" scene="ChainedforLife-25" confidence="21.195652173913047"/>
+			<item order="4" scene="ChainedforLife-16" confidence="17.663043478260867"/>
+			<item order="5" scene="ChainedforLife-20" confidence="8.15217391304348"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="2">
+			<item order="1" scene="ChainedforLife-10" confidence="47.44525547445255"/>
+			<item order="2" scene="ChainedforLife-25" confidence="37.95620437956204"/>
+			<item order="3" scene="ChainedforLife-16" confidence="14.5985401459854"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="3">
+			<item order="1" scene="ChainedforLife-20" confidence="100.0"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="4">
+			<item order="1" scene="ChainedforLife-20" confidence="100.0"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="2" id="1">
+			<item order="1" subject="Person:unknown" confidence="0"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="2" id="2">
+			<item order="1" subject="Person:unknown" confidence="0"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="2" id="3">
+			<item order="1" subject="Person:unknown" confidence="0"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="2" id="4">
+			<item order="1" subject="Person:unknown" confidence="0"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="3" id="1">
+			<item type="Interaction" answer="talks to"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="3" id="2"/>
+		<DeepVideoUnderstandingTopicResult question="3" id="3"/>
+		<DeepVideoUnderstandingTopicResult question="3" id="4"/>
+		<DeepVideoUnderstandingTopicResult question="4" id="1"/>
+		<DeepVideoUnderstandingTopicResult question="4" id="2"/>
+		<DeepVideoUnderstandingTopicResult question="4" id="3"/>
+	</DeepVideoUnderstandingRunResult>
+</DeepVideoUnderstandingSceneResults>

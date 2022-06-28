@@ -1,67 +1,53 @@
-accuses
-hits
-holds in arms
-asks
-disrespects
-offers to help
 teaches
-follows
-bullies
-arrests
-argue with
-smiles at
-advises
-comforts
-proposes to
-orders
-eats with
-mocks
-apologizes to
-plays with
-meets
-walk with
-tells a story
-shows
-invites
-visits
-hugs
-watches
-rejects
-runs to
-introduces
-congratulates
-yells at
-waits for
-teases
-scoffs at
 breaks news to
-leave together
-talks to
-touches
+introduces
+scoffs at
 compliments
-believes in
-kisses
-threatens
-calls on phone
-gives to
-gives gift to
-complains to
-confides in
-snaps at
-hides item from
-works with
-chases
-greets
-catches up with
-suspicious of
-listens to
-disagrees with
-dies for
-scolds
+apologizes to
+touches
 explains to
-tells story to
-encourages
-negotiates with
+kisses
+yells at
+calls on phone
+complains to
+shows
+waits for
+gives gift to
+works with
+follows
+plays with
+disrespects
+hides item from
+meets
+talks to
+hugs
+tells a story
+advises
+confides in
+bullies
+rejects
+watches
+dies for
+teases
+walk with
+threatens
+listens to
+smiles at
+greets
+accuses
+argue with
+arrests
+asks
+leave together
 makes love to
-lies to
+hits
+congratulates
 socializes with
+orders
+holds in arms
+scolds
+lies to
+gives to
+snaps at
+chases
+catches up with

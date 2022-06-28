@@ -1,0 +1,72 @@
+<?xml version="1.0" ?>
+<!DOCTYPE DeepVideoUnderstandingSceneResults SYSTEM "DeepVideoUnderstandingSceneResults.dtd">
+<DeepVideoUnderstandingSceneResults movie="like_me">
+	<DeepVideoUnderstandingRunResult desc="A Multi-Stream Approach for Video Understanding" pid="UZH" priority="1">
+		<DeepVideoUnderstandingTopicResult question="1" id="1">
+			<item order="1" scene="like_me-15" confidence="26.506024096385538"/>
+			<item order="2" scene="like_me-13" confidence="15.903614457831324"/>
+			<item order="3" scene="like_me-13" confidence="15.903614457831324"/>
+			<item order="4" scene="like_me-2" confidence="13.253012048192769"/>
+			<item order="5" scene="like_me-2" confidence="13.253012048192769"/>
+			<item order="6" scene="like_me-20" confidence="7.951807228915662"/>
+			<item order="7" scene="like_me-22" confidence="7.2289156626506035"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="2">
+			<item order="1" scene="like_me-1" confidence="10.894941634241242"/>
+			<item order="2" scene="like_me-1" confidence="10.894941634241242"/>
+			<item order="3" scene="like_me-1" confidence="10.894941634241242"/>
+			<item order="4" scene="like_me-13" confidence="8.171206225680933"/>
+			<item order="5" scene="like_me-13" confidence="8.171206225680933"/>
+			<item order="6" scene="like_me-13" confidence="8.171206225680933"/>
+			<item order="7" scene="like_me-13" confidence="8.171206225680933"/>
+			<item order="8" scene="like_me-13" confidence="8.171206225680933"/>
+			<item order="9" scene="like_me-2" confidence="6.536964980544748"/>
+			<item order="10" scene="like_me-2" confidence="6.536964980544748"/>
+			<item order="11" scene="like_me-15" confidence="5.447470817120621"/>
+			<item order="12" scene="like_me-7" confidence="4.6692607003891045"/>
+			<item order="13" scene="like_me-22" confidence="3.268482490272374"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="3">
+			<item order="1" scene="like_me-4" confidence="42.85714285714286"/>
+			<item order="2" scene="like_me-3" confidence="35.71428571428571"/>
+			<item order="3" scene="like_me-22" confidence="21.42857142857143"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="4">
+			<item order="1" scene="like_me-13" confidence="20.797227036395142"/>
+			<item order="2" scene="like_me-13" confidence="20.797227036395142"/>
+			<item order="3" scene="like_me-2" confidence="15.597920277296362"/>
+			<item order="4" scene="like_me-2" confidence="15.597920277296362"/>
+			<item order="5" scene="like_me-15" confidence="12.478336221837088"/>
+			<item order="6" scene="like_me-20" confidence="7.798960138648181"/>
+			<item order="7" scene="like_me-22" confidence="6.932409012131716"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="2" id="1">
+			<item order="1" subject="Person:unknown" confidence="0"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="2" id="2">
+			<item order="1" subject="Person:unknown" confidence="0"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="2" id="3">
+			<item order="1" subject="Person:unknown" confidence="0"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="2" id="4">
+			<item order="1" subject="Person:unknown" confidence="0"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="3" id="1">
+			<item type="Interaction" answer="talks to"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="3" id="2">
+			<item type="Interaction" answer="asks"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="3" id="3"/>
+		<DeepVideoUnderstandingTopicResult question="3" id="4"/>
+		<DeepVideoUnderstandingTopicResult question="4" id="1">
+			<item type="Interaction" answer="gives to"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="4" id="2">
+			<item type="Interaction" answer="gives to"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="4" id="3"/>
+		<DeepVideoUnderstandingTopicResult question="4" id="4"/>
+	</DeepVideoUnderstandingRunResult>
+</DeepVideoUnderstandingSceneResults>

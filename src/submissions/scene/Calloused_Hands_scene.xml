@@ -1,0 +1,111 @@
+<?xml version="1.0" ?>
+<!DOCTYPE DeepVideoUnderstandingSceneResults SYSTEM "DeepVideoUnderstandingSceneResults.dtd">
+<DeepVideoUnderstandingSceneResults movie="Calloused_Hands">
+	<DeepVideoUnderstandingRunResult desc="A Multi-Stream Approach for Video Understanding" pid="UZH" priority="1">
+		<DeepVideoUnderstandingTopicResult question="1" id="1">
+			<item order="1" scene="Calloused_Hands-25" confidence="6.690028671551448"/>
+			<item order="2" scene="Calloused_Hands-31" confidence="5.017521503663587"/>
+			<item order="3" scene="Calloused_Hands-31" confidence="5.017521503663587"/>
+			<item order="4" scene="Calloused_Hands-31" confidence="5.017521503663587"/>
+			<item order="5" scene="Calloused_Hands-31" confidence="5.017521503663587"/>
+			<item order="6" scene="Calloused_Hands-31" confidence="5.017521503663587"/>
+			<item order="7" scene="Calloused_Hands-31" confidence="5.017521503663587"/>
+			<item order="8" scene="Calloused_Hands-31" confidence="5.017521503663587"/>
+			<item order="9" scene="Calloused_Hands-10" confidence="4.014017202930869"/>
+			<item order="10" scene="Calloused_Hands-10" confidence="4.014017202930869"/>
+			<item order="11" scene="Calloused_Hands-10" confidence="4.014017202930869"/>
+			<item order="12" scene="Calloused_Hands-10" confidence="4.014017202930869"/>
+			<item order="13" scene="Calloused_Hands-10" confidence="4.014017202930869"/>
+			<item order="14" scene="Calloused_Hands-10" confidence="4.014017202930869"/>
+			<item order="15" scene="Calloused_Hands-11" confidence="3.345014335775724"/>
+			<item order="16" scene="Calloused_Hands-11" confidence="3.345014335775724"/>
+			<item order="17" scene="Calloused_Hands-11" confidence="3.345014335775724"/>
+			<item order="18" scene="Calloused_Hands-11" confidence="3.345014335775724"/>
+			<item order="19" scene="Calloused_Hands-1" confidence="2.867155144950621"/>
+			<item order="20" scene="Calloused_Hands-1" confidence="2.867155144950621"/>
+			<item order="21" scene="Calloused_Hands-1" confidence="2.867155144950621"/>
+			<item order="22" scene="Calloused_Hands-1" confidence="2.867155144950621"/>
+			<item order="23" scene="Calloused_Hands-36" confidence="2.5087607518317934"/>
+			<item order="24" scene="Calloused_Hands-36" confidence="2.5087607518317934"/>
+			<item order="25" scene="Calloused_Hands-21" confidence="2.2300095571838163"/>
+			<item order="26" scene="Calloused_Hands-29" confidence="2.0070086014654347"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="2">
+			<item order="1" scene="Calloused_Hands-38" confidence="7.330482590103847"/>
+			<item order="2" scene="Calloused_Hands-1" confidence="5.701486458969658"/>
+			<item order="3" scene="Calloused_Hands-1" confidence="5.701486458969658"/>
+			<item order="4" scene="Calloused_Hands-1" confidence="5.701486458969658"/>
+			<item order="5" scene="Calloused_Hands-31" confidence="4.276114844227244"/>
+			<item order="6" scene="Calloused_Hands-31" confidence="4.276114844227244"/>
+			<item order="7" scene="Calloused_Hands-31" confidence="4.276114844227244"/>
+			<item order="8" scene="Calloused_Hands-31" confidence="4.276114844227244"/>
+			<item order="9" scene="Calloused_Hands-31" confidence="4.276114844227244"/>
+			<item order="10" scene="Calloused_Hands-31" confidence="4.276114844227244"/>
+			<item order="11" scene="Calloused_Hands-29" confidence="3.800990972646439"/>
+			<item order="12" scene="Calloused_Hands-10" confidence="3.4208918753817956"/>
+			<item order="13" scene="Calloused_Hands-10" confidence="3.4208918753817956"/>
+			<item order="14" scene="Calloused_Hands-10" confidence="3.4208918753817956"/>
+			<item order="15" scene="Calloused_Hands-10" confidence="3.4208918753817956"/>
+			<item order="16" scene="Calloused_Hands-10" confidence="3.4208918753817956"/>
+			<item order="17" scene="Calloused_Hands-10" confidence="3.4208918753817956"/>
+			<item order="18" scene="Calloused_Hands-10" confidence="3.4208918753817956"/>
+			<item order="19" scene="Calloused_Hands-11" confidence="2.850743229484829"/>
+			<item order="20" scene="Calloused_Hands-11" confidence="2.850743229484829"/>
+			<item order="21" scene="Calloused_Hands-11" confidence="2.850743229484829"/>
+			<item order="22" scene="Calloused_Hands-11" confidence="2.850743229484829"/>
+			<item order="23" scene="Calloused_Hands-27" confidence="2.443494196701282"/>
+			<item order="24" scene="Calloused_Hands-30" confidence="2.138057422113622"/>
+			<item order="25" scene="Calloused_Hands-30" confidence="2.138057422113622"/>
+			<item order="26" scene="Calloused_Hands-30" confidence="2.138057422113622"/>
+			<item order="27" scene="Calloused_Hands-21" confidence="1.9004954863232195"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="3">
+			<item order="1" scene="Calloused_Hands-14" confidence="15.67651632970451"/>
+			<item order="2" scene="Calloused_Hands-14" confidence="15.67651632970451"/>
+			<item order="3" scene="Calloused_Hands-1" confidence="11.197511664074648"/>
+			<item order="4" scene="Calloused_Hands-1" confidence="11.197511664074648"/>
+			<item order="5" scene="Calloused_Hands-1" confidence="11.197511664074648"/>
+			<item order="6" scene="Calloused_Hands-30" confidence="9.797822706065318"/>
+			<item order="7" scene="Calloused_Hands-38" confidence="8.709175738724726"/>
+			<item order="8" scene="Calloused_Hands-38" confidence="8.709175738724726"/>
+			<item order="9" scene="Calloused_Hands-29" confidence="7.838258164852255"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="4">
+			<item order="1" scene="Calloused_Hands-14" confidence="15.67651632970451"/>
+			<item order="2" scene="Calloused_Hands-14" confidence="15.67651632970451"/>
+			<item order="3" scene="Calloused_Hands-1" confidence="11.197511664074648"/>
+			<item order="4" scene="Calloused_Hands-1" confidence="11.197511664074648"/>
+			<item order="5" scene="Calloused_Hands-1" confidence="11.197511664074648"/>
+			<item order="6" scene="Calloused_Hands-30" confidence="9.797822706065318"/>
+			<item order="7" scene="Calloused_Hands-38" confidence="8.709175738724726"/>
+			<item order="8" scene="Calloused_Hands-38" confidence="8.709175738724726"/>
+			<item order="9" scene="Calloused_Hands-29" confidence="7.838258164852255"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="2" id="1">
+			<item order="1" subject="Person:unknown" confidence="0"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="2" id="2">
+			<item order="1" subject="Person:unknown" confidence="0"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="2" id="3">
+			<item order="1" subject="Person:unknown" confidence="0"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="2" id="4">
+			<item order="1" subject="Person:unknown" confidence="0"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="3" id="1"/>
+		<DeepVideoUnderstandingTopicResult question="3" id="2"/>
+		<DeepVideoUnderstandingTopicResult question="3" id="3">
+			<item type="Interaction" answer="asks"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="3" id="4"/>
+		<DeepVideoUnderstandingTopicResult question="4" id="1"/>
+		<DeepVideoUnderstandingTopicResult question="4" id="2">
+			<item type="Interaction" answer="talks to"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="4" id="3"/>
+		<DeepVideoUnderstandingTopicResult question="4" id="4">
+			<item type="Interaction" answer="asks"/>
+		</DeepVideoUnderstandingTopicResult>
+	</DeepVideoUnderstandingRunResult>
+</DeepVideoUnderstandingSceneResults>

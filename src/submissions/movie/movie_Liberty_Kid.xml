@@ -1,0 +1,370 @@
+<?xml version="1.0" ?>
+<!DOCTYPE DeepVideoUnderstandingResults SYSTEM "DeepVideoUnderstandingResults.dtd">
+<DeepVideoUnderstandingResults movie="Liberty_Kid">
+	<DeepVideoUnderstandingRunResult desc="A Multi-Stream Approach for Video Understanding" pid="UZH" priority="1">
+		<DeepVideoUnderstandingTopicResult question="1" id="2" path="1">
+			<item source="lisa" relation="engaged with by" target="awilda"/>
+			<item source="awilda" relation="knows of" target="mike"/>
+			<item source="mike" relation="has met" target="denice"/>
+			<item source="denice" relation="friend of" target="dequan"/>
+			<item source="dequan" relation="friend of" target="derrick"/>
+			<item source="derrick" relation="friend of" target="nelson"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="2" path="2">
+			<item source="lisa" relation="engaged with by" target="awilda"/>
+			<item source="awilda" relation="knows of" target="mike"/>
+			<item source="mike" relation="has met" target="denice"/>
+			<item source="denice" relation="friend of" target="derrick"/>
+			<item source="derrick" relation="friend of" target="nelson"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="2" path="3">
+			<item source="lisa" relation="engaged with by" target="awilda"/>
+			<item source="awilda" relation="knows of" target="mike"/>
+			<item source="mike" relation="has met" target="denice"/>
+			<item source="denice" relation="friend of" target="tico"/>
+			<item source="tico" relation="friend of" target="derrick"/>
+			<item source="derrick" relation="friend of" target="nelson"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="2" path="4">
+			<item source="lisa" relation="engaged with by" target="awilda"/>
+			<item source="awilda" relation="knows of" target="mike"/>
+			<item source="mike" relation="has met" target="denice"/>
+			<item source="denice" relation="lives at" target="carnival"/>
+			<item source="carnival" relation="residence of" target="tico"/>
+			<item source="tico" relation="friend of" target="derrick"/>
+			<item source="derrick" relation="friend of" target="nelson"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="2" path="5">
+			<item source="lisa" relation="engaged with by" target="awilda"/>
+			<item source="awilda" relation="knows of" target="mike"/>
+			<item source="mike" relation="has met" target="denice"/>
+			<item source="denice" relation="lives at" target="house1"/>
+			<item source="house1" relation="residence of" target="tico"/>
+			<item source="tico" relation="friend of" target="derrick"/>
+			<item source="derrick" relation="friend of" target="nelson"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="2" path="6">
+			<item source="lisa" relation="engaged with by" target="awilda"/>
+			<item source="awilda" relation="knows of" target="mike"/>
+			<item source="mike" relation="has met" target="denice"/>
+			<item source="denice" relation="lives at" target="house2"/>
+			<item source="house2" relation="residence of" target="tico"/>
+			<item source="tico" relation="friend of" target="derrick"/>
+			<item source="derrick" relation="friend of" target="nelson"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="2" path="7">
+			<item source="lisa" relation="engaged with by" target="awilda"/>
+			<item source="awilda" relation="knows of" target="mike"/>
+			<item source="mike" relation="has met" target="denice"/>
+			<item source="denice" relation="lives at" target="prison"/>
+			<item source="prison" relation="residence of" target="tico"/>
+			<item source="tico" relation="friend of" target="derrick"/>
+			<item source="derrick" relation="friend of" target="nelson"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="2" path="8">
+			<item source="lisa" relation="engaged with by" target="awilda"/>
+			<item source="awilda" relation="knows of" target="mike"/>
+			<item source="mike" relation="has met" target="denice"/>
+			<item source="denice" relation="lives at" target="statue_of_liberty"/>
+			<item source="statue_of_liberty" relation="residence of" target="tico"/>
+			<item source="tico" relation="friend of" target="derrick"/>
+			<item source="derrick" relation="friend of" target="nelson"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="2" path="9">
+			<item source="lisa" relation="engaged with by" target="awilda"/>
+			<item source="awilda" relation="knows of" target="mike"/>
+			<item source="mike" relation="friend of" target="derrick"/>
+			<item source="derrick" relation="friend of" target="nelson"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="2" path="10">
+			<item source="lisa" relation="engaged with by" target="awilda"/>
+			<item source="awilda" relation="knows of" target="mike"/>
+			<item source="mike" relation="friend of" target="tico"/>
+			<item source="tico" relation="friend of" target="denice"/>
+			<item source="denice" relation="friend of" target="dequan"/>
+			<item source="dequan" relation="friend of" target="derrick"/>
+			<item source="derrick" relation="friend of" target="nelson"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="2" path="11">
+			<item source="lisa" relation="engaged with by" target="awilda"/>
+			<item source="awilda" relation="knows of" target="mike"/>
+			<item source="mike" relation="friend of" target="tico"/>
+			<item source="tico" relation="friend of" target="denice"/>
+			<item source="denice" relation="friend of" target="derrick"/>
+			<item source="derrick" relation="friend of" target="nelson"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="2" path="12">
+			<item source="lisa" relation="engaged with by" target="awilda"/>
+			<item source="awilda" relation="knows of" target="mike"/>
+			<item source="mike" relation="friend of" target="tico"/>
+			<item source="tico" relation="friend of" target="derrick"/>
+			<item source="derrick" relation="friend of" target="nelson"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="2" path="13">
+			<item source="lisa" relation="engaged with by" target="awilda"/>
+			<item source="awilda" relation="knows of" target="mike"/>
+			<item source="mike" relation="friend of" target="tico"/>
+			<item source="tico" relation="lives at" target="carnival"/>
+			<item source="carnival" relation="residence of" target="denice"/>
+			<item source="denice" relation="friend of" target="derrick"/>
+			<item source="derrick" relation="friend of" target="nelson"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="2" path="14">
+			<item source="lisa" relation="engaged with by" target="awilda"/>
+			<item source="awilda" relation="knows of" target="mike"/>
+			<item source="mike" relation="friend of" target="tico"/>
+			<item source="tico" relation="lives at" target="house1"/>
+			<item source="house1" relation="residence of" target="denice"/>
+			<item source="denice" relation="friend of" target="derrick"/>
+			<item source="derrick" relation="friend of" target="nelson"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="2" path="15">
+			<item source="lisa" relation="engaged with by" target="awilda"/>
+			<item source="awilda" relation="knows of" target="mike"/>
+			<item source="mike" relation="friend of" target="tico"/>
+			<item source="tico" relation="lives at" target="house2"/>
+			<item source="house2" relation="residence of" target="denice"/>
+			<item source="denice" relation="friend of" target="derrick"/>
+			<item source="derrick" relation="friend of" target="nelson"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="2" path="16">
+			<item source="lisa" relation="engaged with by" target="awilda"/>
+			<item source="awilda" relation="knows of" target="mike"/>
+			<item source="mike" relation="friend of" target="tico"/>
+			<item source="tico" relation="lives at" target="prison"/>
+			<item source="prison" relation="residence of" target="denice"/>
+			<item source="denice" relation="friend of" target="derrick"/>
+			<item source="derrick" relation="friend of" target="nelson"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="2" path="17">
+			<item source="lisa" relation="engaged with by" target="awilda"/>
+			<item source="awilda" relation="knows of" target="mike"/>
+			<item source="mike" relation="friend of" target="tico"/>
+			<item source="tico" relation="lives at" target="statue_of_liberty"/>
+			<item source="statue_of_liberty" relation="residence of" target="denice"/>
+			<item source="denice" relation="friend of" target="derrick"/>
+			<item source="derrick" relation="friend of" target="nelson"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="2" path="18">
+			<item source="lisa" relation="friend of" target="derrick"/>
+			<item source="derrick" relation="friend of" target="nelson"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="3" path="1">
+			<item source="awilda" relation="engages with" target="lisa"/>
+			<item source="lisa" relation="friend of" target="derrick"/>
+			<item source="derrick" relation="friend of" target="denice"/>
+			<item source="denice" relation="has met" target="mike"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="3" path="2">
+			<item source="awilda" relation="engages with" target="lisa"/>
+			<item source="lisa" relation="friend of" target="derrick"/>
+			<item source="derrick" relation="friend of" target="denice"/>
+			<item source="denice" relation="friend of" target="tico"/>
+			<item source="tico" relation="friend of" target="mike"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="3" path="3">
+			<item source="awilda" relation="engages with" target="lisa"/>
+			<item source="lisa" relation="friend of" target="derrick"/>
+			<item source="derrick" relation="friend of" target="denice"/>
+			<item source="denice" relation="lives at" target="carnival"/>
+			<item source="carnival" relation="residence of" target="tico"/>
+			<item source="tico" relation="friend of" target="mike"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="3" path="4">
+			<item source="awilda" relation="engages with" target="lisa"/>
+			<item source="lisa" relation="friend of" target="derrick"/>
+			<item source="derrick" relation="friend of" target="denice"/>
+			<item source="denice" relation="lives at" target="house1"/>
+			<item source="house1" relation="residence of" target="tico"/>
+			<item source="tico" relation="friend of" target="mike"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="3" path="5">
+			<item source="awilda" relation="engages with" target="lisa"/>
+			<item source="lisa" relation="friend of" target="derrick"/>
+			<item source="derrick" relation="friend of" target="denice"/>
+			<item source="denice" relation="lives at" target="house2"/>
+			<item source="house2" relation="residence of" target="tico"/>
+			<item source="tico" relation="friend of" target="mike"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="3" path="6">
+			<item source="awilda" relation="engages with" target="lisa"/>
+			<item source="lisa" relation="friend of" target="derrick"/>
+			<item source="derrick" relation="friend of" target="denice"/>
+			<item source="denice" relation="lives at" target="prison"/>
+			<item source="prison" relation="residence of" target="tico"/>
+			<item source="tico" relation="friend of" target="mike"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="3" path="7">
+			<item source="awilda" relation="engages with" target="lisa"/>
+			<item source="lisa" relation="friend of" target="derrick"/>
+			<item source="derrick" relation="friend of" target="denice"/>
+			<item source="denice" relation="lives at" target="statue_of_liberty"/>
+			<item source="statue_of_liberty" relation="residence of" target="tico"/>
+			<item source="tico" relation="friend of" target="mike"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="3" path="8">
+			<item source="awilda" relation="engages with" target="lisa"/>
+			<item source="lisa" relation="friend of" target="derrick"/>
+			<item source="derrick" relation="friend of" target="dequan"/>
+			<item source="dequan" relation="friend of" target="denice"/>
+			<item source="denice" relation="has met" target="mike"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="3" path="9">
+			<item source="awilda" relation="engages with" target="lisa"/>
+			<item source="lisa" relation="friend of" target="derrick"/>
+			<item source="derrick" relation="friend of" target="dequan"/>
+			<item source="dequan" relation="friend of" target="denice"/>
+			<item source="denice" relation="friend of" target="tico"/>
+			<item source="tico" relation="friend of" target="mike"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="3" path="10">
+			<item source="awilda" relation="engages with" target="lisa"/>
+			<item source="lisa" relation="friend of" target="derrick"/>
+			<item source="derrick" relation="friend of" target="dequan"/>
+			<item source="dequan" relation="friend of" target="denice"/>
+			<item source="denice" relation="lives at" target="carnival"/>
+			<item source="carnival" relation="residence of" target="tico"/>
+			<item source="tico" relation="friend of" target="mike"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="3" path="11">
+			<item source="awilda" relation="engages with" target="lisa"/>
+			<item source="lisa" relation="friend of" target="derrick"/>
+			<item source="derrick" relation="friend of" target="dequan"/>
+			<item source="dequan" relation="friend of" target="denice"/>
+			<item source="denice" relation="lives at" target="house1"/>
+			<item source="house1" relation="residence of" target="tico"/>
+			<item source="tico" relation="friend of" target="mike"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="3" path="12">
+			<item source="awilda" relation="engages with" target="lisa"/>
+			<item source="lisa" relation="friend of" target="derrick"/>
+			<item source="derrick" relation="friend of" target="dequan"/>
+			<item source="dequan" relation="friend of" target="denice"/>
+			<item source="denice" relation="lives at" target="house2"/>
+			<item source="house2" relation="residence of" target="tico"/>
+			<item source="tico" relation="friend of" target="mike"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="3" path="13">
+			<item source="awilda" relation="engages with" target="lisa"/>
+			<item source="lisa" relation="friend of" target="derrick"/>
+			<item source="derrick" relation="friend of" target="dequan"/>
+			<item source="dequan" relation="friend of" target="denice"/>
+			<item source="denice" relation="lives at" target="prison"/>
+			<item source="prison" relation="residence of" target="tico"/>
+			<item source="tico" relation="friend of" target="mike"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="3" path="14">
+			<item source="awilda" relation="engages with" target="lisa"/>
+			<item source="lisa" relation="friend of" target="derrick"/>
+			<item source="derrick" relation="friend of" target="dequan"/>
+			<item source="dequan" relation="friend of" target="denice"/>
+			<item source="denice" relation="lives at" target="statue_of_liberty"/>
+			<item source="statue_of_liberty" relation="residence of" target="tico"/>
+			<item source="tico" relation="friend of" target="mike"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="3" path="15">
+			<item source="awilda" relation="engages with" target="lisa"/>
+			<item source="lisa" relation="friend of" target="derrick"/>
+			<item source="derrick" relation="friend of" target="mike"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="3" path="16">
+			<item source="awilda" relation="engages with" target="lisa"/>
+			<item source="lisa" relation="friend of" target="derrick"/>
+			<item source="derrick" relation="friend of" target="tico"/>
+			<item source="tico" relation="friend of" target="denice"/>
+			<item source="denice" relation="has met" target="mike"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="3" path="17">
+			<item source="awilda" relation="engages with" target="lisa"/>
+			<item source="lisa" relation="friend of" target="derrick"/>
+			<item source="derrick" relation="friend of" target="tico"/>
+			<item source="tico" relation="friend of" target="mike"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="3" path="18">
+			<item source="awilda" relation="engages with" target="lisa"/>
+			<item source="lisa" relation="friend of" target="derrick"/>
+			<item source="derrick" relation="friend of" target="tico"/>
+			<item source="tico" relation="lives at" target="carnival"/>
+			<item source="carnival" relation="residence of" target="denice"/>
+			<item source="denice" relation="has met" target="mike"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="3" path="19">
+			<item source="awilda" relation="engages with" target="lisa"/>
+			<item source="lisa" relation="friend of" target="derrick"/>
+			<item source="derrick" relation="friend of" target="tico"/>
+			<item source="tico" relation="lives at" target="house1"/>
+			<item source="house1" relation="residence of" target="denice"/>
+			<item source="denice" relation="has met" target="mike"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="3" path="20">
+			<item source="awilda" relation="engages with" target="lisa"/>
+			<item source="lisa" relation="friend of" target="derrick"/>
+			<item source="derrick" relation="friend of" target="tico"/>
+			<item source="tico" relation="lives at" target="house2"/>
+			<item source="house2" relation="residence of" target="denice"/>
+			<item source="denice" relation="has met" target="mike"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="3" path="21">
+			<item source="awilda" relation="engages with" target="lisa"/>
+			<item source="lisa" relation="friend of" target="derrick"/>
+			<item source="derrick" relation="friend of" target="tico"/>
+			<item source="tico" relation="lives at" target="prison"/>
+			<item source="prison" relation="residence of" target="denice"/>
+			<item source="denice" relation="has met" target="mike"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="3" path="22">
+			<item source="awilda" relation="engages with" target="lisa"/>
+			<item source="lisa" relation="friend of" target="derrick"/>
+			<item source="derrick" relation="friend of" target="tico"/>
+			<item source="tico" relation="lives at" target="statue_of_liberty"/>
+			<item source="statue_of_liberty" relation="residence of" target="denice"/>
+			<item source="denice" relation="has met" target="mike"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="3" path="23">
+			<item source="awilda" relation="knows of" target="mike"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="2" id="1">
+			<item order="1" subject="derrick" confidence="26"/>
+			<item order="2" subject="denice" confidence="19"/>
+			<item order="3" subject="mike" confidence="15"/>
+			<item order="4" subject="tico" confidence="15"/>
+			<item order="5" subject="dequan" confidence="11"/>
+			<item order="6" subject="lisa" confidence="7"/>
+			<item order="7" subject="nelson" confidence="7"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="2" id="2">
+			<item order="1" subject="none" confidence="0"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="2" id="3">
+			<item order="1" subject="derrick" confidence="26"/>
+			<item order="2" subject="denice" confidence="19"/>
+			<item order="3" subject="mike" confidence="15"/>
+			<item order="4" subject="tico" confidence="15"/>
+			<item order="5" subject="dequan" confidence="11"/>
+			<item order="6" subject="lisa" confidence="7"/>
+			<item order="7" subject="nelson" confidence="7"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="2" id="4">
+			<item order="1" subject="denice" confidence="50"/>
+			<item order="2" subject="tico" confidence="50"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="3" id="1">
+			<item type="Relation" answer="None"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="3" id="2">
+			<item type="Integer" answer="0"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="3" id="3">
+			<item type="Integer" answer="0"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="3" id="4">
+			<item type="Relation" answer="friend of"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="3" id="5">
+			<item type="Integer" answer="0"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="3" id="6">
+			<item type="Relation" answer="enemy of"/>
+		</DeepVideoUnderstandingTopicResult>
+	</DeepVideoUnderstandingRunResult>
+</DeepVideoUnderstandingResults>

@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="d0" for="edge" attr.name="label" attr.type="string" />
+  <graph edgedefault="directed">
+    <node id="carlos" />
+    <node id="celia" />
+    <node id="duke" />
+    <node id="extra9" />
+    <node id="gypsy" />
+    <node id="mother" />
+    <node id="sara" />
+    <node id="victor" />
+    <node id="home1" />
+    <node id="home2" />
+    <node id="neighbourhood" />
+    <node id="university-workplace" />
+    <edge source="carlos" target="celia">
+      <data key="d0">friend of</data>
+    </edge>
+    <edge source="carlos" target="duke">
+      <data key="d0">parent of</data>
+    </edge>
+    <edge source="carlos" target="extra9">
+      <data key="d0">friend of</data>
+    </edge>
+    <edge source="carlos" target="gypsy">
+      <data key="d0">friend of</data>
+    </edge>
+    <edge source="carlos" target="mother">
+      <data key="d0">friend of</data>
+    </edge>
+    <edge source="carlos" target="sara">
+      <data key="d0">friend of</data>
+    </edge>
+    <edge source="carlos" target="victor">
+      <data key="d0">friend of</data>
+    </edge>
+    <edge source="duke" target="sara">
+      <data key="d0">friend of</data>
+    </edge>
+    <edge source="sara" target="victor">
+      <data key="d0">friend of</data>
+    </edge>
+    <edge source="home1" target="duke">
+      <data key="d0">residence of</data>
+    </edge>
+    <edge source="home2" target="duke">
+      <data key="d0">residence of</data>
+    </edge>
+    <edge source="neighbourhood" target="duke">
+      <data key="d0">residence of</data>
+    </edge>
+    <edge source="university-workplace" target="duke">
+      <data key="d0">residence of</data>
+    </edge>
+  </graph>
+</graphml>

@@ -68,23 +68,6 @@ def run(movie_list, hlvu_location, dir_path, img_path, testset = False):
         scenelist = os.listdir(f"{img_path}/{movies}")
         orderedshotlist = [i.partition('-')[2] for i in scenelist]
 
-
-        # extend cluster path with original training images
-        
-        if testset:
-            cluster_path = f"{hlvu_location}/Queries/movie_knowledge_graph/{movies}/clustering"
-            training_image_path = f"{hlvu_location}/Queries/movie_knowledge_graph/{movies}/image/Person"
-        else:
-            cluster_path = f"{hlvu_location}/movie_knowledge_graph/{movies}/clustering"
-            training_image_path = f"{hlvu_location}/movie_knowledge_graph/{movies}/image/Person"
-        if not os.path.exists(cluster_path):
-            os.mkdir(cluster_path)
-        
-        for folder in os.listdir(training_image_path):
-            for images in os.listdir(f"{training_image_path}/{folder}/"):
-                image = f"{training_image_path}/{folder}/{images}"
-                shutil.copyfile(image, f"{cluster_path}/{images}")
-
         # finetuning face recognition model
         for i in tqdm(range(len(scenelist))):
             num = i+1
@@ -99,9 +82,9 @@ def run(movie_list, hlvu_location, dir_path, img_path, testset = False):
         
         # delete existing model to generate new one
         if testset:
-            model_loc = f"{hlvu_location}/Queries/movie_knowledge_graph/{movies}/image/Person/representations_arcface.pkl"
+            model_loc = f"{hlvu_location}/Queries/movie_knowledge_graph/{movies}/image/person/representations_arcface.pkl"
         else:
-            model_loc = f"{hlvu_location}/movie_knowledge_graph/{movies}/image/Person/representations_arcface.pkl"
+            model_loc = f"{hlvu_location}/movie_knowledge_graph/{movies}/image/person/representations_arcface.pkl"
 
         
         if os.path.isfile(model_loc):
@@ -123,33 +106,14 @@ def run(movie_list, hlvu_location, dir_path, img_path, testset = False):
                 for image in os.listdir(f"{img_path}/{movies}/{shots}/{shot}"):
                     path = f"{img_path}/{movies}/{shots}/{shot}"
                     if testset:
-                        loc_path = f"{hlvu_location}/Queries/movie_knowledge_graph/{movies}/image/Location"
-                        faces, emotions, unknown_counter = evaluation(image, path, movies, unknown_counter, hlvu_location, cluster_path, testset = testset)
+                        loc_path = f"{hlvu_location}/Queries/movie_knowledge_graph/{movies}/image/location"
+                        faces, emotions, unknown_counter = evaluation(image, path, movies, unknown_counter, hlvu_location, testset = testset)
                     else:
-                        loc_path = f"{hlvu_location}/movie_knowledge_graph/{movies}/image/Location"
-                        faces, emotions, unknown_counter = evaluation(image, path, movies, unknown_counter, hlvu_location, cluster_path,testset = testset)
+                        loc_path = f"{hlvu_location}/movie_knowledge_graph/{movies}/image/location"
+                        faces, emotions, unknown_counter = evaluation(image, path, movies, unknown_counter, hlvu_location, testset = testset)
                     location = compare(image, path,loc_path, delf)
                     places365_data = places365.run_places365(f"{path}/{image}", dir_path)
                     timestamp = get_timestamp_from_shot(movies, shots, image, hlvu_location)
                     vision_db.insert(
                         {'faces': faces, 'emotions': emotions, 'image': image,'location': location, 'places365':places365_data,'timestamp': timestamp, 'scene': shots, 'shots': shot})
                     torch.cuda.empty_cache()
-
-
-'''
-gpus = tf.config.list_physical_devices('GPU')
-if gpus:
-  # Restrict TensorFlow to only use the first GPU
-  try:
-    tf.config.set_logical_device_configuration(
-        gpus[0],
-        [tf.config.LogicalDeviceConfiguration(memory_limit=4500)])
-    logical_gpus = tf.config.list_logical_devices('GPU')
-    print(len(gpus), "Physical GPUs,", len(logical_gpus), "Logical GPU")
-    torch.cuda.set_device(0)
-    run(movie_list, hlvu_location, dir_path, img_path)
-  except RuntimeError as e:
-    #Visible devices must be set before GPUs have been initialized
-    print(e)
-
-'''

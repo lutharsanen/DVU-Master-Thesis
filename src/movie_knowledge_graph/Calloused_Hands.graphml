@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="d0" for="edge" attr.name="label" attr.type="string" />
+  <graph edgedefault="directed">
+    <node id="byrd" />
+    <node id="debbie" />
+    <node id="dee" />
+    <node id="drug_dealer" />
+    <node id="josh" />
+    <node id="rabbi_brookstein" />
+    <node id="solomon" />
+    <node id="tommy" />
+    <node id="synagogue" />
+    <edge source="byrd" target="debbie">
+      <data key="d0">engages with</data>
+    </edge>
+    <edge source="byrd" target="dee">
+      <data key="d0">ex partner of</data>
+    </edge>
+    <edge source="byrd" target="drug_dealer">
+      <data key="d0">knows in passing</data>
+    </edge>
+    <edge source="byrd" target="josh">
+      <data key="d0">ambivalent of</data>
+    </edge>
+    <edge source="byrd" target="rabbi_brookstein">
+      <data key="d0">friend of</data>
+    </edge>
+    <edge source="byrd" target="solomon">
+      <data key="d0">friend of</data>
+    </edge>
+    <edge source="byrd" target="tommy">
+      <data key="d0">parent of</data>
+    </edge>
+    <edge source="debbie" target="josh">
+      <data key="d0">friend of</data>
+    </edge>
+    <edge source="debbie" target="solomon">
+      <data key="d0">friend of</data>
+    </edge>
+    <edge source="debbie" target="tommy">
+      <data key="d0">friend of</data>
+    </edge>
+    <edge source="dee" target="tommy">
+      <data key="d0">acquaintance of</data>
+    </edge>
+    <edge source="drug_dealer" target="tommy">
+      <data key="d0">friend of</data>
+    </edge>
+    <edge source="josh" target="tommy">
+      <data key="d0">friend of</data>
+    </edge>
+    <edge source="rabbi_brookstein" target="tommy">
+      <data key="d0">friend of</data>
+    </edge>
+    <edge source="solomon" target="tommy">
+      <data key="d0">ambivalent of</data>
+    </edge>
+    <edge source="synagogue" target="debbie">
+      <data key="d0">residence of</data>
+    </edge>
+    <edge source="synagogue" target="solomon">
+      <data key="d0">residence of</data>
+    </edge>
+  </graph>
+</graphml>

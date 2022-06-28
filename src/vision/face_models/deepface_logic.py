@@ -40,7 +40,7 @@ def enlargen_image(border):
     border[3]+=20
     return border
 
-def training(image_path, movies, hlvu_location,unknown_counter=None, cluster_path=None, testset = False):
+def training(image_path, movies, hlvu_location, testset = False):
     border_list = []
     if testset:
         hlvu_location = f"{hlvu_location}/Queries"
@@ -54,25 +54,25 @@ def training(image_path, movies, hlvu_location,unknown_counter=None, cluster_pat
                 im = Image.open(f"{image_path}/{image}")
                 im1 = im.crop(enlarged_border)
                 im1.save("cropped.jpg")
-                df = DeepFace.find(img_path = "cropped.jpg", model_name = models[6], db_path = f"{hlvu_location}/movie_knowledge_graph/{movies}/image/Person/", detector_backend = backends[4], enforce_detection = False)
+                df = DeepFace.find(img_path = "cropped.jpg", model_name = models[6], db_path = f"{hlvu_location}/movie_knowledge_graph/{movies}/image/person/", detector_backend = backends[4], enforce_detection = False)
                 if len(df) > 0:
-                    path_to_db = f"/movie_knowledge_graph/{movies}/image/Person/"
+                    path_to_db = f"/movie_knowledge_graph/{movies}/image/person/"
                     idx = len(hlvu_location)+ len(path_to_db)
                     name_list = list(i[idx:].partition('/')[0] for i in df["identity"][:5])
                     c = Counter(name_list)
                     name, count = c.most_common()[0]
                     if count > 2:
                         #name = "{img_path}/{movies}/{shots}/{shot}/{image}"
-                        shutil.copyfile("cropped.jpg", f"{hlvu_location}/movie_knowledge_graph/{movies}/image/Person/{name}/{name}_new{image[:-4]}.png")
+                        shutil.copyfile("cropped.jpg", f"{hlvu_location}/movie_knowledge_graph/{movies}/image/person/{name}/{name}_new{image[:-4]}.png")
                         border_list.append([border,image,name])
                     else:
                         result_name = euclidean_distance_check(border, border_list)
                         if result_name!=0:
-                            shutil.copyfile("cropped.jpg", f"{hlvu_location}/movie_knowledge_graph/{movies}/image/Person/{result_name}/{result_name}_new{image[:-4]}.png")
+                            shutil.copyfile("cropped.jpg", f"{hlvu_location}/movie_knowledge_graph/{movies}/image/person/{result_name}/{result_name}_new{image[:-4]}.png")
                             border_list.append([border,image,name])
 
 
-def evaluation(image, image_path, movies, unknown_counter, hlvu_location, cluster_path, testset = False):
+def evaluation(image, image_path, movies, unknown_counter, hlvu_location, testset = False):
     resp = RetinaFace.detect_faces(f"{image_path}/{image}")
     faces = []
     emotions = []
@@ -86,9 +86,8 @@ def evaluation(image, image_path, movies, unknown_counter, hlvu_location, cluste
             im1 = im.crop(enlarged_border)
             im1.save("cropped.jpg")
             obj = DeepFace.analyze(img_path = "cropped.jpg", actions = ['emotion'], enforce_detection = False)
-            #print(f"{hlvu_location}/movie_knowledge_graph/{movies}/image/Person/")
-            df = DeepFace.find(img_path = "cropped.jpg", model_name = models[6], db_path = f"{hlvu_location}/movie_knowledge_graph/{movies}/image/Person/", detector_backend = backends[4], enforce_detection = False)
-            path_to_db = f"/movie_knowledge_graph/{movies}/image/Person/"
+            df = DeepFace.find(img_path = "cropped.jpg", model_name = models[6], db_path = f"{hlvu_location}/movie_knowledge_graph/{movies}/image/person/", detector_backend = backends[4], enforce_detection = False)
+            path_to_db = f"/movie_knowledge_graph/{movies}/image/person/"
             idx = len(hlvu_location)+ len(path_to_db)
             name_list = list(i[idx:].partition('/')[0] for i in df["identity"][:5])
             if len(name_list) > 0:
@@ -98,17 +97,7 @@ def evaluation(image, image_path, movies, unknown_counter, hlvu_location, cluste
                     #name = "{img_path}/{movies}/{shots}/{shot}/{image}"
                     faces.append(name)
                     emotions.append(obj["dominant_emotion"])
-                else:
-                    faces.append(f"unknown_{unknown_counter}.jpg")
-                    emotions.append(obj["dominant_emotion"])
-                    shutil.copyfile("cropped.jpg", f"{cluster_path}/unknown_{unknown_counter}.jpg")
 
-    else:
-        #print(f"{image_path}/{image}", unknown_counter,cluster_path)
-        unknown_counter, face_detected = crop.crop_unrecognized_faces(f"{image_path}/{image}", unknown_counter,cluster_path)
-        if face_detected:
-            faces.append(f"unknown_{unknown_counter}.jpg")
-            unknown_counter += 1
                 
     return faces, emotions, unknown_counter
 

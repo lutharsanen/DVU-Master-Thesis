@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<!DOCTYPE DeepVideoUnderstandingResults SYSTEM "DeepVideoUnderstandingResults.dtd">
+<DeepVideoUnderstandingResults movie="ChainedforLife">
+	<DeepVideoUnderstandingRunResult desc="A Multi-Stream Approach for Video Understanding" pid="UZH" priority="1">
+		<DeepVideoUnderstandingTopicResult question="1" id="1" path="1">
+			<item source="michelle" relation="engaged with by" target="herr_director"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="2" path="1">
+			<item source="max" relation="is not liked by" target="herr_director"/>
+			<item source="herr_director" relation="engages with" target="mabel"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="2" path="2">
+			<item source="max" relation="is not liked by" target="herr_director"/>
+			<item source="herr_director" relation="friend of" target="rosenthal"/>
+			<item source="rosenthal" relation="friend of" target="mabel"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="2" path="3">
+			<item source="max" relation="friend of" target="mabel"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="2" id="1">
+			<item order="1" subject="none" confidence="0"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="2" id="2">
+			<item order="1" subject="none" confidence="0"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="2" id="3">
+			<item order="1" subject="none" confidence="0"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="3" id="1">
+			<item type="Relation" answer="None"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="3" id="2">
+			<item type="Relation" answer="None"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="3" id="3">
+			<item type="Relation" answer="unknown"/>
+		</DeepVideoUnderstandingTopicResult>
+	</DeepVideoUnderstandingRunResult>
+</DeepVideoUnderstandingResults>

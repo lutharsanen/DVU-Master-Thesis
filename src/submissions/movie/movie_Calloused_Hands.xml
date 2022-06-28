@@ -1,0 +1,362 @@
+<?xml version="1.0" ?>
+<!DOCTYPE DeepVideoUnderstandingResults SYSTEM "DeepVideoUnderstandingResults.dtd">
+<DeepVideoUnderstandingResults movie="Calloused_Hands">
+	<DeepVideoUnderstandingRunResult desc="A Multi-Stream Approach for Video Understanding" pid="UZH" priority="1">
+		<DeepVideoUnderstandingTopicResult question="1" id="1" path="1">
+			<item source="drug_dealer" relation="is known by" target="byrd"/>
+			<item source="byrd" relation="engages with" target="debbie"/>
+			<item source="debbie" relation="friend of" target="josh"/>
+			<item source="josh" relation="friend of" target="tommy"/>
+			<item source="tommy" relation="friend of" target="rabbi_brookstein"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="1" path="2">
+			<item source="drug_dealer" relation="is known by" target="byrd"/>
+			<item source="byrd" relation="engages with" target="debbie"/>
+			<item source="debbie" relation="friend of" target="solomon"/>
+			<item source="solomon" relation="ambivalent of" target="tommy"/>
+			<item source="tommy" relation="friend of" target="rabbi_brookstein"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="1" path="3">
+			<item source="drug_dealer" relation="is known by" target="byrd"/>
+			<item source="byrd" relation="engages with" target="debbie"/>
+			<item source="debbie" relation="friend of" target="tommy"/>
+			<item source="tommy" relation="friend of" target="rabbi_brookstein"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="1" path="4">
+			<item source="drug_dealer" relation="is known by" target="byrd"/>
+			<item source="byrd" relation="engages with" target="debbie"/>
+			<item source="debbie" relation="lives at" target="synagogue"/>
+			<item source="synagogue" relation="residence of" target="solomon"/>
+			<item source="solomon" relation="ambivalent of" target="tommy"/>
+			<item source="tommy" relation="friend of" target="rabbi_brookstein"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="1" path="5">
+			<item source="drug_dealer" relation="is known by" target="byrd"/>
+			<item source="byrd" relation="ex partner of" target="dee"/>
+			<item source="dee" relation="acquaintance of" target="tommy"/>
+			<item source="tommy" relation="friend of" target="rabbi_brookstein"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="1" path="6">
+			<item source="drug_dealer" relation="is known by" target="byrd"/>
+			<item source="byrd" relation="ambivalent of" target="josh"/>
+			<item source="josh" relation="friend of" target="debbie"/>
+			<item source="debbie" relation="friend of" target="solomon"/>
+			<item source="solomon" relation="ambivalent of" target="tommy"/>
+			<item source="tommy" relation="friend of" target="rabbi_brookstein"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="1" path="7">
+			<item source="drug_dealer" relation="is known by" target="byrd"/>
+			<item source="byrd" relation="ambivalent of" target="josh"/>
+			<item source="josh" relation="friend of" target="debbie"/>
+			<item source="debbie" relation="friend of" target="tommy"/>
+			<item source="tommy" relation="friend of" target="rabbi_brookstein"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="1" path="8">
+			<item source="drug_dealer" relation="is known by" target="byrd"/>
+			<item source="byrd" relation="ambivalent of" target="josh"/>
+			<item source="josh" relation="friend of" target="debbie"/>
+			<item source="debbie" relation="lives at" target="synagogue"/>
+			<item source="synagogue" relation="residence of" target="solomon"/>
+			<item source="solomon" relation="ambivalent of" target="tommy"/>
+			<item source="tommy" relation="friend of" target="rabbi_brookstein"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="1" path="9">
+			<item source="drug_dealer" relation="is known by" target="byrd"/>
+			<item source="byrd" relation="ambivalent of" target="josh"/>
+			<item source="josh" relation="friend of" target="tommy"/>
+			<item source="tommy" relation="friend of" target="rabbi_brookstein"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="1" path="10">
+			<item source="drug_dealer" relation="is known by" target="byrd"/>
+			<item source="byrd" relation="friend of" target="rabbi_brookstein"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="1" path="11">
+			<item source="drug_dealer" relation="is known by" target="byrd"/>
+			<item source="byrd" relation="friend of" target="solomon"/>
+			<item source="solomon" relation="friend of" target="debbie"/>
+			<item source="debbie" relation="friend of" target="josh"/>
+			<item source="josh" relation="friend of" target="tommy"/>
+			<item source="tommy" relation="friend of" target="rabbi_brookstein"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="1" path="12">
+			<item source="drug_dealer" relation="is known by" target="byrd"/>
+			<item source="byrd" relation="friend of" target="solomon"/>
+			<item source="solomon" relation="friend of" target="debbie"/>
+			<item source="debbie" relation="friend of" target="tommy"/>
+			<item source="tommy" relation="friend of" target="rabbi_brookstein"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="1" path="13">
+			<item source="drug_dealer" relation="is known by" target="byrd"/>
+			<item source="byrd" relation="friend of" target="solomon"/>
+			<item source="solomon" relation="ambivalent of" target="tommy"/>
+			<item source="tommy" relation="friend of" target="rabbi_brookstein"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="1" path="14">
+			<item source="drug_dealer" relation="is known by" target="byrd"/>
+			<item source="byrd" relation="friend of" target="solomon"/>
+			<item source="solomon" relation="lives at" target="synagogue"/>
+			<item source="synagogue" relation="residence of" target="debbie"/>
+			<item source="debbie" relation="friend of" target="josh"/>
+			<item source="josh" relation="friend of" target="tommy"/>
+			<item source="tommy" relation="friend of" target="rabbi_brookstein"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="1" path="15">
+			<item source="drug_dealer" relation="is known by" target="byrd"/>
+			<item source="byrd" relation="friend of" target="solomon"/>
+			<item source="solomon" relation="lives at" target="synagogue"/>
+			<item source="synagogue" relation="residence of" target="debbie"/>
+			<item source="debbie" relation="friend of" target="tommy"/>
+			<item source="tommy" relation="friend of" target="rabbi_brookstein"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="1" path="16">
+			<item source="drug_dealer" relation="is known by" target="byrd"/>
+			<item source="byrd" relation="parent of" target="tommy"/>
+			<item source="tommy" relation="friend of" target="rabbi_brookstein"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="1" path="17">
+			<item source="drug_dealer" relation="friend of" target="tommy"/>
+			<item source="tommy" relation="child of" target="byrd"/>
+			<item source="byrd" relation="friend of" target="rabbi_brookstein"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="1" path="18">
+			<item source="drug_dealer" relation="friend of" target="tommy"/>
+			<item source="tommy" relation="friend of" target="debbie"/>
+			<item source="debbie" relation="engaged with by" target="byrd"/>
+			<item source="byrd" relation="friend of" target="rabbi_brookstein"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="1" path="19">
+			<item source="drug_dealer" relation="friend of" target="tommy"/>
+			<item source="tommy" relation="friend of" target="debbie"/>
+			<item source="debbie" relation="friend of" target="josh"/>
+			<item source="josh" relation="is not liked by" target="byrd"/>
+			<item source="byrd" relation="friend of" target="rabbi_brookstein"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="1" path="20">
+			<item source="drug_dealer" relation="friend of" target="tommy"/>
+			<item source="tommy" relation="friend of" target="debbie"/>
+			<item source="debbie" relation="friend of" target="solomon"/>
+			<item source="solomon" relation="friend of" target="byrd"/>
+			<item source="byrd" relation="friend of" target="rabbi_brookstein"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="1" path="21">
+			<item source="drug_dealer" relation="friend of" target="tommy"/>
+			<item source="tommy" relation="friend of" target="debbie"/>
+			<item source="debbie" relation="lives at" target="synagogue"/>
+			<item source="synagogue" relation="residence of" target="solomon"/>
+			<item source="solomon" relation="friend of" target="byrd"/>
+			<item source="byrd" relation="friend of" target="rabbi_brookstein"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="1" path="22">
+			<item source="drug_dealer" relation="friend of" target="tommy"/>
+			<item source="tommy" relation="acquaintance of" target="dee"/>
+			<item source="dee" relation="ex partner of" target="byrd"/>
+			<item source="byrd" relation="friend of" target="rabbi_brookstein"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="1" path="23">
+			<item source="drug_dealer" relation="friend of" target="tommy"/>
+			<item source="tommy" relation="friend of" target="josh"/>
+			<item source="josh" relation="is not liked by" target="byrd"/>
+			<item source="byrd" relation="friend of" target="rabbi_brookstein"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="1" path="24">
+			<item source="drug_dealer" relation="friend of" target="tommy"/>
+			<item source="tommy" relation="friend of" target="josh"/>
+			<item source="josh" relation="friend of" target="debbie"/>
+			<item source="debbie" relation="engaged with by" target="byrd"/>
+			<item source="byrd" relation="friend of" target="rabbi_brookstein"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="1" path="25">
+			<item source="drug_dealer" relation="friend of" target="tommy"/>
+			<item source="tommy" relation="friend of" target="josh"/>
+			<item source="josh" relation="friend of" target="debbie"/>
+			<item source="debbie" relation="friend of" target="solomon"/>
+			<item source="solomon" relation="friend of" target="byrd"/>
+			<item source="byrd" relation="friend of" target="rabbi_brookstein"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="1" path="26">
+			<item source="drug_dealer" relation="friend of" target="tommy"/>
+			<item source="tommy" relation="friend of" target="josh"/>
+			<item source="josh" relation="friend of" target="debbie"/>
+			<item source="debbie" relation="lives at" target="synagogue"/>
+			<item source="synagogue" relation="residence of" target="solomon"/>
+			<item source="solomon" relation="friend of" target="byrd"/>
+			<item source="byrd" relation="friend of" target="rabbi_brookstein"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="1" path="27">
+			<item source="drug_dealer" relation="friend of" target="tommy"/>
+			<item source="tommy" relation="friend of" target="rabbi_brookstein"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="1" path="28">
+			<item source="drug_dealer" relation="friend of" target="tommy"/>
+			<item source="tommy" relation="is not liked by" target="solomon"/>
+			<item source="solomon" relation="friend of" target="byrd"/>
+			<item source="byrd" relation="friend of" target="rabbi_brookstein"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="1" path="29">
+			<item source="drug_dealer" relation="friend of" target="tommy"/>
+			<item source="tommy" relation="is not liked by" target="solomon"/>
+			<item source="solomon" relation="friend of" target="debbie"/>
+			<item source="debbie" relation="engaged with by" target="byrd"/>
+			<item source="byrd" relation="friend of" target="rabbi_brookstein"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="1" path="30">
+			<item source="drug_dealer" relation="friend of" target="tommy"/>
+			<item source="tommy" relation="is not liked by" target="solomon"/>
+			<item source="solomon" relation="friend of" target="debbie"/>
+			<item source="debbie" relation="friend of" target="josh"/>
+			<item source="josh" relation="is not liked by" target="byrd"/>
+			<item source="byrd" relation="friend of" target="rabbi_brookstein"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="1" path="31">
+			<item source="drug_dealer" relation="friend of" target="tommy"/>
+			<item source="tommy" relation="is not liked by" target="solomon"/>
+			<item source="solomon" relation="lives at" target="synagogue"/>
+			<item source="synagogue" relation="residence of" target="debbie"/>
+			<item source="debbie" relation="engaged with by" target="byrd"/>
+			<item source="byrd" relation="friend of" target="rabbi_brookstein"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="1" path="32">
+			<item source="drug_dealer" relation="friend of" target="tommy"/>
+			<item source="tommy" relation="is not liked by" target="solomon"/>
+			<item source="solomon" relation="lives at" target="synagogue"/>
+			<item source="synagogue" relation="residence of" target="debbie"/>
+			<item source="debbie" relation="friend of" target="josh"/>
+			<item source="josh" relation="is not liked by" target="byrd"/>
+			<item source="byrd" relation="friend of" target="rabbi_brookstein"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="3" path="1">
+			<item source="tommy" relation="child of" target="byrd"/>
+			<item source="byrd" relation="ex partner of" target="dee"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="3" path="2">
+			<item source="tommy" relation="friend of" target="debbie"/>
+			<item source="debbie" relation="engaged with by" target="byrd"/>
+			<item source="byrd" relation="ex partner of" target="dee"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="3" path="3">
+			<item source="tommy" relation="friend of" target="debbie"/>
+			<item source="debbie" relation="friend of" target="josh"/>
+			<item source="josh" relation="is not liked by" target="byrd"/>
+			<item source="byrd" relation="ex partner of" target="dee"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="3" path="4">
+			<item source="tommy" relation="friend of" target="debbie"/>
+			<item source="debbie" relation="friend of" target="solomon"/>
+			<item source="solomon" relation="friend of" target="byrd"/>
+			<item source="byrd" relation="ex partner of" target="dee"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="3" path="5">
+			<item source="tommy" relation="friend of" target="debbie"/>
+			<item source="debbie" relation="lives at" target="synagogue"/>
+			<item source="synagogue" relation="residence of" target="solomon"/>
+			<item source="solomon" relation="friend of" target="byrd"/>
+			<item source="byrd" relation="ex partner of" target="dee"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="3" path="6">
+			<item source="tommy" relation="acquaintance of" target="dee"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="3" path="7">
+			<item source="tommy" relation="friend of" target="drug_dealer"/>
+			<item source="drug_dealer" relation="is known by" target="byrd"/>
+			<item source="byrd" relation="ex partner of" target="dee"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="3" path="8">
+			<item source="tommy" relation="friend of" target="josh"/>
+			<item source="josh" relation="is not liked by" target="byrd"/>
+			<item source="byrd" relation="ex partner of" target="dee"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="3" path="9">
+			<item source="tommy" relation="friend of" target="josh"/>
+			<item source="josh" relation="friend of" target="debbie"/>
+			<item source="debbie" relation="engaged with by" target="byrd"/>
+			<item source="byrd" relation="ex partner of" target="dee"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="3" path="10">
+			<item source="tommy" relation="friend of" target="josh"/>
+			<item source="josh" relation="friend of" target="debbie"/>
+			<item source="debbie" relation="friend of" target="solomon"/>
+			<item source="solomon" relation="friend of" target="byrd"/>
+			<item source="byrd" relation="ex partner of" target="dee"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="3" path="11">
+			<item source="tommy" relation="friend of" target="josh"/>
+			<item source="josh" relation="friend of" target="debbie"/>
+			<item source="debbie" relation="lives at" target="synagogue"/>
+			<item source="synagogue" relation="residence of" target="solomon"/>
+			<item source="solomon" relation="friend of" target="byrd"/>
+			<item source="byrd" relation="ex partner of" target="dee"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="3" path="12">
+			<item source="tommy" relation="friend of" target="rabbi_brookstein"/>
+			<item source="rabbi_brookstein" relation="friend of" target="byrd"/>
+			<item source="byrd" relation="ex partner of" target="dee"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="3" path="13">
+			<item source="tommy" relation="is not liked by" target="solomon"/>
+			<item source="solomon" relation="friend of" target="byrd"/>
+			<item source="byrd" relation="ex partner of" target="dee"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="3" path="14">
+			<item source="tommy" relation="is not liked by" target="solomon"/>
+			<item source="solomon" relation="friend of" target="debbie"/>
+			<item source="debbie" relation="engaged with by" target="byrd"/>
+			<item source="byrd" relation="ex partner of" target="dee"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="3" path="15">
+			<item source="tommy" relation="is not liked by" target="solomon"/>
+			<item source="solomon" relation="friend of" target="debbie"/>
+			<item source="debbie" relation="friend of" target="josh"/>
+			<item source="josh" relation="is not liked by" target="byrd"/>
+			<item source="byrd" relation="ex partner of" target="dee"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="3" path="16">
+			<item source="tommy" relation="is not liked by" target="solomon"/>
+			<item source="solomon" relation="lives at" target="synagogue"/>
+			<item source="synagogue" relation="residence of" target="debbie"/>
+			<item source="debbie" relation="engaged with by" target="byrd"/>
+			<item source="byrd" relation="ex partner of" target="dee"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="3" path="17">
+			<item source="tommy" relation="is not liked by" target="solomon"/>
+			<item source="solomon" relation="lives at" target="synagogue"/>
+			<item source="synagogue" relation="residence of" target="debbie"/>
+			<item source="debbie" relation="friend of" target="josh"/>
+			<item source="josh" relation="is not liked by" target="byrd"/>
+			<item source="byrd" relation="ex partner of" target="dee"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="2" id="1">
+			<item order="1" subject="byrd" confidence="50"/>
+			<item order="2" subject="tommy" confidence="50"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="2" id="2">
+			<item order="1" subject="debbie" confidence="50"/>
+			<item order="2" subject="tommy" confidence="50"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="2" id="3">
+			<item order="1" subject="tommy" confidence="100"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="2" id="4">
+			<item order="1" subject="tommy" confidence="20"/>
+			<item order="2" subject="debbie" confidence="20"/>
+			<item order="3" subject="drug_dealer" confidence="20"/>
+			<item order="4" subject="josh" confidence="20"/>
+			<item order="5" subject="rabbi_brookstein" confidence="20"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="3" id="1"/>
+		<DeepVideoUnderstandingTopicResult question="3" id="2">
+			<item type="Relation" answer="unknown"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="3" id="3">
+			<item type="Relation" answer="parent of"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="3" id="4">
+			<item type="Integer" answer="0"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="3" id="5">
+			<item type="Relation" answer="None"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="3" id="6">
+			<item type="Relation" answer="parent of"/>
+		</DeepVideoUnderstandingTopicResult>
+	</DeepVideoUnderstandingRunResult>
+</DeepVideoUnderstandingResults>

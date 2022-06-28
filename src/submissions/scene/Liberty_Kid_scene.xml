@@ -1,0 +1,57 @@
+<?xml version="1.0" ?>
+<!DOCTYPE DeepVideoUnderstandingSceneResults SYSTEM "DeepVideoUnderstandingSceneResults.dtd">
+<DeepVideoUnderstandingSceneResults movie="Liberty_Kid">
+	<DeepVideoUnderstandingRunResult desc="A Multi-Stream Approach for Video Understanding" pid="UZH" priority="1">
+		<DeepVideoUnderstandingTopicResult question="1" id="1">
+			<item order="1" scene="None" confidence="0"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="2">
+			<item order="1" scene="Liberty_Kid-19" confidence="9.015777610818933"/>
+			<item order="2" scene="Liberty_Kid-1" confidence="6.761833208114202"/>
+			<item order="3" scene="Liberty_Kid-1" confidence="6.761833208114202"/>
+			<item order="4" scene="Liberty_Kid-1" confidence="6.761833208114202"/>
+			<item order="5" scene="Liberty_Kid-1" confidence="6.761833208114202"/>
+			<item order="6" scene="Liberty_Kid-1" confidence="6.761833208114202"/>
+			<item order="7" scene="Liberty_Kid-1" confidence="6.761833208114202"/>
+			<item order="8" scene="Liberty_Kid-1" confidence="6.761833208114202"/>
+			<item order="9" scene="Liberty_Kid-22" confidence="5.409466566491361"/>
+			<item order="10" scene="Liberty_Kid-22" confidence="5.409466566491361"/>
+			<item order="11" scene="Liberty_Kid-22" confidence="5.409466566491361"/>
+			<item order="12" scene="Liberty_Kid-25" confidence="4.507888805409467"/>
+			<item order="13" scene="Liberty_Kid-13" confidence="3.380916604057101"/>
+			<item order="14" scene="Liberty_Kid-13" confidence="3.380916604057101"/>
+			<item order="15" scene="Liberty_Kid-13" confidence="3.380916604057101"/>
+			<item order="16" scene="Liberty_Kid-13" confidence="3.380916604057101"/>
+			<item order="17" scene="Liberty_Kid-13" confidence="3.380916604057101"/>
+			<item order="18" scene="Liberty_Kid-27" confidence="3.0052592036063115"/>
+			<item order="19" scene="Liberty_Kid-27" confidence="3.0052592036063115"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="3">
+			<item order="1" scene="Liberty_Kid-40" confidence="56.25"/>
+			<item order="2" scene="Liberty_Kid-8" confidence="43.75"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="4">
+			<item order="1" scene="None" confidence="0"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="2" id="1">
+			<item order="1" subject="Person:unknown" confidence="0"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="2" id="2">
+			<item order="1" subject="Person:unknown" confidence="0"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="2" id="3">
+			<item order="1" subject="Person:unknown" confidence="0"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="2" id="4">
+			<item order="1" subject="Person:unknown" confidence="0"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="3" id="1"/>
+		<DeepVideoUnderstandingTopicResult question="3" id="2"/>
+		<DeepVideoUnderstandingTopicResult question="3" id="3"/>
+		<DeepVideoUnderstandingTopicResult question="3" id="4"/>
+		<DeepVideoUnderstandingTopicResult question="4" id="1"/>
+		<DeepVideoUnderstandingTopicResult question="4" id="2"/>
+		<DeepVideoUnderstandingTopicResult question="4" id="3"/>
+		<DeepVideoUnderstandingTopicResult question="4" id="4"/>
+	</DeepVideoUnderstandingRunResult>
+</DeepVideoUnderstandingSceneResults>

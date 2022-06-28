@@ -32,7 +32,11 @@ def character_checker(name1, name2, shot_level, scene_level, vision_db, video_db
     if outcome:
         emotions = emotion_temp
         places365_features = places_temp
-        action = video_db.search((User['shot_name'] == f"{shot_level}.mp4") & (User['scene'] == scene_level))[0]["action"]
+        action_resp = video_db.search((User['shot_name'] == f"{shot_level}.mp4") & (User['scene'] == scene_level))
+        if len(action_resp) > 0:
+            action = action_resp[0]["action"]
+        else:
+            action = None
     return outcome, emotions, places365_features, action
 
 def scene_character_checker(name1, name2, scene_level, vision_db, audio_db):

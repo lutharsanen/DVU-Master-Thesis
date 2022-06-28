@@ -1,0 +1,66 @@
+<?xml version="1.0" ?>
+<!DOCTYPE DeepVideoUnderstandingSceneResults SYSTEM "DeepVideoUnderstandingSceneResults.dtd">
+<DeepVideoUnderstandingSceneResults movie="losing_ground">
+	<DeepVideoUnderstandingRunResult desc="A Multi-Stream Approach for Video Understanding" pid="UZH" priority="1">
+		<DeepVideoUnderstandingTopicResult question="1" id="1">
+			<item order="1" scene="losing_ground-25" confidence="55.55555555555556"/>
+			<item order="2" scene="losing_ground-9" confidence="44.44444444444444"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="2">
+			<item order="1" scene="losing_ground-17" confidence="13.260327202879035"/>
+			<item order="2" scene="losing_ground-21" confidence="11.05027266906586"/>
+			<item order="3" scene="losing_ground-37" confidence="10.200251694522334"/>
+			<item order="4" scene="losing_ground-10" confidence="6.630163601439517"/>
+			<item order="5" scene="losing_ground-10" confidence="6.630163601439517"/>
+			<item order="6" scene="losing_ground-10" confidence="6.630163601439517"/>
+			<item order="7" scene="losing_ground-10" confidence="6.630163601439517"/>
+			<item order="8" scene="losing_ground-26" confidence="6.027421455854108"/>
+			<item order="9" scene="losing_ground-26" confidence="6.027421455854108"/>
+			<item order="10" scene="losing_ground-26" confidence="6.027421455854108"/>
+			<item order="11" scene="losing_ground-19" confidence="5.52513633453293"/>
+			<item order="12" scene="losing_ground-19" confidence="5.52513633453293"/>
+			<item order="13" scene="losing_ground-23" confidence="5.100125847261167"/>
+			<item order="14" scene="losing_ground-1" confidence="4.735831143885369"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="3">
+			<item order="1" scene="losing_ground-23" confidence="40.06069802731411"/>
+			<item order="2" scene="losing_ground-25" confidence="25.03793626707132"/>
+			<item order="3" scene="losing_ground-21" confidence="18.20940819423369"/>
+			<item order="4" scene="losing_ground-1" confidence="16.691957511380878"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="4">
+			<item order="1" scene="losing_ground-1" confidence="16.597510373443985"/>
+			<item order="2" scene="losing_ground-10" confidence="14.522821576763489"/>
+			<item order="3" scene="losing_ground-10" confidence="14.522821576763489"/>
+			<item order="4" scene="losing_ground-10" confidence="14.522821576763489"/>
+			<item order="5" scene="losing_ground-28" confidence="11.61825726141079"/>
+			<item order="6" scene="losing_ground-28" confidence="11.61825726141079"/>
+			<item order="7" scene="losing_ground-23" confidence="8.298755186721992"/>
+			<item order="8" scene="losing_ground-23" confidence="8.298755186721992"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="2" id="1">
+			<item order="1" subject="Person:unknown" confidence="0"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="2" id="2">
+			<item order="1" subject="Person:unknown" confidence="0"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="2" id="3">
+			<item order="1" subject="Person:unknown" confidence="0"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="2" id="4">
+			<item order="1" subject="Person:unknown" confidence="0"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="3" id="1"/>
+		<DeepVideoUnderstandingTopicResult question="3" id="2">
+			<item type="Interaction" answer="asks"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="3" id="3"/>
+		<DeepVideoUnderstandingTopicResult question="3" id="4"/>
+		<DeepVideoUnderstandingTopicResult question="4" id="1"/>
+		<DeepVideoUnderstandingTopicResult question="4" id="2"/>
+		<DeepVideoUnderstandingTopicResult question="4" id="3">
+			<item type="Interaction" answer="talks to"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="4" id="4"/>
+	</DeepVideoUnderstandingRunResult>
+</DeepVideoUnderstandingSceneResults>

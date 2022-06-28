@@ -57,20 +57,20 @@ def create_data(hlvu_location, dir_path, movie_list, answer_path_exists = False)
 
     movie_dfpl = pd.DataFrame(data=d)
 
-    d = {
-        'concept': [], 
-        'person': [],
-        'movie':[],
-        'concept_stat': [], 
-        'polarity': [], 
-        'voice_angry':[],
-        'voice_happy':[],
-        'voice_neutral':[],
-        'voice_sad':[], 
-        'relation':[]
-    }
+    #d = {
+    #    'concept': [], 
+    #    'person': [],
+    #    'movie':[],
+    #    'concept_stat': [], 
+    #    'polarity': [], 
+    #    'voice_angry':[],
+    #    'voice_happy':[],
+    #    'voice_neutral':[],
+    #    'voice_sad':[], 
+    #    'relation':[]
+    #}
 
-    movie_dfpc = pd.DataFrame(data=d)
+    #movie_dfpc = pd.DataFrame(data=d)
 
     action_classes = get_action_classes(dir_path)
     location_classes = get_location_classes(dir_path)
@@ -98,7 +98,7 @@ def create_data(hlvu_location, dir_path, movie_list, answer_path_exists = False)
         data=pd.read_table(f"{hlvu_location}/Queries/movie_knowledge_graph/{movie}/{movie}.entity.types.txt", delimiter = ':', header= None)
 
         for _,row in data.iterrows():
-            entity_type[row[0].replace(" ","")] = row[1].replace(" ","")
+            entity_type[row[0].replace(" ","").lower()] = row[1].replace(" ","")
 
         if answer_path_exists:
             f = open(f"{hlvu_location}/Queries/movie_knowledge_graph/{movie}/{movie}.Movie-level.txt", "r")
@@ -149,19 +149,19 @@ def create_data(hlvu_location, dir_path, movie_list, answer_path_exists = False)
                     combis_pp.append((i[0], i[1]))
 
         for i in tqdm(combis_pp):
-            try:
-                scene_stat, shot_stat, text_stat, emotions, places365, action, sentiment = get_stats(i[0], i[1], movie, path, vision_db, video_db, audio_db, location_classes, action_classes)
-                movie_dfpp.loc[movie_dfpp.shape[0]] = [
-                    i[0], i[1], movie,
-                    scene_stat, 
-                    shot_stat, 
-                    emotions["angry"], emotions["fear"], emotions["neutral"], emotions["sad"], emotions["suprise"],
-                    action[0][0], action[0][1], action[1][0], action[1][1], action[2][0], action[2][1],
-                    places365[0][0], places365[0][1], places365[1][0], places365[1][1], places365[2][0], places365[2][1], 
-                    sentiment, 
-                    text_stat
-                    ,relation_d[i]
+            scene_stat, shot_stat, text_stat, emotions, places365, action, sentiment = get_stats(i[0], i[1], movie, path, vision_db, video_db, audio_db, location_classes, action_classes)
+            movie_dfpp.loc[movie_dfpp.shape[0]] = [
+                i[0], i[1], movie,
+                scene_stat, 
+                shot_stat, 
+                emotions["angry"], emotions["fear"], emotions["neutral"], emotions["sad"], emotions["suprise"],
+                action[0][0], action[0][1], action[1][0], action[1][1], action[2][0], action[2][1],
+                places365[0][0], places365[0][1], places365[1][0], places365[1][1], places365[2][0], places365[2][1], 
+                sentiment, 
+                text_stat
+                , None
                 ]
+            """
             except:
                 scene_stat, shot_stat, text_stat, emotions, places365, action, sentiment = get_stats(i[0], i[1], movie, path,vision_db, video_db, audio_db, location_classes, action_classes)
                 movie_dfpp.loc[movie_dfpp.shape[0]] = [
@@ -175,6 +175,7 @@ def create_data(hlvu_location, dir_path, movie_list, answer_path_exists = False)
                     text_stat, 
                     None
                 ]
+            """
 
         t1 = tuple(entity_type.keys())
         combis_pl = []
@@ -185,14 +186,15 @@ def create_data(hlvu_location, dir_path, movie_list, answer_path_exists = False)
                     combis_pl.append((i[0], i[1]))
 
         for i in tqdm(combis_pl):
-            try:
-                delf, places365 = get_person_location_stats(i[0], i[1], vision_db, location_classes)
-                movie_dfpl.loc[movie_dfpl.shape[0]] = [
-                    i[0], i[1], movie,
-                    delf, 
-                    places365[0][0], places365[0][1], places365[1][0], places365[1][1], places365[2][0], places365[2][1],
-                    relation_d[i]
-                ]
+            #try:
+            delf, places365 = get_person_location_stats(i[0], i[1], vision_db, location_classes)
+            movie_dfpl.loc[movie_dfpl.shape[0]] = [
+                i[0], i[1], movie,
+                delf, 
+                places365[0][0], places365[0][1], places365[1][0], places365[1][1], places365[2][0], places365[2][1],
+                None
+            ]
+            """
             except:
                 delf, places365 = get_person_location_stats(i[0], i[1], vision_db, location_classes)
                 movie_dfpl.loc[movie_dfpl.shape[0]] = [
@@ -201,10 +203,13 @@ def create_data(hlvu_location, dir_path, movie_list, answer_path_exists = False)
                     places365[0][0], places365[0][1], places365[1][0], places365[1][1], places365[2][0], places365[2][1],
                     None
                 ]
+            """
 
+        """
         t1 = tuple(entity_type.keys())
         combis_pc = []
 
+        
         for i in itertools.product(t1,t1):
             if i[0] != i[1] and ((i[1], i[0]) not in combis_pc):
                 if (entity_type[i[0]] == "Person" and entity_type[i[1]] == "Concept"):
@@ -229,10 +234,11 @@ def create_data(hlvu_location, dir_path, movie_list, answer_path_exists = False)
                     emotion_list["ang"], emotion_list["hap"], emotion_list["neu"], emotion_list["sad"], 
                     None
                 ]
+        """
     
     if not os.path.exists(f"{dir_path}/data"):
         os.mkdir(f"{dir_path}/data")
 
-    movie_dfpp.to_json(f'{dir_path}/people2people_test.json')
-    movie_dfpl.to_json(f'{dir_path}/people2location_test.json')
-    movie_dfpc.to_json(f'{dir_path}/people2concept_test.json')
+    movie_dfpp.to_json(f'{dir_path}/data/people2people_test.json')
+    movie_dfpl.to_json(f'{dir_path}/data/people2location_test.json')
+    #movie_dfpc.to_json(f'{dir_path}/data/people2concept_test.json')

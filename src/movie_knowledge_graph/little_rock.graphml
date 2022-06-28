@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="d0" for="edge" attr.name="label" attr.type="string" />
+  <graph edgedefault="directed">
+    <node id="atsuko" />
+    <node id="brody" />
+    <node id="cory" />
+    <node id="dad" />
+    <node id="garbo" />
+    <node id="extra1" />
+    <node id="francisco" />
+    <node id="jordan" />
+    <node id="marques" />
+    <node id="rintaro" />
+    <node id="sean" />
+    <node id="caravan" />
+    <node id="fun_place" />
+    <node id="gallery" />
+    <node id="house1" />
+    <node id="house2" />
+    <node id="motel" />
+    <node id="shop" />
+    <edge source="atsuko" target="brody">
+      <data key="d0">friend of</data>
+    </edge>
+    <edge source="atsuko" target="cory">
+      <data key="d0">friend of</data>
+    </edge>
+    <edge source="brody" target="dad">
+      <data key="d0">friend of</data>
+    </edge>
+    <edge source="brody" target="garbo">
+      <data key="d0">friend of</data>
+    </edge>
+    <edge source="cory" target="dad">
+      <data key="d0">friend of</data>
+    </edge>
+    <edge source="cory" target="garbo">
+      <data key="d0">friend of</data>
+    </edge>
+    <edge source="dad" target="extra1">
+      <data key="d0">friend of</data>
+    </edge>
+    <edge source="dad" target="francisco">
+      <data key="d0">friend of</data>
+    </edge>
+    <edge source="dad" target="garbo">
+      <data key="d0">friend of</data>
+    </edge>
+    <edge source="dad" target="jordan">
+      <data key="d0">friend of</data>
+    </edge>
+    <edge source="dad" target="marques">
+      <data key="d0">friend of</data>
+    </edge>
+    <edge source="dad" target="rintaro">
+      <data key="d0">friend of</data>
+    </edge>
+    <edge source="dad" target="sean">
+      <data key="d0">friend of</data>
+    </edge>
+    <edge source="caravan" target="garbo">
+      <data key="d0">residence of</data>
+    </edge>
+    <edge source="fun_place" target="garbo">
+      <data key="d0">residence of</data>
+    </edge>
+    <edge source="gallery" target="garbo">
+      <data key="d0">residence of</data>
+    </edge>
+    <edge source="house1" target="garbo">
+      <data key="d0">residence of</data>
+    </edge>
+    <edge source="house2" target="cory">
+      <data key="d0">residence of</data>
+    </edge>
+    <edge source="house2" target="garbo">
+      <data key="d0">residence of</data>
+    </edge>
+    <edge source="motel" target="garbo">
+      <data key="d0">residence of</data>
+    </edge>
+    <edge source="shop" target="cory">
+      <data key="d0">residence of</data>
+    </edge>
+    <edge source="shop" target="garbo">
+      <data key="d0">residence of</data>
+    </edge>
+  </graph>
+</graphml>

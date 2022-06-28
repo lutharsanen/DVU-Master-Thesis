@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="d0" for="edge" attr.name="label" attr.type="string" />
+  <graph edgedefault="directed">
+    <node id="burt" />
+    <node id="gas_station_clerk" />
+    <node id="kiya" />
+    <node id="marshall" />
+    <node id="homeless_man" />
+    <node id="diner" />
+    <node id="gas_station" />
+    <node id="motel" />
+    <edge source="burt" target="gas_station_clerk">
+      <data key="d0">friend of</data>
+    </edge>
+    <edge source="burt" target="kiya">
+      <data key="d0">engages with</data>
+    </edge>
+    <edge source="burt" target="marshall">
+      <data key="d0">friend of</data>
+    </edge>
+    <edge source="gas_station_clerk" target="kiya">
+      <data key="d0">acquaintance of</data>
+    </edge>
+    <edge source="gas_station_clerk" target="marshall">
+      <data key="d0">acquaintance of</data>
+    </edge>
+    <edge source="kiya" target="marshall">
+      <data key="d0">friend of</data>
+    </edge>
+    <edge source="homeless_man" target="kiya">
+      <data key="d0">friend of</data>
+    </edge>
+    <edge source="diner" target="gas_station_clerk">
+      <data key="d0">patient at</data>
+    </edge>
+    <edge source="diner" target="kiya">
+      <data key="d0">residence of</data>
+    </edge>
+    <edge source="gas_station" target="gas_station_clerk">
+      <data key="d0">patient at</data>
+    </edge>
+    <edge source="motel" target="gas_station_clerk">
+      <data key="d0">patient at</data>
+    </edge>
+  </graph>
+</graphml>

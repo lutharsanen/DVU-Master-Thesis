@@ -11,18 +11,6 @@ from tqdm import tqdm
 import itertools
 
 
-movie_list = ["shooters", 
-              "The_Big_Something", 
-              "time_expired", 
-              "Valkaama", 
-              "Huckleberry_Finn", 
-              "spiritual_contact", 
-              "honey", 
-              "sophie", 
-              "Nuclear_Family", 
-              "SuperHero"
-             ]
-
 def create_dataframe(movie_list, dir_path, hlvu_location):
 
     d = {

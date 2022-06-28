@@ -6,13 +6,18 @@ def prep_data_creator(data_path):
  
     # Opening JSON file
     f = open(data_path)
-
+    #print(data_path)
     # returns JSON object as
     # a dictionary
     data = json.load(f)
-
-    nodes = data["nodes"]
-    links = data["links"]
+    if "nodes" in data:
+        nodes = data["nodes"]
+    elif "nodeDataArray" in data:
+        nodes = data["nodeDataArray"]
+    if "links" in data:
+        links = data["links"]
+    elif "linkDataArray"in data:
+        links = data["linkDataArray"]
 
     node_dict = {}
 
@@ -89,8 +94,9 @@ def prep_data_creator(data_path):
                 if len(interaction) > 0:
                     if interaction[-1] != point[1][0]:
                         interaction.append(point[1][0])
-                        interaction_person_1.append(interaction_person_1[interaction.index(point[1][0])])
-                        interaction_person_2.append(interaction_person_2[interaction.index(point[1][0])])
+                        if (len(interaction_person_1) > interaction.index(point[1][0])) and (len(interaction_person_2) > interaction.index(point[1][0])): 
+                            interaction_person_1.append(interaction_person_1[interaction.index(point[1][0])])
+                            interaction_person_2.append(interaction_person_2[interaction.index(point[1][0])])
 
             if point[1][1] == "Sequence":
                 sequence.append(point[1][0])

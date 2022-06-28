@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!-- DTD for scene level results from one Deep Video Understanding movie -->
+
+<!-- DeepVideoUnderstandingSceneResults contains the Deep Video Understanding Results for a single test movie -->
+
+<!ELEMENT DeepVideoUnderstandingSceneResults (DeepVideoUnderstandingRunResult)>
+
+<!-- movie - the name of the movie this submisssion answers questions on
+
+
+-->
+
+<!ATTLIST DeepVideoUnderstandingSceneResults movie   CDATA     #REQUIRED>
+
+<!-- DTD for a results of a single Deep Video Understanding scene-level run -->
+
+
+<!-- A Deep Video Understanding run result contains the Deep Video Understanding Results for
+a single system (variant) run against all the scene-level topics
+-->
+
+<!ELEMENT DeepVideoUnderstandingRunResult (DeepVideoUnderstandingTopicResult+)>
+
+<!-- pid - short participant id
+
+     priority - evaluation priority (1,2,...) If not all runs can be
+             judged, then judging will begin with the run with priority
+             1 and so on.
+
+     desc - verbal description of the characteristics of this run,
+             how it differs in approach, resources, etc from others
+             runs.
+
+
+-->
+<!ATTLIST DeepVideoUnderstandingRunResult pid   CDATA     #REQUIRED 
+                            	priority   (1|2|3|4|5|6|7|8) #REQUIRED
+                           	desc   CDATA     #REQUIRED>
+
+
+<!-- A Deep Video Understanding topic result contains the query results for
+a single topic.
+-->
+<!ELEMENT DeepVideoUnderstandingTopicResult (item*)>
+
+
+<!-- question - which question number is this answering (1,2, or 3)
+
+
+     id - which part of the question are we answering - (1|2|3|4|5|6|7|8|9|10)
+     
+     
+     path - for question 3 only - which path number is this listing for
+  
+-->
+
+<!ATTLIST DeepVideoUnderstandingTopicResult   question (1|2|3|4|5|6) #REQUIRED
+                            id (1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20) #REQUIRED
+                            path CDATA  #IMPLIED>
+                            
+                            
+
+<!ELEMENT item     EMPTY >
+
+<!-- order - provide the ordering of the answer to the question - applies to question 1, and 2 only
+
+     subject - where the subject of the question - the actual answer - should be provided - applies to question 2 only
+     
+     confidence - the confidence rating for this answer - applies to question 1, and 2 only
+     
+     type - applies to questions 3, 4, 5, and 6 only - the type being questioned about (relation, entity etc.)
+     
+     scene - applies to questions 2, 3, and 4 only - the scene being asked about
+     
+     answer - provide the answer to the question - question 3, 4, 5,
+     and 6 only
+
+     start_time - Provide the start time of a clip (in seconds) within
+     the specified scene where evidence of this interation exists - Questions 3 & 4 only
+
+     end_time - Provide the end time of a clip (in seconds) within the
+     specified scene where evidence of this interation exists - Questions 3 & 4 only
+
+
+--> 
+<!ATTLIST item   type CDATA	#IMPLIED
+               order CDATA	#IMPLIED
+               subject CDATA	#IMPLIED
+               confidence CDATA	#IMPLIED
+               scene CDATA	#IMPLIED
+               answer CDATA #IMPLIED
+               start_time CDATA #IMPLIED
+               end_time CDATA  #IMPLIED>
+               
+
+

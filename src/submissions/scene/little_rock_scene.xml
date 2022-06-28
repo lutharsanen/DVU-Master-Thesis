@@ -1,0 +1,106 @@
+<?xml version="1.0" ?>
+<!DOCTYPE DeepVideoUnderstandingSceneResults SYSTEM "DeepVideoUnderstandingSceneResults.dtd">
+<DeepVideoUnderstandingSceneResults movie="little_rock">
+	<DeepVideoUnderstandingRunResult desc="A Multi-Stream Approach for Video Understanding" pid="UZH" priority="1">
+		<DeepVideoUnderstandingTopicResult question="1" id="1">
+			<item order="1" scene="little_rock-14" confidence="10.737943056362584"/>
+			<item order="2" scene="little_rock-10" confidence="10.226612434631031"/>
+			<item order="3" scene="little_rock-8" confidence="9.761766414875076"/>
+			<item order="4" scene="little_rock-19" confidence="7.954031893601914"/>
+			<item order="5" scene="little_rock-25" confidence="7.158628704241724"/>
+			<item order="6" scene="little_rock-6" confidence="6.507844276583386"/>
+			<item order="7" scene="little_rock-15" confidence="5.965523920201435"/>
+			<item order="8" scene="little_rock-15" confidence="5.965523920201435"/>
+			<item order="9" scene="little_rock-11" confidence="5.1133062173155155"/>
+			<item order="10" scene="little_rock-11" confidence="5.1133062173155155"/>
+			<item order="11" scene="little_rock-11" confidence="5.1133062173155155"/>
+			<item order="12" scene="little_rock-17" confidence="4.474142940151077"/>
+			<item order="13" scene="little_rock-17" confidence="4.474142940151077"/>
+			<item order="14" scene="little_rock-17" confidence="4.474142940151077"/>
+			<item order="15" scene="little_rock-27" confidence="3.977015946800957"/>
+			<item order="16" scene="little_rock-21" confidence="2.9827619601007176"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="2">
+			<item order="1" scene="little_rock-19" confidence="12.912061038833997"/>
+			<item order="2" scene="little_rock-15" confidence="8.608040692556"/>
+			<item order="3" scene="little_rock-15" confidence="8.608040692556"/>
+			<item order="4" scene="little_rock-11" confidence="7.747236623300399"/>
+			<item order="5" scene="little_rock-11" confidence="7.747236623300399"/>
+			<item order="6" scene="little_rock-11" confidence="7.747236623300399"/>
+			<item order="7" scene="little_rock-10" confidence="7.042942384818546"/>
+			<item order="8" scene="little_rock-10" confidence="7.042942384818546"/>
+			<item order="9" scene="little_rock-10" confidence="7.042942384818546"/>
+			<item order="10" scene="little_rock-27" confidence="6.4560305194169985"/>
+			<item order="11" scene="little_rock-14" confidence="5.1648244155336"/>
+			<item order="12" scene="little_rock-14" confidence="5.1648244155336"/>
+			<item order="13" scene="little_rock-8" confidence="4.84202288956275"/>
+			<item order="14" scene="little_rock-4" confidence="3.8736183116501994"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="3">
+			<item order="1" scene="little_rock-14" confidence="9.977352537422645"/>
+			<item order="2" scene="little_rock-8" confidence="9.209863880697826"/>
+			<item order="3" scene="little_rock-10" confidence="8.86875781104235"/>
+			<item order="4" scene="little_rock-19" confidence="7.256256390852833"/>
+			<item order="5" scene="little_rock-4" confidence="7.042837085239515"/>
+			<item order="6" scene="little_rock-6" confidence="6.1399092537985505"/>
+			<item order="7" scene="little_rock-25" confidence="5.701344307098654"/>
+			<item order="8" scene="little_rock-15" confidence="4.988676268711322"/>
+			<item order="9" scene="little_rock-15" confidence="4.988676268711322"/>
+			<item order="10" scene="little_rock-11" confidence="4.434378905521175"/>
+			<item order="11" scene="little_rock-11" confidence="4.434378905521175"/>
+			<item order="12" scene="little_rock-11" confidence="4.434378905521175"/>
+			<item order="13" scene="little_rock-11" confidence="4.434378905521175"/>
+			<item order="14" scene="little_rock-17" confidence="3.990941014969058"/>
+			<item order="15" scene="little_rock-17" confidence="3.990941014969058"/>
+			<item order="16" scene="little_rock-27" confidence="3.6281281954264166"/>
+			<item order="17" scene="little_rock-27" confidence="3.6281281954264166"/>
+			<item order="18" scene="little_rock-21" confidence="2.850672153549327"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="4">
+			<item order="1" scene="little_rock-3" confidence="9.747409560393585"/>
+			<item order="2" scene="little_rock-10" confidence="8.861281418539624"/>
+			<item order="3" scene="little_rock-4" confidence="7.69532333715283"/>
+			<item order="4" scene="little_rock-14" confidence="6.498273040262391"/>
+			<item order="5" scene="little_rock-14" confidence="6.498273040262391"/>
+			<item order="6" scene="little_rock-8" confidence="6.092130975245991"/>
+			<item order="7" scene="little_rock-12" confidence="5.415227533551992"/>
+			<item order="8" scene="little_rock-12" confidence="5.415227533551992"/>
+			<item order="9" scene="little_rock-12" confidence="5.415227533551992"/>
+			<item order="10" scene="little_rock-12" confidence="5.415227533551992"/>
+			<item order="11" scene="little_rock-15" confidence="4.8737047801967925"/>
+			<item order="12" scene="little_rock-15" confidence="4.8737047801967925"/>
+			<item order="13" scene="little_rock-23" confidence="4.430640709269812"/>
+			<item order="14" scene="little_rock-23" confidence="4.430640709269812"/>
+			<item order="15" scene="little_rock-36" confidence="4.061420650163993"/>
+			<item order="16" scene="little_rock-28" confidence="3.749003677074456"/>
+			<item order="17" scene="little_rock-19" confidence="3.481217700140566"/>
+			<item order="18" scene="little_rock-6" confidence="3.0460654876229953"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="2" id="1">
+			<item order="1" subject="Person:unknown" confidence="0"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="2" id="2">
+			<item order="1" subject="Person:unknown" confidence="0"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="2" id="3">
+			<item order="1" subject="Person:unknown" confidence="0"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="2" id="4">
+			<item order="1" subject="Person:unknown" confidence="0"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="3" id="1">
+			<item type="Interaction" answer="talks to"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="3" id="2">
+			<item type="Interaction" answer="talks to"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="3" id="3"/>
+		<DeepVideoUnderstandingTopicResult question="3" id="4"/>
+		<DeepVideoUnderstandingTopicResult question="4" id="1">
+			<item type="Interaction" answer="holds in arms"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="4" id="2"/>
+		<DeepVideoUnderstandingTopicResult question="4" id="3"/>
+		<DeepVideoUnderstandingTopicResult question="4" id="4"/>
+	</DeepVideoUnderstandingRunResult>
+</DeepVideoUnderstandingSceneResults>

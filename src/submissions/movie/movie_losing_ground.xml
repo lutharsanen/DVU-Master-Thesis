@@ -1,0 +1,62 @@
+<?xml version="1.0" ?>
+<!DOCTYPE DeepVideoUnderstandingResults SYSTEM "DeepVideoUnderstandingResults.dtd">
+<DeepVideoUnderstandingResults movie="losing_ground">
+	<DeepVideoUnderstandingRunResult desc="A Multi-Stream Approach for Video Understanding" pid="UZH" priority="1">
+		<DeepVideoUnderstandingTopicResult question="1" id="1" path="1">
+			<item source="duke" relation="child of" target="carlos"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="1" path="2">
+			<item source="duke" relation="friend of" target="sara"/>
+			<item source="sara" relation="friend of" target="carlos"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="1" path="3">
+			<item source="duke" relation="friend of" target="sara"/>
+			<item source="sara" relation="friend of" target="victor"/>
+			<item source="victor" relation="friend of" target="carlos"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="3" path="1">
+			<item source="gypsy" relation="friend of" target="carlos"/>
+			<item source="carlos" relation="parent of" target="duke"/>
+			<item source="duke" relation="friend of" target="sara"/>
+			<item source="sara" relation="friend of" target="victor"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="3" path="2">
+			<item source="gypsy" relation="friend of" target="carlos"/>
+			<item source="carlos" relation="friend of" target="sara"/>
+			<item source="sara" relation="friend of" target="victor"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="1" id="3" path="3">
+			<item source="gypsy" relation="friend of" target="carlos"/>
+			<item source="carlos" relation="friend of" target="victor"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="2" id="1">
+			<item order="1" subject="carlos" confidence="50"/>
+			<item order="2" subject="sara" confidence="50"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="2" id="2">
+			<item order="1" subject="none" confidence="0"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="2" id="3">
+			<item order="1" subject="none" confidence="0"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="2" id="4">
+			<item order="1" subject="duke" confidence="100"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="3" id="1">
+			<item type="Relation" answer="unknown"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="3" id="2"/>
+		<DeepVideoUnderstandingTopicResult question="3" id="3">
+			<item type="Integer" answer="0"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="3" id="4">
+			<item type="Relation" answer="None"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="3" id="5">
+			<item type="Relation" answer="unknown"/>
+		</DeepVideoUnderstandingTopicResult>
+		<DeepVideoUnderstandingTopicResult question="3" id="6">
+			<item type="Relation" answer="lives at"/>
+		</DeepVideoUnderstandingTopicResult>
+	</DeepVideoUnderstandingRunResult>
+</DeepVideoUnderstandingResults>

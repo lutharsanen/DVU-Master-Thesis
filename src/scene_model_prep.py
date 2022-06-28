@@ -49,48 +49,52 @@ def scene_data_creation(movie_list, dir_path, hlvu_location):
 
         path = f"{hlvu_location}/keyframes/shot_keyf/{movie}"
         json_path = f"{hlvu_location}/scenes_knowledge_graphs"
+        scene_list = [i.strip(".json") for i in os.listdir(json_path)]
+
 
         movie = os.listdir(f"{hlvu_location}/keyframes/shot_keyf/{movie}")
         for scene in tqdm(movie):
-            prep_interaction, prep_emotion, prep_location = prep_data_creator(f"{json_path}/{scene}.json")
-            #print(prep_interaction)
-            full_list = sorted(os.listdir(f"{path}/{scene}"))
-            split_nr = len(prep_interaction)
-            if len(prep_interaction) > 1:
-                split_list = list(np.array_split(full_list, split_nr))
-            else:
-                split_list = full_list
-            for idx,row in prep_interaction.iterrows():
-                chunk_list = split_list[idx]
-                #print(row["action"],row["person1"],row["person2"],row["sequence"])
-                transformed_action, emo, text_emo, text = get_scene_features(
-                    row["person1"], row["person2"], scene, chunk_list, kinetics400,
-                    vision_db, video_db, audio_db
-                )
 
-                interaction = row["action"]
-                for action, em, t_em, tex in zip(transformed_action, emo, text_emo, text):
+            if scene in scene_list:
 
-                    #if transformed_action != "unknown":
-                    df_interaction.loc[df_interaction.shape[0]] = [
-                        row["person1"], 
-                        row["person2"],
-                        action, 
-                        em["happy"], 
-                        em["angry"], 
-                        em["neutral"], 
-                        em["sad"], 
-                        em["surprise"],
-                        t_em["hap"], 
-                        t_em["ang"], 
-                        t_em["neu"], 
-                        t_em["sad"],
-                        interaction
-                    ]
+                prep_interaction, prep_emotion, prep_location = prep_data_creator(f"{json_path}/{scene}.json")
+                #print(prep_interaction)
+                full_list = sorted(os.listdir(f"{path}/{scene}"))
+                split_nr = len(prep_interaction)
+                if len(prep_interaction) > 1:
+                    split_list = list(np.array_split(full_list, split_nr))
+                else:
+                    split_list = full_list
+                for idx,row in prep_interaction.iterrows():
+                    chunk_list = split_list[idx]
+                    #print(row["action"],row["person1"],row["person2"],row["sequence"])
+                    transformed_action, emo, text_emo, text = get_scene_features(
+                        row["person1"], row["person2"], scene, chunk_list, kinetics400,
+                        vision_db, video_db, audio_db
+                    )
+
+                    interaction = row["action"]
+                    for action, em, t_em, tex in zip(transformed_action, emo, text_emo, text):
+
+                        #if transformed_action != "unknown":
+                        df_interaction.loc[df_interaction.shape[0]] = [
+                            row["person1"], 
+                            row["person2"],
+                            action, 
+                            em["happy"], 
+                            em["angry"], 
+                            em["neutral"], 
+                            em["sad"], 
+                            em["surprise"],
+                            t_em["hap"], 
+                            t_em["ang"], 
+                            t_em["neu"], 
+                            t_em["sad"],
+                            interaction
+                        ]
     action_list = list(set(kinetics400.values()))
     action_list.append("unknown")
     action_indizes_interaction = [action_list.index(i) for i in df_interaction["action"]]
     df_interaction["action"] = action_indizes_interaction
 
     df_interaction.to_json(f"{dir_path}/data/df_interaction.json")
-    

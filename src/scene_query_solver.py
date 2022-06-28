@@ -18,6 +18,24 @@ from collections import Counter
 
 
 def solve_query(dir_path, movie_list, hlvu_test, kinetics400_to_interaction):
+
+    d = {
+        'person1': [], 
+        'person2': [],
+        'action': [], 
+        'face_happy':[], 
+        'face_angry':[], 
+        'face_neutral':[],
+        'face_sad':[],
+        'face_surprise':[],
+        'text_happy':[],
+        'text_angry':[],
+        'text_neutral':[],
+        'text_sad':[],
+        'interaction':[]
+        }
+    df_interaction_generell = pd.DataFrame(data=d)
+
     for movie in movie_list:
         serialization_vision = SerializationMiddleware(JSONStorage)
         serialization_vision.register_serializer(DateTimeSerializer(), 'TinyDate')
@@ -110,20 +128,19 @@ def solve_query(dir_path, movie_list, hlvu_test, kinetics400_to_interaction):
                                 query[2][0]["sad"]
                             ]
 
-        #print("length: ", len(df_interaction))
         X_test = df_interaction.drop(columns = ["person1", "person2", "scene", "shot"])
-        #print("length: ", len(X_test))
         kinetics_values = list(kinetics400_to_interaction.values())
         kinetics_values.append("unknown")
         action_list = [kinetics_values.index(i) for i in df_interaction["action"]]
         X_test["action"] = action_list
-        #print("length: ", len(X_test))
         clf = joblib.load(f"{dir_path}/models/interaction_classifier.sav")
         y_predicted = clf.predict(X_test)
         y_proba = clf.predict_proba(X_test)
 
         # define an empty list
         relation_list = []
+
+        df_interaction_generell = df_interaction_generell.append(df_interaction, ignore_index=True)
 
         # open file and read the content in a list
         with open(f'{dir_path}/data/interactions.txt', 'r') as filehandle:
@@ -152,21 +169,27 @@ def solve_query(dir_path, movie_list, hlvu_test, kinetics400_to_interaction):
             df_query = sqldf(f"SELECT * FROM df WHERE scene='{scene}'", locals())
             scene_interaction.append(list(df_query["interaction"].unique()))
 
-        path = f"{hlvu_test}/Queries/Scene-level/{movie}.Scene_Level.xml"
-
+        path = f"{hlvu_test}/Queries/Scene-level/{movie}.Scene-Level.Queries.xml"
         with open(path) as xml_file:
             data_dict = xmltodict.parse(xml_file.read())
 
         root = minidom.Document()
   
-        xml = root.createElement('DeepVideoUnderstandingSceneResult') 
-        xml.setAttribute('scenes', movie)
-        root.appendChild(xml)
+        body = root.createElement('DeepVideoUnderstandingSceneResults') 
+        body.setAttribute('movie', movie)
+        root.appendChild(body)
+
+        xml = root.createElement('DeepVideoUnderstandingRunResult') 
+        xml.setAttribute('desc', "A Multi-Stream Approach for Video Understanding")
+        xml.setAttribute('pid', "UZH")
+        xml.setAttribute('priority', "1")
+        body.appendChild(xml)
 
 
         question = list(data_dict["DeepVideoUnderstandingSceneQueries"].values())[1]
 
         for q in question:
+
             if (q["@question"] == "5") or (q["@question"] == "6"):
                 pass
             else:
@@ -243,9 +266,10 @@ def solve_query(dir_path, movie_list, hlvu_test, kinetics400_to_interaction):
                 if query_type =="3":
                     answers = []
                     for answer in q["Answers"]["item"]:
-                        if answer in relation_list: 
+                        if answer["@answer"] in relation_list: 
                             answers.append(answer["@answer"])
                     for item in q["item"]:
+                        #print(item.keys())
                         if "@subject" in list(item.keys()):
                             #subj = item["@subject"].split(":")[1]
                             obj = item["@object"].split(":")[1]
@@ -266,6 +290,10 @@ def solve_query(dir_path, movie_list, hlvu_test, kinetics400_to_interaction):
                                     for prob in prob_lst:
                                         probs.append(prob[predication_idx])
                                     idx = probs.index(max(probs)) + 1
+                                    if len(prob_lst) <= idx and len(probs) > 1:
+                                        probs_sorted = probs.sort()
+                                        max_second_val = probs_sorted[-2]
+                                        idx  = probs.index(max_second_val) + 1
                                     if len(prob_lst) > idx:
                                         while answer_not_found:
                                             proba = prob_lst[idx]
@@ -284,23 +312,28 @@ def solve_query(dir_path, movie_list, hlvu_test, kinetics400_to_interaction):
                                                 item.setAttribute('type', "Interaction")
                                                 item.setAttribute('answer', relation_list[answer_idx])
                                                 productChild.appendChild(item)
-                                            if idx == len(prob_lst):
+                                            elif idx == len(prob_lst):
                                                 answer_not_found = False
-                                                item = root.createElement('item')
-                                                item.setAttribute('type', "Interaction")
-                                                item.setAttribute('answer', "relation not found")
-                                                productChild.appendChild(item)
-                            else:
-                                item = root.createElement('item')
-                                item.setAttribute('type', "Interaction")
-                                item.setAttribute('answer', "subject not in list")
-                                productChild.appendChild(item)
+                                                #item = root.createElement('item')
+                                                #item.setAttribute('type', "Interaction")
+                                                #item.setAttribute('answer', "relation not found")
+                                                #productChild.appendChild(item)
+                                    #else:
+                                    #    item = root.createElement('item')
+                                    #    item.setAttribute('type', "Interaction")
+                                    #    item.setAttribute('answer', "only one interaction available for this scene")
+                                    #    productChild.appendChild(item)
+                            #else:
+                            #    item = root.createElement('item')
+                            #    item.setAttribute('type', "Interaction")
+                            #    item.setAttribute('answer', "subject not in list")
+                            #    productChild.appendChild(item)
 
                         
                 if query_type == "4":
                     answers = []
                     for answer in q["Answers"]["item"]:
-                        if answer in relation_list:
+                        if answer["@answer"] in relation_list:
                             answers.append(answer["@answer"])
                     for item in q["item"]:
                         if "@subject" in list(item.keys()):
@@ -323,6 +356,13 @@ def solve_query(dir_path, movie_list, hlvu_test, kinetics400_to_interaction):
                                     for prob in prob_lst:
                                         probs.append(prob[predication_idx])
                                     idx = probs.index(max(probs)) - 1
+                                    if len(prob_lst) <= idx:
+                                        max_second_val = probs.sort()[-2]
+                                        idx  = probs.index(max_second_val) - 1
+                                    if len(prob_lst) <= idx and len(probs) > 1:
+                                        probs_sorted = probs.sort()
+                                        max_second_val = probs_sorted[-2]
+                                        idx  = probs.index(max_second_val) - 1
                                     if len(prob_lst) > idx:
                                         while answer_not_found:
                                             proba = prob_lst[idx]
@@ -341,17 +381,31 @@ def solve_query(dir_path, movie_list, hlvu_test, kinetics400_to_interaction):
                                                 item.setAttribute('type', "Interaction")
                                                 item.setAttribute('answer', relation_list[answer_idx])
                                                 productChild.appendChild(item)
-                                            if idx == len(prob_lst):
+                                            elif idx == len(prob_lst):
                                                 answer_not_found = False
-                                                item = root.createElement('item')
-                                                item.setAttribute('type', "Interaction")
-                                                item.setAttribute('answer', "relation not found")
-                                                productChild.appendChild(item)
-                            else:
-                                item = root.createElement('item')
-                                item.setAttribute('type', "Interaction")
-                                item.setAttribute('answer', "subject not in list")
-                                productChild.appendChild(item)
+                                            #    item = root.createElement('item')
+                                            #    item.setAttribute('type', "Interaction")
+                                            #    item.setAttribute('answer', "None")
+                                            #    productChild.appendChild(item)
+                                    #else:
+                                    #    item = root.createElement('item')
+                                    #    item.setAttribute('type', "Interaction")
+                                    #    item.setAttribute('answer', "None")
+                                    #    productChild.appendChild(item)
+                            #else:
+                            #    item = root.createElement('item')
+                            #    item.setAttribute('type', "Interaction")
+                            #    item.setAttribute('answer', "None")
+                            #    productChild.appendChild(item)
+                
+                #if query_type == "5":
+                #    pass
+
+
+                #if query_type == "6":
+                #    pass
+
+                            
 
         xml_str = root.toprettyxml(indent ="\t") 
         if not os.path.exists(f"{dir_path}/submissions/scene"):
@@ -362,4 +416,6 @@ def solve_query(dir_path, movie_list, hlvu_test, kinetics400_to_interaction):
                 os.mkdir(f"{dir_path}/submissions/scene")
         save_path_file = f"{dir_path}/submissions/scene/{movie}_scene.xml"
         with open(save_path_file, "w") as f:
-            f.write(xml_str) 
+            f.write(xml_str)
+
+        df_interaction_generell.to_json(f"{dir_path}/data/df_interaction_test.json")

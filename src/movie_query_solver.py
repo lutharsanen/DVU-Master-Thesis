@@ -67,7 +67,7 @@ def movie_queries(location_file, person_file, movie_list, code_loc, hlvu_locatio
 
     for movie in movie_list:
 
-        print(movie)
+        #print(movie)
 
         df_movie_person = sqldf(f"SELECT * FROM df_person_graph WHERE movie='{movie}'",locals())
         df_movie_location = sqldf(f"SELECT * FROM df_location_graph WHERE movie='{movie}'", locals())
@@ -114,9 +114,15 @@ def movie_queries(location_file, person_file, movie_list, code_loc, hlvu_locatio
 
         root = minidom.Document()
         
-        xml = root.createElement('DeepVideoUnderstandingResults') 
-        xml.setAttribute('movie', movie)
-        root.appendChild(xml)
+        body = root.createElement('DeepVideoUnderstandingResults') 
+        body.setAttribute('movie', movie)
+        root.appendChild(body)
+
+        xml = root.createElement('DeepVideoUnderstandingRunResult') 
+        xml.setAttribute('desc', "A Multi-Stream Approach for Video Understanding")
+        xml.setAttribute('pid', "UZH")
+        xml.setAttribute('priority', "1")
+        body.appendChild(xml)
 
         all_nodes = list(G.nodes())
         for q in tqdm(question):
@@ -134,7 +140,7 @@ def movie_queries(location_file, person_file, movie_list, code_loc, hlvu_locatio
                         productChild = root.createElement('DeepVideoUnderstandingTopicResult')
                         productChild.setAttribute('question', q["@question"])
                         productChild.setAttribute('id', q["@id"])
-                        productChild.setAttribute('paths', str(idx+1))
+                        productChild.setAttribute('path', str(idx+1))
                         xml.appendChild(productChild)
                         for x,y in zip(range(0, len(combi)-1), range(1,len(combi))):
                             item = root.createElement('item')

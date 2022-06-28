@@ -1,7 +1,7 @@
-import os
+#import os
 #os.environ["CUDA_VISIBLE_DEVICES"]="2"
 #import tensorflow as tf
-import torch
+#import torch
 #from run_vision_stream import run as run_vision
 #from preprocessing_vision import shot_segment
 #from run_audio_stream import audio_stream as run_audio
@@ -19,7 +19,8 @@ from interaction_transformer import kinetics400_to_interaction as kinetics400
 
 #############################  paths and movie-list ###################################
 
-movie_list = [ "Manos", "Bagman", "Road_To_Bali", "The_Illusionist"]
+movie_list = [ "Calloused_Hands", "ChainedforLife", "Liberty_Kid", "like_me", "little_rock", "losing_ground"]
+
 
 hlvu_location = s.HLVU_LOCATION_TEST
 hlvu_training = s.HLVU_LOCATION
@@ -30,9 +31,9 @@ audio_chunk_path = f"{hlvu_location}/audiochunk"
 img_path = f"{hlvu_location}/keyframes/shot_keyf"
 
 ########################### preprocessing hlvu data set ###############################
-
+"""
 #shot_segment(hlvu_location)
-#data_creation(hlvu_location, testset = True)
+data_creation(hlvu_location, movie_list, testset = True)
 
 # extract audio from video
 #extractor.run_extractor(hlvu_location)
@@ -40,7 +41,7 @@ img_path = f"{hlvu_location}/keyframes/shot_keyf"
 #video.process_data(video_path)
 
 ########################## vision stream ###############################################
-"""
+
 gpus = tf.config.list_physical_devices('GPU')
 if gpus:
   # Restrict TensorFlow to only use the first GPU
@@ -83,13 +84,12 @@ audio_vision_combiner(movie_list,hlvu_location, code_loc)
 
 ########################## create test data set #########################################
 
-#m.create_data(hlvu_location, code_loc, movie_list, answer_path_exists = True)
+#m.create_data(hlvu_location, code_loc, movie_list, answer_path_exists = False)
 movie_queries(
   f"{code_loc}/data/people2location_test.json", 
-  f"{code_loc}/data/people2people_test.json", 
-  #f"{code_loc}/data/people2concept_test.json", 
+  f"{code_loc}/data/people2people_test.json",
   movie_list, code_loc, hlvu_training , hlvu_location)
 
 ############################# scene-level #########################################
 
-#solve_query(code_loc, movie_list, hlvu_location, kinetics400)
+solve_query(code_loc, movie_list, hlvu_location, kinetics400)
